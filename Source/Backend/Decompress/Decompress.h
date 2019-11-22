@@ -9,6 +9,7 @@
 #ifndef Decompress_h
 #define Decompress_h
 
-void decompressFile(const char *inputFile, const char *outputFile);
+__attribute__((nonnull(1, 2)))
+int elva_decompressFile(const char *inputFile, const char *outputFile);
 
 #endif /* Decompress_h */

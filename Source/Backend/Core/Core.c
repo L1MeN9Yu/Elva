@@ -9,7 +9,7 @@
 #include "Core.h"
 #include <zstd.h>
 
-void setup(LogCallback logCallBack) {
+void elva_setup(LogCallback logCallBack) {
     registerLogCallback(logCallBack);
     LogDebug("zstd version : %s", ZSTD_versionString());
 }

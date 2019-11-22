@@ -13,7 +13,7 @@
 #include "File.h"
 #include "Decompress.h"
 
-void decompressFile(const char *inputFile, const char *outputFile) {
+int elva_decompressFile(const char *inputFile, const char *outputFile) {
     FILE *const fileIn = try_fopen(inputFile, "rb");
     size_t const buffInSize = ZSTD_DStreamInSize();
     void *const buffIn = try_malloc(buffInSize);
@@ -24,6 +24,7 @@ void decompressFile(const char *inputFile, const char *outputFile) {
     ZSTD_DCtx *const decompressContext = ZSTD_createDCtx();
     if (decompressContext == NULL) {
         LogCritical("ZSTD_createDCtx() failed!");
+        return 1;
     }
 
     /* This loop assumes that the input file is one or more concatenated zstd
@@ -62,6 +63,7 @@ void decompressFile(const char *inputFile, const char *outputFile) {
 
     if (isEmpty) {
         LogError("input is empty");
+        return 2;
     }
 
     if (lastRet != 0) {
@@ -70,6 +72,7 @@ void decompressFile(const char *inputFile, const char *outputFile) {
          * error, and the input was truncated.
          */
         LogError("EOF before end of stream: %zu\n", lastRet)
+        return 3;
     }
 
     ZSTD_freeDCtx(decompressContext);
@@ -77,4 +80,6 @@ void decompressFile(const char *inputFile, const char *outputFile) {
     try_fclose(fileOut);
     free(buffIn);
     free(buffOut);
+
+    return 0;
 }

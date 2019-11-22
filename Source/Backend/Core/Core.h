@@ -11,6 +11,7 @@
 
 #include "Log.h"
 
-extern void setup(LogCallback logCallBack);
+__attribute__((nonnull(1)))
+extern void elva_setup(LogCallback logCallBack);
 
 #endif /* Core_h */

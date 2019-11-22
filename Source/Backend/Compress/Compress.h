@@ -9,6 +9,7 @@
 #ifndef Compress_h
 #define Compress_h
 
-extern int compressFile(const char *inputFile, const char *outputFile, int level);
+__attribute__((nonnull(1, 2)))
+extern int elva_compressFile(const char *inputFile, const char *outputFile, int level);
 
 #endif /* Compress_h */

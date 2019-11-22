@@ -16,7 +16,7 @@
 #include "File.h"
 #include "Compress.h"
 
-int compressFile(const char *inputFile, const char *outputFile, int level) {
+int elva_compressFile(const char *inputFile, const char *outputFile, int level) {
     /* Open the input and output files. */
     FILE *const fileIn = try_fopen(inputFile, "rb");
     FILE *const fileOut = try_fopen(outputFile, "wb");
@@ -33,7 +33,7 @@ int compressFile(const char *inputFile, const char *outputFile, int level) {
     ZSTD_CCtx *const compressContext = ZSTD_createCCtx();
     if (compressContext == NULL) {
         LogCritical("ZSTD_createCCtx() failed!");
-        return 0;
+        return 1;
     }
 
     /* Set any parameters you want.
@@ -78,7 +78,7 @@ int compressFile(const char *inputFile, const char *outputFile, int level) {
         } while (!finished);
         if (input.pos != input.size) {
             LogCritical("Impossible: zstd only returns 0 when the input is completely consumed!");
-            return 0;
+            return 1;
         }
 
         if (lastChunk) {
