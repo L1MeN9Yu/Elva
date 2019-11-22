@@ -15,10 +15,12 @@
  * Check the zstd error code and die if an error occurred after printing a
  * message.
  */
-#define CHECK_ZSTD(fn, ...)                                     \
-do {                                                            \
-    size_t const err = (fn);                                    \
-    LogCritical("%s", ZSTD_getErrorName(err));                  \
+#define CHECK_ZSTD(fn, ...)                                                             \
+do {                                                                                    \
+    size_t const err = (fn);                                                            \
+    if (ZSTD_isError(err)) {                                                                     \
+        LogCritical("check result : code = %d msg : %s",err, ZSTD_getErrorName(err));   \
+    }                                                                                   \
 } while (0)
 
 

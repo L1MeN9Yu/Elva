@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		42F4AC802386927A00463F82 /* libzstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F4AC7F2386926900463F82 /* libzstd.a */; };
 		42F4AC812386928500463F82 /* libzstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F4AC7E2386925D00463F82 /* libzstd.a */; };
+		42F78C112387C0E50066694E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F78C102387C0E50066694E /* main.swift */; };
+		42F78C152387C1190066694E /* Elva.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F4AC72238688C900463F82 /* Elva.framework */; };
+		42F78C162387C1190066694E /* Elva.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42F4AC72238688C900463F82 /* Elva.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45304115D95DBA5262D8BAF4 /* Compress.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304C66EC8BF5D0DC30C9AE /* Compress.h */; };
 		4530411B6648E94758B4AB44 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530476AFD61F53F3B9F7406 /* Environment.swift */; };
 		4530414065ADDBAB17B6A88B /* Decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530431534E1CC7E2D916F86 /* Decompress.c */; };
@@ -39,6 +42,7 @@
 		45304AB577CEACF99177524B /* LogFlag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304A5F73BAE475A4FD3FE7 /* LogFlag.swift */; };
 		45304B0A6F095691827D22CC /* Elva.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453047D5241647B806C6C07B /* Elva.swift */; };
 		45304B446EF0856F7F98DCED /* File.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530404FA943990C2E11C452 /* File.c */; };
+		45304B7DE63A16AD23858E78 /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453048C64CC5FCC7404A2517 /* Env.swift */; };
 		45304BFD66AD89A00F82CEB5 /* Log.c in Sources */ = {isa = PBXBuildFile; fileRef = 453047A0F1366C785506BF79 /* Log.c */; };
 		45304C192EE72B28948085E2 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530489730D4562F1AF46308 /* Error.swift */; };
 		45304CAECFA5E3E98923F40E /* Decompress.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304C838443F357C46F3E5D /* Decompress.h */; };
@@ -53,6 +57,39 @@
 		45304F9FF48A0AD69C032BE2 /* Bridge.Decompress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304577A01473135330AF96 /* Bridge.Decompress.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		42F78C172387C1190066694E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42F4AC58238687FD00463F82 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 42F4AC71238688C900463F82;
+			remoteInfo = Elva.macOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		42F78C0C2387C0E50066694E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		42F78C192387C1190066694E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				42F78C162387C1190066694E /* Elva.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		429183122387B0C200C4A8C3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		42F4AC61238687FD00463F82 /* Elva.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Elva.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +99,8 @@
 		42F4AC7F2386926900463F82 /* libzstd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzstd.a; path = ExternalLibrary/iOS/lib/libzstd.a; sourceTree = "<group>"; };
 		42F4AC82238692CA00463F82 /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		42F4AC83238692CA00463F82 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		42F78C0E2387C0E50066694E /* Elva.Mac.CoimmandLine.Demo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Elva.Mac.CoimmandLine.Demo; sourceTree = BUILT_PRODUCTS_DIR; };
+		42F78C102387C0E50066694E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		4530404FA943990C2E11C452 /* File.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = File.c; sourceTree = "<group>"; };
 		4530416883A1035DCE23EB4B /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		4530431534E1CC7E2D916F86 /* Decompress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Decompress.c; sourceTree = "<group>"; };
@@ -74,6 +113,7 @@
 		453047A0F1366C785506BF79 /* Log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Log.c; sourceTree = "<group>"; };
 		453047D5241647B806C6C07B /* Elva.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Elva.swift; sourceTree = "<group>"; };
 		4530489730D4562F1AF46308 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		453048C64CC5FCC7404A2517 /* Env.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Env.swift; sourceTree = "<group>"; };
 		45304940AA96850CBBAD12E0 /* Checker.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Checker.c; sourceTree = "<group>"; };
 		4530496FAB36E11DC6A9A7A4 /* Core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Core.c; sourceTree = "<group>"; };
 		45304A5F73BAE475A4FD3FE7 /* LogFlag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogFlag.swift; sourceTree = "<group>"; };
@@ -102,6 +142,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		42F78C0B2387C0E50066694E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42F78C152387C1190066694E /* Elva.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -113,6 +161,7 @@
 				42F4AC83238692CA00463F82 /* .gitignore */,
 				42F4AC6C2386880800463F82 /* Source */,
 				42F4AC63238687FD00463F82 /* Elva */,
+				42F78C0F2387C0E50066694E /* Elva.Mac.CoimmandLine.Demo */,
 				42F4AC62238687FD00463F82 /* Products */,
 				42F4AC7D2386925D00463F82 /* Frameworks */,
 			);
@@ -123,6 +172,7 @@
 			children = (
 				42F4AC61238687FD00463F82 /* Elva.framework */,
 				42F4AC72238688C900463F82 /* Elva.framework */,
+				42F78C0E2387C0E50066694E /* Elva.Mac.CoimmandLine.Demo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,6 +202,15 @@
 				42F4AC7E2386925D00463F82 /* libzstd.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		42F78C0F2387C0E50066694E /* Elva.Mac.CoimmandLine.Demo */ = {
+			isa = PBXGroup;
+			children = (
+				42F78C102387C0E50066694E /* main.swift */,
+				453048C64CC5FCC7404A2517 /* Env.swift */,
+			);
+			path = Elva.Mac.CoimmandLine.Demo;
 			sourceTree = "<group>";
 		};
 		453041C767B3E1497E5B25CC /* File */ = {
@@ -312,12 +371,32 @@
 			productReference = 42F4AC72238688C900463F82 /* Elva.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		42F78C0D2387C0E50066694E /* Elva.Mac.CoimmandLine.Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42F78C142387C0E50066694E /* Build configuration list for PBXNativeTarget "Elva.Mac.CoimmandLine.Demo" */;
+			buildPhases = (
+				42F78C0A2387C0E50066694E /* Sources */,
+				42F78C0B2387C0E50066694E /* Frameworks */,
+				42F78C0C2387C0E50066694E /* CopyFiles */,
+				42F78C192387C1190066694E /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				42F78C182387C1190066694E /* PBXTargetDependency */,
+			);
+			name = Elva.Mac.CoimmandLine.Demo;
+			productName = Elva.Mac.CoimmandLine.Demo;
+			productReference = 42F78C0E2387C0E50066694E /* Elva.Mac.CoimmandLine.Demo */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		42F4AC58238687FD00463F82 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1120;
 				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "Mengyu Li";
 				TargetAttributes = {
@@ -328,6 +407,9 @@
 					42F4AC71238688C900463F82 = {
 						CreatedOnToolsVersion = 11.2.1;
 						LastSwiftMigration = 1120;
+					};
+					42F78C0D2387C0E50066694E = {
+						CreatedOnToolsVersion = 11.2.1;
 					};
 				};
 			};
@@ -346,6 +428,7 @@
 			targets = (
 				42F4AC60238687FD00463F82 /* Elva.iOS */,
 				42F4AC71238688C900463F82 /* Elva.macOS */,
+				42F78C0D2387C0E50066694E /* Elva.Mac.CoimmandLine.Demo */,
 			);
 		};
 /* End PBXProject section */
@@ -412,7 +495,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		42F78C0A2387C0E50066694E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42F78C112387C0E50066694E /* main.swift in Sources */,
+				45304B7DE63A16AD23858E78 /* Env.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		42F78C182387C1190066694E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 42F4AC71238688C900463F82 /* Elva.macOS */;
+			targetProxy = 42F78C172387C1190066694E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		42F4AC67238687FD00463F82 /* Debug */ = {
@@ -669,6 +769,34 @@
 			};
 			name = Release;
 		};
+		42F78C122387C0E50066694E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HMEN575QY4;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Elva/Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		42F78C132387C0E50066694E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HMEN575QY4;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Elva/Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -695,6 +823,15 @@
 			buildConfigurations = (
 				42F4AC78238688C900463F82 /* Debug */,
 				42F4AC79238688C900463F82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		42F78C142387C0E50066694E /* Build configuration list for PBXNativeTarget "Elva.Mac.CoimmandLine.Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42F78C122387C0E50066694E /* Debug */,
+				42F78C132387C0E50066694E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
