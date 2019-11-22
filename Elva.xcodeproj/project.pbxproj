@@ -7,13 +7,58 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		42F4AC66238687FD00463F82 /* Elva.h in Headers */ = {isa = PBXBuildFile; fileRef = 42F4AC64238687FD00463F82 /* Elva.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		42F4AC802386927A00463F82 /* libzstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F4AC7F2386926900463F82 /* libzstd.a */; };
+		42F4AC812386928500463F82 /* libzstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F4AC7E2386925D00463F82 /* libzstd.a */; };
+		45304115D95DBA5262D8BAF4 /* Compress.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304C66EC8BF5D0DC30C9AE /* Compress.h */; };
+		4530414065ADDBAB17B6A88B /* Decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530431534E1CC7E2D916F86 /* Decompress.c */; };
+		453041FA788D0105722A349C /* Log.c in Sources */ = {isa = PBXBuildFile; fileRef = 453047A0F1366C785506BF79 /* Log.c */; };
+		453042F33987378F009306F3 /* Checker.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304796A5DE855B7944541F /* Checker.h */; };
+		453045BCB15ABAF6DECC1A09 /* Decompress.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304C838443F357C46F3E5D /* Decompress.h */; };
+		453045EB4573B71B9D68678D /* Elva.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453047D5241647B806C6C07B /* Elva.swift */; };
+		453046F17B5B1E7EC11C6A20 /* File.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304FD1252E73477543D2CD /* File.h */; };
+		4530478C8D6A2809DB3D36D2 /* Core.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530445FF3C8874D5C648600 /* Core.h */; };
+		453047B8EA1825045FFFC255 /* Compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304F1743D0E38CB413A4B2 /* Compress.c */; };
+		453048037FECCAB4FAACFB75 /* File.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304FD1252E73477543D2CD /* File.h */; };
+		45304805A7368D530E898D5C /* Decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530431534E1CC7E2D916F86 /* Decompress.c */; };
+		453049177552BFD3D52EB56C /* Checker.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304796A5DE855B7944541F /* Checker.h */; };
+		453049BD3B71C3EBA6614F39 /* Checker.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304940AA96850CBBAD12E0 /* Checker.c */; };
+		453049C96B7A81218E270FF7 /* Compress.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304C66EC8BF5D0DC30C9AE /* Compress.h */; };
+		45304A1937D96992BD841FC4 /* Core.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530496FAB36E11DC6A9A7A4 /* Core.c */; };
+		45304A732BC7F79D1CE868FB /* Log.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530416883A1035DCE23EB4B /* Log.h */; };
+		45304AA64E914474A609E3A7 /* File.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530404FA943990C2E11C452 /* File.c */; };
+		45304B0A6F095691827D22CC /* Elva.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453047D5241647B806C6C07B /* Elva.swift */; };
+		45304B446EF0856F7F98DCED /* File.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530404FA943990C2E11C452 /* File.c */; };
+		45304BFD66AD89A00F82CEB5 /* Log.c in Sources */ = {isa = PBXBuildFile; fileRef = 453047A0F1366C785506BF79 /* Log.c */; };
+		45304CAECFA5E3E98923F40E /* Decompress.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304C838443F357C46F3E5D /* Decompress.h */; };
+		45304D2696E019A904060BCC /* Core.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530496FAB36E11DC6A9A7A4 /* Core.c */; };
+		45304D8D6EB259D2BBB62AAC /* Compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304F1743D0E38CB413A4B2 /* Compress.c */; };
+		45304E05B73505A72BF9BA5F /* Core.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530445FF3C8874D5C648600 /* Core.h */; };
+		45304EDB7DD7F1EB2FFEAA0A /* Log.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530416883A1035DCE23EB4B /* Log.h */; };
+		45304F75C9A85B9C8FBB1D22 /* Checker.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304940AA96850CBBAD12E0 /* Checker.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		429183122387B0C200C4A8C3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		42F4AC61238687FD00463F82 /* Elva.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Elva.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42F4AC64238687FD00463F82 /* Elva.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Elva.h; sourceTree = "<group>"; };
 		42F4AC65238687FD00463F82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42F4AC72238688C900463F82 /* Elva.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Elva.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42F4AC7E2386925D00463F82 /* libzstd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzstd.a; path = ExternalLibrary/macOS/lib/libzstd.a; sourceTree = "<group>"; };
+		42F4AC7F2386926900463F82 /* libzstd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzstd.a; path = ExternalLibrary/iOS/lib/libzstd.a; sourceTree = "<group>"; };
+		42F4AC82238692CA00463F82 /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
+		42F4AC83238692CA00463F82 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		4530404FA943990C2E11C452 /* File.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = File.c; sourceTree = "<group>"; };
+		4530416883A1035DCE23EB4B /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
+		4530431534E1CC7E2D916F86 /* Decompress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Decompress.c; sourceTree = "<group>"; };
+		4530445FF3C8874D5C648600 /* Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
+		45304796A5DE855B7944541F /* Checker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Checker.h; sourceTree = "<group>"; };
+		453047A0F1366C785506BF79 /* Log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Log.c; sourceTree = "<group>"; };
+		453047D5241647B806C6C07B /* Elva.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Elva.swift; sourceTree = "<group>"; };
+		45304940AA96850CBBAD12E0 /* Checker.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Checker.c; sourceTree = "<group>"; };
+		4530496FAB36E11DC6A9A7A4 /* Core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Core.c; sourceTree = "<group>"; };
+		45304C66EC8BF5D0DC30C9AE /* Compress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compress.h; sourceTree = "<group>"; };
+		45304C838443F357C46F3E5D /* Decompress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decompress.h; sourceTree = "<group>"; };
+		45304F1743D0E38CB413A4B2 /* Compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Compress.c; sourceTree = "<group>"; };
+		45304FD1252E73477543D2CD /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -21,6 +66,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42F4AC802386927A00463F82 /* libzstd.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42F4AC6F238688C900463F82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42F4AC812386928500463F82 /* libzstd.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -30,8 +84,13 @@
 		42F4AC57238687FD00463F82 = {
 			isa = PBXGroup;
 			children = (
+				429183122387B0C200C4A8C3 /* README.md */,
+				42F4AC82238692CA00463F82 /* .gitattributes */,
+				42F4AC83238692CA00463F82 /* .gitignore */,
+				42F4AC6C2386880800463F82 /* Source */,
 				42F4AC63238687FD00463F82 /* Elva */,
 				42F4AC62238687FD00463F82 /* Products */,
+				42F4AC7D2386925D00463F82 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -39,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				42F4AC61238687FD00463F82 /* Elva.framework */,
+				42F4AC72238688C900463F82 /* Elva.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -46,10 +106,110 @@
 		42F4AC63238687FD00463F82 /* Elva */ = {
 			isa = PBXGroup;
 			children = (
-				42F4AC64238687FD00463F82 /* Elva.h */,
 				42F4AC65238687FD00463F82 /* Info.plist */,
 			);
 			path = Elva;
+			sourceTree = "<group>";
+		};
+		42F4AC6C2386880800463F82 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				453041F566B36D6CF513652E /* Backend */,
+				453046D6DB2A5B3AB4730ED7 /* Bridge */,
+				4530496259BE1FE1D15ABD5F /* Frontend */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		42F4AC7D2386925D00463F82 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				42F4AC7F2386926900463F82 /* libzstd.a */,
+				42F4AC7E2386925D00463F82 /* libzstd.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		453041C767B3E1497E5B25CC /* File */ = {
+			isa = PBXGroup;
+			children = (
+				45304FD1252E73477543D2CD /* File.h */,
+				4530404FA943990C2E11C452 /* File.c */,
+			);
+			path = File;
+			sourceTree = "<group>";
+		};
+		453041F566B36D6CF513652E /* Backend */ = {
+			isa = PBXGroup;
+			children = (
+				4530430B62BCB54295A54F7B /* Core */,
+				4530458C5BE1B7DF5480EAF0 /* Checker */,
+				453041C767B3E1497E5B25CC /* File */,
+				45304388FA9226F1A3D19C90 /* Compress */,
+				45304908C010E3BA0EF2FE70 /* Decompress */,
+				45304F175C9414B15B067445 /* Log */,
+			);
+			path = Backend;
+			sourceTree = "<group>";
+		};
+		4530430B62BCB54295A54F7B /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				4530445FF3C8874D5C648600 /* Core.h */,
+				4530496FAB36E11DC6A9A7A4 /* Core.c */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		45304388FA9226F1A3D19C90 /* Compress */ = {
+			isa = PBXGroup;
+			children = (
+				45304C66EC8BF5D0DC30C9AE /* Compress.h */,
+				45304F1743D0E38CB413A4B2 /* Compress.c */,
+			);
+			path = Compress;
+			sourceTree = "<group>";
+		};
+		4530458C5BE1B7DF5480EAF0 /* Checker */ = {
+			isa = PBXGroup;
+			children = (
+				45304796A5DE855B7944541F /* Checker.h */,
+				45304940AA96850CBBAD12E0 /* Checker.c */,
+			);
+			path = Checker;
+			sourceTree = "<group>";
+		};
+		453046D6DB2A5B3AB4730ED7 /* Bridge */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Bridge;
+			sourceTree = "<group>";
+		};
+		45304908C010E3BA0EF2FE70 /* Decompress */ = {
+			isa = PBXGroup;
+			children = (
+				45304C838443F357C46F3E5D /* Decompress.h */,
+				4530431534E1CC7E2D916F86 /* Decompress.c */,
+			);
+			path = Decompress;
+			sourceTree = "<group>";
+		};
+		4530496259BE1FE1D15ABD5F /* Frontend */ = {
+			isa = PBXGroup;
+			children = (
+				453047D5241647B806C6C07B /* Elva.swift */,
+			);
+			path = Frontend;
+			sourceTree = "<group>";
+		};
+		45304F175C9414B15B067445 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				4530416883A1035DCE23EB4B /* Log.h */,
+				453047A0F1366C785506BF79 /* Log.c */,
+			);
+			path = Log;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -59,16 +219,34 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42F4AC66238687FD00463F82 /* Elva.h in Headers */,
+				453049C96B7A81218E270FF7 /* Compress.h in Headers */,
+				4530478C8D6A2809DB3D36D2 /* Core.h in Headers */,
+				453042F33987378F009306F3 /* Checker.h in Headers */,
+				453046F17B5B1E7EC11C6A20 /* File.h in Headers */,
+				453045BCB15ABAF6DECC1A09 /* Decompress.h in Headers */,
+				45304A732BC7F79D1CE868FB /* Log.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42F4AC6D238688C900463F82 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45304115D95DBA5262D8BAF4 /* Compress.h in Headers */,
+				45304E05B73505A72BF9BA5F /* Core.h in Headers */,
+				453049177552BFD3D52EB56C /* Checker.h in Headers */,
+				453048037FECCAB4FAACFB75 /* File.h in Headers */,
+				45304CAECFA5E3E98923F40E /* Decompress.h in Headers */,
+				45304EDB7DD7F1EB2FFEAA0A /* Log.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		42F4AC60238687FD00463F82 /* Elva */ = {
+		42F4AC60238687FD00463F82 /* Elva.iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 42F4AC69238687FD00463F82 /* Build configuration list for PBXNativeTarget "Elva" */;
+			buildConfigurationList = 42F4AC69238687FD00463F82 /* Build configuration list for PBXNativeTarget "Elva.iOS" */;
 			buildPhases = (
 				42F4AC5C238687FD00463F82 /* Headers */,
 				42F4AC5D238687FD00463F82 /* Sources */,
@@ -79,9 +257,27 @@
 			);
 			dependencies = (
 			);
-			name = Elva;
+			name = Elva.iOS;
 			productName = Elva;
 			productReference = 42F4AC61238687FD00463F82 /* Elva.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		42F4AC71238688C900463F82 /* Elva.macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42F4AC77238688C900463F82 /* Build configuration list for PBXNativeTarget "Elva.macOS" */;
+			buildPhases = (
+				42F4AC6D238688C900463F82 /* Headers */,
+				42F4AC6E238688C900463F82 /* Sources */,
+				42F4AC6F238688C900463F82 /* Frameworks */,
+				42F4AC70238688C900463F82 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Elva.macOS;
+			productName = Elva.macOS;
+			productReference = 42F4AC72238688C900463F82 /* Elva.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -95,6 +291,11 @@
 				TargetAttributes = {
 					42F4AC60238687FD00463F82 = {
 						CreatedOnToolsVersion = 11.2.1;
+						LastSwiftMigration = 1120;
+					};
+					42F4AC71238688C900463F82 = {
+						CreatedOnToolsVersion = 11.2.1;
+						LastSwiftMigration = 1120;
 					};
 				};
 			};
@@ -111,13 +312,21 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				42F4AC60238687FD00463F82 /* Elva */,
+				42F4AC60238687FD00463F82 /* Elva.iOS */,
+				42F4AC71238688C900463F82 /* Elva.macOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		42F4AC5F238687FD00463F82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42F4AC70238688C900463F82 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -131,6 +340,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45304B0A6F095691827D22CC /* Elva.swift in Sources */,
+				45304D8D6EB259D2BBB62AAC /* Compress.c in Sources */,
+				45304A1937D96992BD841FC4 /* Core.c in Sources */,
+				45304F75C9A85B9C8FBB1D22 /* Checker.c in Sources */,
+				45304AA64E914474A609E3A7 /* File.c in Sources */,
+				4530414065ADDBAB17B6A88B /* Decompress.c in Sources */,
+				45304BFD66AD89A00F82CEB5 /* Log.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42F4AC6E238688C900463F82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				453045EB4573B71B9D68678D /* Elva.swift in Sources */,
+				453047B8EA1825045FFFC255 /* Compress.c in Sources */,
+				45304D2696E019A904060BCC /* Core.c in Sources */,
+				453049BD3B71C3EBA6614F39 /* Checker.c in Sources */,
+				45304B446EF0856F7F98DCED /* File.c in Sources */,
+				45304805A7368D530E898D5C /* Decompress.c in Sources */,
+				453041FA788D0105722A349C /* Log.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,22 +490,33 @@
 		42F4AC6A238687FD00463F82 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = HMEN575QY4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Elva/Info.plist;
+				HEADER_SEARCH_PATHS = $PROJECT_DIR/ExternalLIbrary/iOS/include;
+				INFOPLIST_FILE = "$(SRCROOT)/Elva/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ExternalLibrary/iOS/lib",
+				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.Elva;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = Elva;
 				SKIP_INSTALL = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -284,24 +525,99 @@
 		42F4AC6B238687FD00463F82 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = HMEN575QY4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Elva/Info.plist;
+				HEADER_SEARCH_PATHS = $PROJECT_DIR/ExternalLIbrary/iOS/include;
+				INFOPLIST_FILE = "$(SRCROOT)/Elva/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ExternalLibrary/iOS/lib",
+				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.Elva;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = Elva;
 				SKIP_INSTALL = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		42F4AC78238688C900463F82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = HMEN575QY4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = $PROJECT_DIR/ExternalLIbrary/macOS/include;
+				INFOPLIST_FILE = "$(SRCROOT)/Elva/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ExternalLibrary/macOS/lib";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "top.limengyu.Elva-macOS";
+				PRODUCT_NAME = Elva;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		42F4AC79238688C900463F82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = HMEN575QY4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = $PROJECT_DIR/ExternalLIbrary/macOS/include;
+				INFOPLIST_FILE = "$(SRCROOT)/Elva/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ExternalLibrary/macOS/lib";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "top.limengyu.Elva-macOS";
+				PRODUCT_NAME = Elva;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -317,11 +633,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		42F4AC69238687FD00463F82 /* Build configuration list for PBXNativeTarget "Elva" */ = {
+		42F4AC69238687FD00463F82 /* Build configuration list for PBXNativeTarget "Elva.iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				42F4AC6A238687FD00463F82 /* Debug */,
 				42F4AC6B238687FD00463F82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		42F4AC77238688C900463F82 /* Build configuration list for PBXNativeTarget "Elva.macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42F4AC78238688C900463F82 /* Debug */,
+				42F4AC79238688C900463F82 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
