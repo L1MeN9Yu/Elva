@@ -9,4 +9,4 @@
 import Foundation
 import Elva
 
-Elva.setup(environment: Env.self)
+Elva.register(environment: Env.self)

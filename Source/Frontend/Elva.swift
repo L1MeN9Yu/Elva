@@ -9,7 +9,7 @@
 
 private(set) var __environment: Environment.Type?
 
-public func setup(environment: Environment.Type) {
+public func register(environment: Environment.Type) {
     __environment = environment
     elva_setup { flag, file, function, line, message in
         guard let logFlag = LogFlag(unsignedIntValue: CUnsignedInt(flag)),
