@@ -36,4 +36,6 @@ do{                                                                             
 #define LogError(fmt, ...)   LogMacro(4,fmt, ##__VA_ARGS__)
 #define LogCritical(fmt, ...)   LogMacro(5,fmt, ##__VA_ARGS__)
 
+const char *PrintablePath(const char *path);
+
 #endif /* Log_h */

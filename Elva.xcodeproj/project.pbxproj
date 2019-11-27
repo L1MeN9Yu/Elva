@@ -7,54 +7,70 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42E64D87238E18E300BBEC0F /* libbrotli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42E64D86238E18D900BBEC0F /* libbrotli.a */; };
+		42E64D89238E18FA00BBEC0F /* libbrotli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42E64D88238E18F100BBEC0F /* libbrotli.a */; };
 		42F4AC802386927A00463F82 /* libzstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F4AC7F2386926900463F82 /* libzstd.a */; };
 		42F4AC812386928500463F82 /* libzstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F4AC7E2386925D00463F82 /* libzstd.a */; };
 		42F78C112387C0E50066694E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F78C102387C0E50066694E /* main.swift */; };
 		42F78C152387C1190066694E /* Elva.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F4AC72238688C900463F82 /* Elva.framework */; };
 		42F78C162387C1190066694E /* Elva.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42F4AC72238688C900463F82 /* Elva.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		45304115D95DBA5262D8BAF4 /* Compress.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304C66EC8BF5D0DC30C9AE /* Compress.h */; };
 		4530411B6648E94758B4AB44 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530476AFD61F53F3B9F7406 /* Environment.swift */; };
-		4530414065ADDBAB17B6A88B /* Decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530431534E1CC7E2D916F86 /* Decompress.c */; };
+		4530412B937CB25422F03D8B /* Brotli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453046610FA6353C144DA375 /* Brotli.swift */; };
 		4530418868EFE320833F5875 /* Bridge.Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453045B63911AB64ACE71BA9 /* Bridge.Core.swift */; };
-		453041A4D9BF9A0AE948F239 /* Bridge.Compress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530438B99C1EF7BB71549EC /* Bridge.Compress.swift */; };
+		453041E5EE3130A3DD4E458D /* ZSTD_Compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 453042E539EDAC54C799C4CC /* ZSTD_Compress.c */; };
 		453041FA788D0105722A349C /* Log.c in Sources */ = {isa = PBXBuildFile; fileRef = 453047A0F1366C785506BF79 /* Log.c */; };
-		453042F33987378F009306F3 /* Checker.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304796A5DE855B7944541F /* Checker.h */; };
-		4530433B4D6370ED6C562FDA /* Compressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304DDC08918D53322E5ED9 /* Compressor.swift */; };
+		45304277E02A973068CF7A06 /* ZSTD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304DD4E27307AD6B5AF291 /* ZSTD.swift */; };
+		453042D15338A84E5E42953F /* Brotli.InputBlockBits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453046C2F59EBE7BBCAFE9F1 /* Brotli.InputBlockBits.swift */; };
+		453042DFB96A4D682E87D38A /* ZSTD_Compress.h in Headers */ = {isa = PBXBuildFile; fileRef = 453040D47D8F8B23D4602A1E /* ZSTD_Compress.h */; };
+		453042FE27E90C960376E2B8 /* Brotli.Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304DE15C6E56263A8BF4B5 /* Brotli.Mode.swift */; };
+		4530433678049D9FF79084A5 /* ZSTD.Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530427EB1115E78CF3EE748 /* ZSTD.Error.swift */; };
 		4530437B5B7D0FAD71066BAE /* Bridge.Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453045B63911AB64ACE71BA9 /* Bridge.Core.swift */; };
-		453043BC54A2B7963A08F1B3 /* Decompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304F229570758994DB6FD6 /* Decompressor.swift */; };
-		453044790A106CA4EDBAB794 /* Compressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304DDC08918D53322E5ED9 /* Compressor.swift */; };
-		4530451268281D68B0520B01 /* Decompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304F229570758994DB6FD6 /* Decompressor.swift */; };
-		453045BCB15ABAF6DECC1A09 /* Decompress.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304C838443F357C46F3E5D /* Decompress.h */; };
+		453043F05B7255CED87FB0BA /* Brotli.WindowBits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530408FC14D28910FCFD61D /* Brotli.WindowBits.swift */; };
+		453044493AEED8084FCF825A /* Brotli.InputBlockBits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453046C2F59EBE7BBCAFE9F1 /* Brotli.InputBlockBits.swift */; };
+		45304517F9912C3249727C49 /* Brotli.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304E43BE10A6F59BE7ADF3 /* Brotli.h */; };
+		4530452D009EACAA77DB1AEF /* Brotli.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304DEB8D95FF855700289E /* Brotli.c */; };
+		4530457981800976B8141BD0 /* Brotli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453046610FA6353C144DA375 /* Brotli.swift */; };
+		45304581C0F893677FF6C33F /* ZSTD_Compress.h in Headers */ = {isa = PBXBuildFile; fileRef = 453040D47D8F8B23D4602A1E /* ZSTD_Compress.h */; };
 		453045EB4573B71B9D68678D /* Elva.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453047D5241647B806C6C07B /* Elva.swift */; };
+		453045EC250ADF74C93A859F /* ZSTD_Checker.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304F4C5B02531DB0BD43F6 /* ZSTD_Checker.h */; };
+		4530464A8EC90A411CCF9CF4 /* Bridge.ZSTD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530467C4628CB8C6A86FDA0 /* Bridge.ZSTD.swift */; };
 		4530465CBEC0E0220CB4C500 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530476AFD61F53F3B9F7406 /* Environment.swift */; };
 		453046F17B5B1E7EC11C6A20 /* File.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304FD1252E73477543D2CD /* File.h */; };
+		453047229C1260AEBA43BAEA /* Brotli.WindowBits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530408FC14D28910FCFD61D /* Brotli.WindowBits.swift */; };
+		453047324F63DF6461001E6E /* ZSTD_Checker.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304F4C5B02531DB0BD43F6 /* ZSTD_Checker.h */; };
 		4530478C8D6A2809DB3D36D2 /* Core.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530445FF3C8874D5C648600 /* Core.h */; };
-		453047B8EA1825045FFFC255 /* Compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304F1743D0E38CB413A4B2 /* Compress.c */; };
+		453047D3C805208B6DD8BC85 /* Brotli.Quality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453049A83452E2612E94ABBE /* Brotli.Quality.swift */; };
+		453047E41891FE6E0CF54D0C /* Bridge.Brotli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304658F6EC95E7C16A2608 /* Bridge.Brotli.swift */; };
 		453048037FECCAB4FAACFB75 /* File.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304FD1252E73477543D2CD /* File.h */; };
-		45304805A7368D530E898D5C /* Decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530431534E1CC7E2D916F86 /* Decompress.c */; };
 		453048B69D0DC1B4D6F50A03 /* LogFlag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304A5F73BAE475A4FD3FE7 /* LogFlag.swift */; };
-		453049177552BFD3D52EB56C /* Checker.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304796A5DE855B7944541F /* Checker.h */; };
-		453049BD3B71C3EBA6614F39 /* Checker.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304940AA96850CBBAD12E0 /* Checker.c */; };
-		453049C96B7A81218E270FF7 /* Compress.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304C66EC8BF5D0DC30C9AE /* Compress.h */; };
+		453048E11A71043A501BD4B8 /* ZSTD_Decompress.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530481CABEFA98CDC590CFF /* ZSTD_Decompress.h */; };
+		45304981879282EB092292BD /* Brotli.Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304261B722BF82C946B6B9 /* Brotli.Error.swift */; };
+		45304A0193B7215F3F3FAF3E /* Bridge.ZSTD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530467C4628CB8C6A86FDA0 /* Bridge.ZSTD.swift */; };
 		45304A1937D96992BD841FC4 /* Core.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530496FAB36E11DC6A9A7A4 /* Core.c */; };
+		45304A36B8257A740269FECD /* Brotli.Quality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453049A83452E2612E94ABBE /* Brotli.Quality.swift */; };
+		45304A42FDD197E06FEBD624 /* ZSTD.Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530427EB1115E78CF3EE748 /* ZSTD.Error.swift */; };
 		45304A732BC7F79D1CE868FB /* Log.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530416883A1035DCE23EB4B /* Log.h */; };
 		45304AA64E914474A609E3A7 /* File.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530404FA943990C2E11C452 /* File.c */; };
 		45304AB577CEACF99177524B /* LogFlag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304A5F73BAE475A4FD3FE7 /* LogFlag.swift */; };
+		45304AECE813744599285F32 /* ZSTD_Checker.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304279528DC244F5503255 /* ZSTD_Checker.c */; };
 		45304B0A6F095691827D22CC /* Elva.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453047D5241647B806C6C07B /* Elva.swift */; };
+		45304B2A34BA23E87360104D /* ZSTD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304DD4E27307AD6B5AF291 /* ZSTD.swift */; };
 		45304B446EF0856F7F98DCED /* File.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530404FA943990C2E11C452 /* File.c */; };
+		45304B77ED74C4148447AEEB /* ZSTD_Checker.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304279528DC244F5503255 /* ZSTD_Checker.c */; };
 		45304B7DE63A16AD23858E78 /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453048C64CC5FCC7404A2517 /* Env.swift */; };
+		45304B817D3FD88CA5E17CE5 /* ZSTD_Compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 453042E539EDAC54C799C4CC /* ZSTD_Compress.c */; };
+		45304BF008B78BB40A608BF9 /* Bridge.Brotli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304658F6EC95E7C16A2608 /* Bridge.Brotli.swift */; };
+		45304BF112F080BDF6541FAA /* Brotli.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304E43BE10A6F59BE7ADF3 /* Brotli.h */; };
 		45304BFD66AD89A00F82CEB5 /* Log.c in Sources */ = {isa = PBXBuildFile; fileRef = 453047A0F1366C785506BF79 /* Log.c */; };
-		45304C192EE72B28948085E2 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530489730D4562F1AF46308 /* Error.swift */; };
-		45304CAECFA5E3E98923F40E /* Decompress.h in Headers */ = {isa = PBXBuildFile; fileRef = 45304C838443F357C46F3E5D /* Decompress.h */; };
 		45304D2696E019A904060BCC /* Core.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530496FAB36E11DC6A9A7A4 /* Core.c */; };
-		45304D66875C71349E4FEB69 /* Bridge.Decompress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304577A01473135330AF96 /* Bridge.Decompress.swift */; };
-		45304D8D6EB259D2BBB62AAC /* Compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304F1743D0E38CB413A4B2 /* Compress.c */; };
-		45304DFC6219F1D6935F6A4B /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530489730D4562F1AF46308 /* Error.swift */; };
+		45304D874804AC351A1D190B /* Brotli.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304DEB8D95FF855700289E /* Brotli.c */; };
 		45304E05B73505A72BF9BA5F /* Core.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530445FF3C8874D5C648600 /* Core.h */; };
+		45304ED817F569A1A1BB20F7 /* ZSTD_Decompress.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530481CABEFA98CDC590CFF /* ZSTD_Decompress.h */; };
+		45304ED892F3D6CFD4079689 /* Brotli.Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304DE15C6E56263A8BF4B5 /* Brotli.Mode.swift */; };
 		45304EDB7DD7F1EB2FFEAA0A /* Log.h in Headers */ = {isa = PBXBuildFile; fileRef = 4530416883A1035DCE23EB4B /* Log.h */; };
-		45304EFFA323BA02C86FA8CB /* Bridge.Compress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530438B99C1EF7BB71549EC /* Bridge.Compress.swift */; };
-		45304F75C9A85B9C8FBB1D22 /* Checker.c in Sources */ = {isa = PBXBuildFile; fileRef = 45304940AA96850CBBAD12E0 /* Checker.c */; };
-		45304F9FF48A0AD69C032BE2 /* Bridge.Decompress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304577A01473135330AF96 /* Bridge.Decompress.swift */; };
+		45304F2064191A5372192262 /* ZSTD_Decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 453048104E27A63F842D8BCC /* ZSTD_Decompress.c */; };
+		45304F662389E408DCD68A89 /* Brotli.Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304261B722BF82C946B6B9 /* Brotli.Error.swift */; };
+		45304F972235F9488E97B3EF /* ZSTD_Decompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 453048104E27A63F842D8BCC /* ZSTD_Decompress.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +108,8 @@
 
 /* Begin PBXFileReference section */
 		429183122387B0C200C4A8C3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		42E64D86238E18D900BBEC0F /* libbrotli.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbrotli.a; path = ExternalLibrary/iOS/lib/libbrotli.a; sourceTree = "<group>"; };
+		42E64D88238E18F100BBEC0F /* libbrotli.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbrotli.a; path = ExternalLibrary/macOS/lib/libbrotli.a; sourceTree = "<group>"; };
 		42F4AC61238687FD00463F82 /* Elva.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Elva.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42F4AC65238687FD00463F82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42F4AC72238688C900463F82 /* Elva.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Elva.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,29 +117,36 @@
 		42F4AC7F2386926900463F82 /* libzstd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzstd.a; path = ExternalLibrary/iOS/lib/libzstd.a; sourceTree = "<group>"; };
 		42F4AC82238692CA00463F82 /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		42F4AC83238692CA00463F82 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		42F78C0E2387C0E50066694E /* Elva.Mac.CoimmandLine.Demo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Elva.Mac.CoimmandLine.Demo; sourceTree = BUILT_PRODUCTS_DIR; };
+		42F78C0E2387C0E50066694E /* Elva.Mac.CommandLine.Demo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Elva.Mac.CommandLine.Demo; sourceTree = BUILT_PRODUCTS_DIR; };
 		42F78C102387C0E50066694E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		4530404FA943990C2E11C452 /* File.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = File.c; sourceTree = "<group>"; };
+		4530408FC14D28910FCFD61D /* Brotli.WindowBits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brotli.WindowBits.swift; sourceTree = "<group>"; };
+		453040D47D8F8B23D4602A1E /* ZSTD_Compress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSTD_Compress.h; sourceTree = "<group>"; };
 		4530416883A1035DCE23EB4B /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
-		4530431534E1CC7E2D916F86 /* Decompress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Decompress.c; sourceTree = "<group>"; };
-		4530438B99C1EF7BB71549EC /* Bridge.Compress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.Compress.swift; sourceTree = "<group>"; };
+		45304261B722BF82C946B6B9 /* Brotli.Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brotli.Error.swift; sourceTree = "<group>"; };
+		45304279528DC244F5503255 /* ZSTD_Checker.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ZSTD_Checker.c; sourceTree = "<group>"; };
+		4530427EB1115E78CF3EE748 /* ZSTD.Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZSTD.Error.swift; sourceTree = "<group>"; };
+		453042E539EDAC54C799C4CC /* ZSTD_Compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ZSTD_Compress.c; sourceTree = "<group>"; };
 		4530445FF3C8874D5C648600 /* Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
-		45304577A01473135330AF96 /* Bridge.Decompress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.Decompress.swift; sourceTree = "<group>"; };
 		453045B63911AB64ACE71BA9 /* Bridge.Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.Core.swift; sourceTree = "<group>"; };
+		45304658F6EC95E7C16A2608 /* Bridge.Brotli.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.Brotli.swift; sourceTree = "<group>"; };
+		453046610FA6353C144DA375 /* Brotli.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brotli.swift; sourceTree = "<group>"; };
+		4530467C4628CB8C6A86FDA0 /* Bridge.ZSTD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.ZSTD.swift; sourceTree = "<group>"; };
+		453046C2F59EBE7BBCAFE9F1 /* Brotli.InputBlockBits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brotli.InputBlockBits.swift; sourceTree = "<group>"; };
 		4530476AFD61F53F3B9F7406 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
-		45304796A5DE855B7944541F /* Checker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Checker.h; sourceTree = "<group>"; };
 		453047A0F1366C785506BF79 /* Log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Log.c; sourceTree = "<group>"; };
 		453047D5241647B806C6C07B /* Elva.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Elva.swift; sourceTree = "<group>"; };
-		4530489730D4562F1AF46308 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		453048104E27A63F842D8BCC /* ZSTD_Decompress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ZSTD_Decompress.c; sourceTree = "<group>"; };
+		4530481CABEFA98CDC590CFF /* ZSTD_Decompress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSTD_Decompress.h; sourceTree = "<group>"; };
 		453048C64CC5FCC7404A2517 /* Env.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Env.swift; sourceTree = "<group>"; };
-		45304940AA96850CBBAD12E0 /* Checker.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Checker.c; sourceTree = "<group>"; };
 		4530496FAB36E11DC6A9A7A4 /* Core.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Core.c; sourceTree = "<group>"; };
+		453049A83452E2612E94ABBE /* Brotli.Quality.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brotli.Quality.swift; sourceTree = "<group>"; };
 		45304A5F73BAE475A4FD3FE7 /* LogFlag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogFlag.swift; sourceTree = "<group>"; };
-		45304C66EC8BF5D0DC30C9AE /* Compress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compress.h; sourceTree = "<group>"; };
-		45304C838443F357C46F3E5D /* Decompress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decompress.h; sourceTree = "<group>"; };
-		45304DDC08918D53322E5ED9 /* Compressor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Compressor.swift; sourceTree = "<group>"; };
-		45304F1743D0E38CB413A4B2 /* Compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Compress.c; sourceTree = "<group>"; };
-		45304F229570758994DB6FD6 /* Decompressor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decompressor.swift; sourceTree = "<group>"; };
+		45304DD4E27307AD6B5AF291 /* ZSTD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZSTD.swift; sourceTree = "<group>"; };
+		45304DE15C6E56263A8BF4B5 /* Brotli.Mode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brotli.Mode.swift; sourceTree = "<group>"; };
+		45304DEB8D95FF855700289E /* Brotli.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Brotli.c; sourceTree = "<group>"; };
+		45304E43BE10A6F59BE7ADF3 /* Brotli.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Brotli.h; sourceTree = "<group>"; };
+		45304F4C5B02531DB0BD43F6 /* ZSTD_Checker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSTD_Checker.h; sourceTree = "<group>"; };
 		45304FD1252E73477543D2CD /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,6 +156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42F4AC802386927A00463F82 /* libzstd.a in Frameworks */,
+				42E64D87238E18E300BBEC0F /* libbrotli.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42F4AC812386928500463F82 /* libzstd.a in Frameworks */,
+				42E64D89238E18FA00BBEC0F /* libbrotli.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,7 +188,7 @@
 				42F4AC83238692CA00463F82 /* .gitignore */,
 				42F4AC6C2386880800463F82 /* Source */,
 				42F4AC63238687FD00463F82 /* Elva */,
-				42F78C0F2387C0E50066694E /* Elva.Mac.CoimmandLine.Demo */,
+				42F78C0F2387C0E50066694E /* Elva.Mac.CommandLine.Demo */,
 				42F4AC62238687FD00463F82 /* Products */,
 				42F4AC7D2386925D00463F82 /* Frameworks */,
 			);
@@ -172,7 +199,7 @@
 			children = (
 				42F4AC61238687FD00463F82 /* Elva.framework */,
 				42F4AC72238688C900463F82 /* Elva.framework */,
-				42F78C0E2387C0E50066694E /* Elva.Mac.CoimmandLine.Demo */,
+				42F78C0E2387C0E50066694E /* Elva.Mac.CommandLine.Demo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -198,19 +225,21 @@
 		42F4AC7D2386925D00463F82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				42E64D86238E18D900BBEC0F /* libbrotli.a */,
+				42E64D88238E18F100BBEC0F /* libbrotli.a */,
 				42F4AC7F2386926900463F82 /* libzstd.a */,
 				42F4AC7E2386925D00463F82 /* libzstd.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		42F78C0F2387C0E50066694E /* Elva.Mac.CoimmandLine.Demo */ = {
+		42F78C0F2387C0E50066694E /* Elva.Mac.CommandLine.Demo */ = {
 			isa = PBXGroup;
 			children = (
 				42F78C102387C0E50066694E /* main.swift */,
 				453048C64CC5FCC7404A2517 /* Env.swift */,
 			);
-			path = Elva.Mac.CoimmandLine.Demo;
+			path = Elva.Mac.CommandLine.Demo;
 			sourceTree = "<group>";
 		};
 		453041C767B3E1497E5B25CC /* File */ = {
@@ -226,13 +255,25 @@
 			isa = PBXGroup;
 			children = (
 				4530430B62BCB54295A54F7B /* Core */,
-				4530458C5BE1B7DF5480EAF0 /* Checker */,
 				453041C767B3E1497E5B25CC /* File */,
-				45304388FA9226F1A3D19C90 /* Compress */,
-				45304908C010E3BA0EF2FE70 /* Decompress */,
 				45304F175C9414B15B067445 /* Log */,
+				45304F0F77AC52610DCE3AF8 /* ZSTD */,
+				45304ECCAAD684C8DC412703 /* Brotli */,
 			);
 			path = Backend;
+			sourceTree = "<group>";
+		};
+		453042055DAC4A0E15D6C48E /* Brotli */ = {
+			isa = PBXGroup;
+			children = (
+				453046610FA6353C144DA375 /* Brotli.swift */,
+				45304DE15C6E56263A8BF4B5 /* Brotli.Mode.swift */,
+				453049A83452E2612E94ABBE /* Brotli.Quality.swift */,
+				4530408FC14D28910FCFD61D /* Brotli.WindowBits.swift */,
+				453046C2F59EBE7BBCAFE9F1 /* Brotli.InputBlockBits.swift */,
+				45304261B722BF82C946B6B9 /* Brotli.Error.swift */,
+			);
+			path = Brotli;
 			sourceTree = "<group>";
 		};
 		4530430B62BCB54295A54F7B /* Core */ = {
@@ -244,20 +285,11 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
-		45304388FA9226F1A3D19C90 /* Compress */ = {
+		453044ADEE3EEDD4FB04376A /* Checker */ = {
 			isa = PBXGroup;
 			children = (
-				45304C66EC8BF5D0DC30C9AE /* Compress.h */,
-				45304F1743D0E38CB413A4B2 /* Compress.c */,
-			);
-			path = Compress;
-			sourceTree = "<group>";
-		};
-		4530458C5BE1B7DF5480EAF0 /* Checker */ = {
-			isa = PBXGroup;
-			children = (
-				45304796A5DE855B7944541F /* Checker.h */,
-				45304940AA96850CBBAD12E0 /* Checker.c */,
+				45304F4C5B02531DB0BD43F6 /* ZSTD_Checker.h */,
+				45304279528DC244F5503255 /* ZSTD_Checker.c */,
 			);
 			path = Checker;
 			sourceTree = "<group>";
@@ -266,32 +298,68 @@
 			isa = PBXGroup;
 			children = (
 				453045B63911AB64ACE71BA9 /* Bridge.Core.swift */,
-				4530438B99C1EF7BB71549EC /* Bridge.Compress.swift */,
-				45304577A01473135330AF96 /* Bridge.Decompress.swift */,
+				4530467C4628CB8C6A86FDA0 /* Bridge.ZSTD.swift */,
+				45304658F6EC95E7C16A2608 /* Bridge.Brotli.swift */,
 			);
 			path = Bridge;
 			sourceTree = "<group>";
 		};
-		45304908C010E3BA0EF2FE70 /* Decompress */ = {
+		4530488879E9E52425E84FBD /* ZSTD */ = {
 			isa = PBXGroup;
 			children = (
-				45304C838443F357C46F3E5D /* Decompress.h */,
-				4530431534E1CC7E2D916F86 /* Decompress.c */,
+				45304DD4E27307AD6B5AF291 /* ZSTD.swift */,
+				4530427EB1115E78CF3EE748 /* ZSTD.Error.swift */,
 			);
-			path = Decompress;
+			path = ZSTD;
 			sourceTree = "<group>";
 		};
 		4530496259BE1FE1D15ABD5F /* Frontend */ = {
 			isa = PBXGroup;
 			children = (
 				453047D5241647B806C6C07B /* Elva.swift */,
-				45304DDC08918D53322E5ED9 /* Compressor.swift */,
-				45304F229570758994DB6FD6 /* Decompressor.swift */,
 				45304A5F73BAE475A4FD3FE7 /* LogFlag.swift */,
 				4530476AFD61F53F3B9F7406 /* Environment.swift */,
-				4530489730D4562F1AF46308 /* Error.swift */,
+				4530488879E9E52425E84FBD /* ZSTD */,
+				453042055DAC4A0E15D6C48E /* Brotli */,
 			);
 			path = Frontend;
+			sourceTree = "<group>";
+		};
+		453049B3B4449F9EB5EAC27E /* Compress */ = {
+			isa = PBXGroup;
+			children = (
+				453040D47D8F8B23D4602A1E /* ZSTD_Compress.h */,
+				453042E539EDAC54C799C4CC /* ZSTD_Compress.c */,
+			);
+			path = Compress;
+			sourceTree = "<group>";
+		};
+		45304DE14C2DCB2F0207211E /* Decompress */ = {
+			isa = PBXGroup;
+			children = (
+				4530481CABEFA98CDC590CFF /* ZSTD_Decompress.h */,
+				453048104E27A63F842D8BCC /* ZSTD_Decompress.c */,
+			);
+			path = Decompress;
+			sourceTree = "<group>";
+		};
+		45304ECCAAD684C8DC412703 /* Brotli */ = {
+			isa = PBXGroup;
+			children = (
+				45304E43BE10A6F59BE7ADF3 /* Brotli.h */,
+				45304DEB8D95FF855700289E /* Brotli.c */,
+			);
+			path = Brotli;
+			sourceTree = "<group>";
+		};
+		45304F0F77AC52610DCE3AF8 /* ZSTD */ = {
+			isa = PBXGroup;
+			children = (
+				453044ADEE3EEDD4FB04376A /* Checker */,
+				453049B3B4449F9EB5EAC27E /* Compress */,
+				45304DE14C2DCB2F0207211E /* Decompress */,
+			);
+			path = ZSTD;
 			sourceTree = "<group>";
 		};
 		45304F175C9414B15B067445 /* Log */ = {
@@ -310,12 +378,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				453049C96B7A81218E270FF7 /* Compress.h in Headers */,
 				4530478C8D6A2809DB3D36D2 /* Core.h in Headers */,
-				453042F33987378F009306F3 /* Checker.h in Headers */,
 				453046F17B5B1E7EC11C6A20 /* File.h in Headers */,
-				453045BCB15ABAF6DECC1A09 /* Decompress.h in Headers */,
 				45304A732BC7F79D1CE868FB /* Log.h in Headers */,
+				45304ED817F569A1A1BB20F7 /* ZSTD_Decompress.h in Headers */,
+				453045EC250ADF74C93A859F /* ZSTD_Checker.h in Headers */,
+				453042DFB96A4D682E87D38A /* ZSTD_Compress.h in Headers */,
+				45304517F9912C3249727C49 /* Brotli.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,12 +392,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45304115D95DBA5262D8BAF4 /* Compress.h in Headers */,
 				45304E05B73505A72BF9BA5F /* Core.h in Headers */,
-				453049177552BFD3D52EB56C /* Checker.h in Headers */,
 				453048037FECCAB4FAACFB75 /* File.h in Headers */,
-				45304CAECFA5E3E98923F40E /* Decompress.h in Headers */,
 				45304EDB7DD7F1EB2FFEAA0A /* Log.h in Headers */,
+				453048E11A71043A501BD4B8 /* ZSTD_Decompress.h in Headers */,
+				453047324F63DF6461001E6E /* ZSTD_Checker.h in Headers */,
+				45304581C0F893677FF6C33F /* ZSTD_Compress.h in Headers */,
+				45304BF112F080BDF6541FAA /* Brotli.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,9 +441,9 @@
 			productReference = 42F4AC72238688C900463F82 /* Elva.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		42F78C0D2387C0E50066694E /* Elva.Mac.CoimmandLine.Demo */ = {
+		42F78C0D2387C0E50066694E /* Elva.Mac.CommandLine.Demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 42F78C142387C0E50066694E /* Build configuration list for PBXNativeTarget "Elva.Mac.CoimmandLine.Demo" */;
+			buildConfigurationList = 42F78C142387C0E50066694E /* Build configuration list for PBXNativeTarget "Elva.Mac.CommandLine.Demo" */;
 			buildPhases = (
 				42F78C0A2387C0E50066694E /* Sources */,
 				42F78C0B2387C0E50066694E /* Frameworks */,
@@ -385,9 +455,9 @@
 			dependencies = (
 				42F78C182387C1190066694E /* PBXTargetDependency */,
 			);
-			name = Elva.Mac.CoimmandLine.Demo;
-			productName = Elva.Mac.CoimmandLine.Demo;
-			productReference = 42F78C0E2387C0E50066694E /* Elva.Mac.CoimmandLine.Demo */;
+			name = Elva.Mac.CommandLine.Demo;
+			productName = Elva.Mac.CommandLine.Demo;
+			productReference = 42F78C0E2387C0E50066694E /* Elva.Mac.CommandLine.Demo */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -428,7 +498,7 @@
 			targets = (
 				42F4AC60238687FD00463F82 /* Elva.iOS */,
 				42F4AC71238688C900463F82 /* Elva.macOS */,
-				42F78C0D2387C0E50066694E /* Elva.Mac.CoimmandLine.Demo */,
+				42F78C0D2387C0E50066694E /* Elva.Mac.CommandLine.Demo */,
 			);
 		};
 /* End PBXProject section */
@@ -456,20 +526,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				45304B0A6F095691827D22CC /* Elva.swift in Sources */,
-				45304D8D6EB259D2BBB62AAC /* Compress.c in Sources */,
 				45304A1937D96992BD841FC4 /* Core.c in Sources */,
-				45304F75C9A85B9C8FBB1D22 /* Checker.c in Sources */,
 				45304AA64E914474A609E3A7 /* File.c in Sources */,
-				4530414065ADDBAB17B6A88B /* Decompress.c in Sources */,
 				45304BFD66AD89A00F82CEB5 /* Log.c in Sources */,
 				4530418868EFE320833F5875 /* Bridge.Core.swift in Sources */,
-				453044790A106CA4EDBAB794 /* Compressor.swift in Sources */,
-				4530451268281D68B0520B01 /* Decompressor.swift in Sources */,
 				45304AB577CEACF99177524B /* LogFlag.swift in Sources */,
 				4530465CBEC0E0220CB4C500 /* Environment.swift in Sources */,
-				45304EFFA323BA02C86FA8CB /* Bridge.Compress.swift in Sources */,
-				45304D66875C71349E4FEB69 /* Bridge.Decompress.swift in Sources */,
-				45304DFC6219F1D6935F6A4B /* Error.swift in Sources */,
+				45304F2064191A5372192262 /* ZSTD_Decompress.c in Sources */,
+				45304B77ED74C4148447AEEB /* ZSTD_Checker.c in Sources */,
+				45304B817D3FD88CA5E17CE5 /* ZSTD_Compress.c in Sources */,
+				45304B2A34BA23E87360104D /* ZSTD.swift in Sources */,
+				4530433678049D9FF79084A5 /* ZSTD.Error.swift in Sources */,
+				45304A0193B7215F3F3FAF3E /* Bridge.ZSTD.swift in Sources */,
+				4530457981800976B8141BD0 /* Brotli.swift in Sources */,
+				45304D874804AC351A1D190B /* Brotli.c in Sources */,
+				453047E41891FE6E0CF54D0C /* Bridge.Brotli.swift in Sources */,
+				45304ED892F3D6CFD4079689 /* Brotli.Mode.swift in Sources */,
+				45304A36B8257A740269FECD /* Brotli.Quality.swift in Sources */,
+				453047229C1260AEBA43BAEA /* Brotli.WindowBits.swift in Sources */,
+				453042D15338A84E5E42953F /* Brotli.InputBlockBits.swift in Sources */,
+				45304981879282EB092292BD /* Brotli.Error.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,20 +554,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				453045EB4573B71B9D68678D /* Elva.swift in Sources */,
-				453047B8EA1825045FFFC255 /* Compress.c in Sources */,
 				45304D2696E019A904060BCC /* Core.c in Sources */,
-				453049BD3B71C3EBA6614F39 /* Checker.c in Sources */,
 				45304B446EF0856F7F98DCED /* File.c in Sources */,
-				45304805A7368D530E898D5C /* Decompress.c in Sources */,
 				453041FA788D0105722A349C /* Log.c in Sources */,
 				4530437B5B7D0FAD71066BAE /* Bridge.Core.swift in Sources */,
-				4530433B4D6370ED6C562FDA /* Compressor.swift in Sources */,
-				453043BC54A2B7963A08F1B3 /* Decompressor.swift in Sources */,
 				453048B69D0DC1B4D6F50A03 /* LogFlag.swift in Sources */,
 				4530411B6648E94758B4AB44 /* Environment.swift in Sources */,
-				453041A4D9BF9A0AE948F239 /* Bridge.Compress.swift in Sources */,
-				45304F9FF48A0AD69C032BE2 /* Bridge.Decompress.swift in Sources */,
-				45304C192EE72B28948085E2 /* Error.swift in Sources */,
+				45304F972235F9488E97B3EF /* ZSTD_Decompress.c in Sources */,
+				45304AECE813744599285F32 /* ZSTD_Checker.c in Sources */,
+				453041E5EE3130A3DD4E458D /* ZSTD_Compress.c in Sources */,
+				45304277E02A973068CF7A06 /* ZSTD.swift in Sources */,
+				45304A42FDD197E06FEBD624 /* ZSTD.Error.swift in Sources */,
+				4530464A8EC90A411CCF9CF4 /* Bridge.ZSTD.swift in Sources */,
+				4530412B937CB25422F03D8B /* Brotli.swift in Sources */,
+				4530452D009EACAA77DB1AEF /* Brotli.c in Sources */,
+				45304BF008B78BB40A608BF9 /* Bridge.Brotli.swift in Sources */,
+				453042FE27E90C960376E2B8 /* Brotli.Mode.swift in Sources */,
+				453047D3C805208B6DD8BC85 /* Brotli.Quality.swift in Sources */,
+				453043F05B7255CED87FB0BA /* Brotli.WindowBits.swift in Sources */,
+				453044493AEED8084FCF825A /* Brotli.InputBlockBits.swift in Sources */,
+				45304F662389E408DCD68A89 /* Brotli.Error.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -825,7 +907,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		42F78C142387C0E50066694E /* Build configuration list for PBXNativeTarget "Elva.Mac.CoimmandLine.Demo" */ = {
+		42F78C142387C0E50066694E /* Build configuration list for PBXNativeTarget "Elva.Mac.CommandLine.Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				42F78C122387C0E50066694E /* Debug */,

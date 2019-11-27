@@ -1936,7 +1936,7 @@ ZSTDLIB_API size_t ZSTD_compressEnd(ZSTD_CCtx* cctx, void* dst, size_t dstCapaci
   as long as the encoder and decoder progress in "lock-step",
   aka use exactly the same buffer sizes, break contiguity at the same place, etc.
 
-  Once buffers are elva_setup, start decompression, with ZSTD_decompressBegin().
+  Once buffers are setup, start decompression, with ZSTD_decompressBegin().
   If decompression requires a dictionary, use ZSTD_decompressBegin_usingDict() or ZSTD_decompressBegin_usingDDict().
 
   Then use ZSTD_nextSrcSizeToDecompress() and ZSTD_decompressContinue() alternatively.

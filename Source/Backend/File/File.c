@@ -9,6 +9,12 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <memory.h>
+#include <errno.h>
+#include <sys/stat.h>
+#include <utime.h>
+#include <zconf.h>
+#include <fcntl.h>
 #include "File.h"
 #include "Log.h"
 
@@ -44,4 +50,68 @@ size_t try_fwrite(const void *buffer, size_t sizeToWrite, FILE *file) {
 void try_fclose(FILE *file) {
     if (!fclose(file)) {return;};
     LogError("File Close Error");
+}
+
+//-------------------------------------//
+
+bool OpenInputFile(const char *input_path, FILE **file) {
+    *file = NULL;
+
+    *file = fopen(input_path, "rb");
+    if (!*file) {
+        LogError("failed to open input file [%s]: %s\n",
+                PrintablePath(input_path), strerror(errno));
+        return false;
+    }
+    return true;
+}
+
+bool OpenOutputFile(const char *output_path, FILE **file, bool force) {
+    int fd;
+    *file = NULL;
+
+    fd = open(output_path, O_CREAT | (force ? 0 : O_EXCL) | O_WRONLY | O_TRUNC,
+            S_IRUSR | S_IWUSR);
+    if (fd < 0) {
+        LogError("failed to open output file [%s]: %s\n",
+                PrintablePath(output_path), strerror(errno));
+        return false;
+    }
+    *file = fdopen(fd, "wb");
+    if (!*file) {
+        LogError("failed to open output file [%s]: %s\n",
+                PrintablePath(output_path), strerror(errno));
+        return false;
+    }
+    return true;
+}
+
+void CopyStat(const char *input_path, const char *output_path) {
+    struct stat statbuf;
+    struct utimbuf times;
+    int res;
+    if (input_path == 0 || output_path == 0) {
+        return;
+    }
+    if (stat(input_path, &statbuf) != 0) {
+        return;
+    }
+    times.actime = statbuf.st_atime;
+    times.modtime = statbuf.st_mtime;
+    utime(output_path, &times);
+    res = chmod(output_path, (mode_t) (statbuf.st_mode & (S_IRWXU | S_IRWXG | S_IRWXO)));
+    if (res != 0) {
+        LogError("setting access bits failed for [%s]: %s\n",
+                PrintablePath(output_path), strerror(errno));
+    }
+    res = chown(output_path, (uid_t) -1, statbuf.st_gid);
+    if (res != 0) {
+        LogError("setting group failed for [%s]: %s\n",
+                PrintablePath(output_path), strerror(errno));
+    }
+    res = chown(output_path, statbuf.st_uid, (gid_t) -1);
+    if (res != 0) {
+        LogError("setting user failed for [%s]: %s\n",
+                PrintablePath(output_path), strerror(errno));
+    }
 }

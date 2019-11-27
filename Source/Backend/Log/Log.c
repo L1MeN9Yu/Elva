@@ -29,3 +29,7 @@ void elvaLog(LogFlag flag, const char *file, const char *function, int line, con
         __logCallBack(flag, file, function, line, buffer);
     }
 }
+
+const char *PrintablePath(const char *path) {
+    return path ? path : "null path";
+}

@@ -11,12 +11,16 @@ private(set) var __environment: Environment.Type?
 
 public func register(environment: Environment.Type) {
     __environment = environment
-    elva_setup { flag, file, function, line, message in
-        guard let logFlag = LogFlag(unsignedIntValue: CUnsignedInt(flag)),
-              let file = String(cString: file, encoding: .utf8),
-              let function = String(cString: function, encoding: .utf8),
-              let message = String(cString: message, encoding: .utf8) else { return }
+    elva_setup(logCallBack)
 
-        __environment?.log(logFlag: logFlag, message: message, filename: file, function: function, line: Int(line))
-    }
+    Brotli.register()
+}
+
+let logCallBack: LogCallback = { flag, file, function, line, message in
+    guard let logFlag = LogFlag(unsignedIntValue: CUnsignedInt(flag)),
+          let file = String(cString: file, encoding: .utf8),
+          let function = String(cString: function, encoding: .utf8),
+          let message = String(cString: message, encoding: .utf8) else { return }
+
+    __environment?.log(logFlag: logFlag, message: message, filename: file, function: function, line: Int(line))
 }
