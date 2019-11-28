@@ -13,6 +13,7 @@ public func register(environment: Environment.Type) {
     __environment = environment
     elva_setup(logCallBack)
 
+    ZSTD.register()
     Brotli.register()
 }
 

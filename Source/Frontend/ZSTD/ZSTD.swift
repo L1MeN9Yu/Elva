@@ -9,9 +9,15 @@ public struct ZSTD {
     private init() {}
 }
 
+internal extension ZSTD {
+    static func register() {
+        Level.register()
+    }
+}
+
 public extension ZSTD {
-    static func compress(from inFile: URL, to outFile: URL, level: Int32) -> Result<Void, Error> {
-        let ret = ZSTD_compressFile(inFile.path, outFile.path, level)
+    static func compress(from inFile: URL, to outFile: URL, level: Level = Level.default) -> Result<Void, Error> {
+        let ret = ZSTD_compressFile(inFile.path, outFile.path, level.rawValue)
         guard ret == 0 else { return .failure(.compress) }
         return .success(())
     }

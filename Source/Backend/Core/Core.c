@@ -7,7 +7,7 @@
 //
 
 #include "Core.h"
-#include <zstd.h>
+#include <zstd/zstd.h>
 #include <brotli/version.h>
 
 static void show_zstd_version(void) {
