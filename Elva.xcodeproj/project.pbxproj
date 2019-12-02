@@ -16,6 +16,7 @@
 		42F78C162387C1190066694E /* Elva.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42F4AC72238688C900463F82 /* Elva.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4530411B6648E94758B4AB44 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4530476AFD61F53F3B9F7406 /* Environment.swift */; };
 		4530412B937CB25422F03D8B /* Brotli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453046610FA6353C144DA375 /* Brotli.swift */; };
+		4530417D2FF3E85A0CA734DD /* Data.UnsafePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453044F012279D655FBEDFBC /* Data.UnsafePointer.swift */; };
 		4530418868EFE320833F5875 /* Bridge.Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453045B63911AB64ACE71BA9 /* Bridge.Core.swift */; };
 		453041FA788D0105722A349C /* Log.c in Sources */ = {isa = PBXBuildFile; fileRef = 453047A0F1366C785506BF79 /* Log.c */; };
 		45304277E02A973068CF7A06 /* ZSTD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304DD4E27307AD6B5AF291 /* ZSTD.swift */; };
@@ -50,6 +51,7 @@
 		45304AB577CEACF99177524B /* LogFlag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304A5F73BAE475A4FD3FE7 /* LogFlag.swift */; };
 		45304B0A6F095691827D22CC /* Elva.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453047D5241647B806C6C07B /* Elva.swift */; };
 		45304B2A34BA23E87360104D /* ZSTD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304DD4E27307AD6B5AF291 /* ZSTD.swift */; };
+		45304B34C72B5ED0CD0F1982 /* Data.UnsafePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453044F012279D655FBEDFBC /* Data.UnsafePointer.swift */; };
 		45304B446EF0856F7F98DCED /* File.c in Sources */ = {isa = PBXBuildFile; fileRef = 4530404FA943990C2E11C452 /* File.c */; };
 		45304B7DE63A16AD23858E78 /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453048C64CC5FCC7404A2517 /* Env.swift */; };
 		45304BF008B78BB40A608BF9 /* Bridge.Brotli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45304658F6EC95E7C16A2608 /* Bridge.Brotli.swift */; };
@@ -119,6 +121,7 @@
 		45304261B722BF82C946B6B9 /* Brotli.Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brotli.Error.swift; sourceTree = "<group>"; };
 		4530427EB1115E78CF3EE748 /* ZSTD.Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZSTD.Error.swift; sourceTree = "<group>"; };
 		4530445FF3C8874D5C648600 /* Core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Core.h; sourceTree = "<group>"; };
+		453044F012279D655FBEDFBC /* Data.UnsafePointer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.UnsafePointer.swift; sourceTree = "<group>"; };
 		453045B63911AB64ACE71BA9 /* Bridge.Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.Core.swift; sourceTree = "<group>"; };
 		45304658F6EC95E7C16A2608 /* Bridge.Brotli.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.Brotli.swift; sourceTree = "<group>"; };
 		453046610FA6353C144DA375 /* Brotli.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brotli.swift; sourceTree = "<group>"; };
@@ -302,6 +305,7 @@
 				453047D5241647B806C6C07B /* Elva.swift */,
 				45304A5F73BAE475A4FD3FE7 /* LogFlag.swift */,
 				4530476AFD61F53F3B9F7406 /* Environment.swift */,
+				453044F012279D655FBEDFBC /* Data.UnsafePointer.swift */,
 				4530488879E9E52425E84FBD /* ZSTD */,
 				453042055DAC4A0E15D6C48E /* Brotli */,
 			);
@@ -505,6 +509,7 @@
 				45304981879282EB092292BD /* Brotli.Error.swift in Sources */,
 				453043AA0CCDB9ECD285609A /* ZSTD.c in Sources */,
 				45304C4EC2529E9C632484C6 /* ZSTD.Level.swift in Sources */,
+				45304B34C72B5ED0CD0F1982 /* Data.UnsafePointer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,6 +537,7 @@
 				45304F662389E408DCD68A89 /* Brotli.Error.swift in Sources */,
 				45304C3B8CCBF2E46ACCB7CA /* ZSTD.c in Sources */,
 				45304C4F9FCB46E1544C9236 /* ZSTD.Level.swift in Sources */,
+				4530417D2FF3E85A0CA734DD /* Data.UnsafePointer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

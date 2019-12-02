@@ -17,7 +17,7 @@ public func register(environment: Environment.Type) {
     Brotli.register()
 }
 
-let logCallBack: LogCallback = { flag, file, function, line, message in
+private let logCallBack: LogCallback = { flag, file, function, line, message in
     guard let logFlag = LogFlag(unsignedIntValue: CUnsignedInt(flag)),
           let file = String(cString: file, encoding: .utf8),
           let function = String(cString: function, encoding: .utf8),
