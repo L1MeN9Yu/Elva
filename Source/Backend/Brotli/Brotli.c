@@ -18,6 +18,12 @@
 #include "File.h"
 #include "Log.h"
 
+#define SUCCEED 0
+#define INVALID_PARAMETER 1
+#define MEMORY_ERROR 2
+#define COMPRESS_ERROR 3
+#define DECOMPRESS_ERROR 4
+
 __attribute__((used))
 void Brotli_GetMode(unsigned int *generic, unsigned int *text, unsigned int *font, unsigned int *def) {
     *generic = BROTLI_MODE_GENERIC;
@@ -123,7 +129,7 @@ static BROTLI_BOOL CloseFiles(const char *input_path, FILE *file_in, FILE *file_
 }
 
 __attribute__((used))
-int Brotli_Compress(const char *input_path, const char *output_path, uint32_t mode, uint32_t window_bits, uint32_t quality) {
+int Brotli_CompressFile(const char *input_path, const char *output_path, uint32_t mode, uint32_t window_bits, uint32_t quality) {
     int ret = 0;
 
     FILE *file_in = NULL;
@@ -203,7 +209,7 @@ int Brotli_Compress(const char *input_path, const char *output_path, uint32_t mo
 }
 
 __attribute__((used))
-int Brotli_Decompress(const char *input_path, const char *output_path) {
+int Brotli_DecompressFile(const char *input_path, const char *output_path) {
     int ret = 0;
     FILE *file_in = NULL;
     ret = OpenInputFile(input_path, &file_in);
@@ -274,4 +280,55 @@ int Brotli_Decompress(const char *input_path, const char *output_path) {
     if (!CloseFiles(input_path, file_in, file_out, output_path, ret)) {ret = BROTLI_FALSE;}
     if (ret != BROTLI_TRUE) {return 3;}
     return 0;
+}
+
+__attribute__((used))
+int Brotli_CompressData(const void *inputData, size_t inputSize, uint32_t mode, uint32_t window_bits, uint32_t quality, void **outputData, size_t *outputSize) {
+    const size_t maxOutputSize = BrotliEncoderMaxCompressedSize(inputSize);
+    uint8_t *outputBuffer = malloc(maxOutputSize * sizeof(uint8_t));
+    size_t output_size = maxOutputSize;
+
+    BROTLI_BOOL ret = BrotliEncoderCompress(quality, window_bits, (BrotliEncoderMode) mode, inputSize, inputData, &output_size, outputBuffer);
+    if (ret != BROTLI_TRUE) {return COMPRESS_ERROR;}
+    *outputData = outputBuffer;
+    *outputSize = output_size;
+    return SUCCEED;
+}
+
+__attribute__((used))
+int Brotli_DecompressData(const void *inputData, size_t inputSize, void **outputData, size_t *outputSize, size_t bufferCapacity) {
+    size_t available_in = inputSize;
+    const uint8_t *next_in = inputData;
+
+    size_t outputBufferSize = 0;
+    size_t outputBufferCapacity = bufferCapacity;
+    uint8_t *outputBuffer = (uint8_t *) malloc(outputBufferCapacity * sizeof(uint8_t));
+
+    BrotliDecoderState *s = BrotliDecoderCreateInstance(NULL, NULL, NULL);
+    BrotliDecoderResult result = BROTLI_DECODER_RESULT_NEEDS_MORE_OUTPUT;
+    size_t total_out = 0;
+
+    while (result == BROTLI_DECODER_RESULT_NEEDS_MORE_OUTPUT) {
+        size_t available_out = outputBufferCapacity - outputBufferSize;
+        uint8_t *next_out = outputBuffer + outputBufferSize;
+
+        result = BrotliDecoderDecompressStream(s, &available_in, &next_in, &available_out, &next_out, &total_out);
+        outputBufferSize = outputBufferCapacity - available_out;
+
+        if (available_out < bufferCapacity) {
+            outputBufferCapacity += bufferCapacity;
+            outputBuffer = realloc(outputBuffer, outputBufferCapacity * sizeof(uint8_t));
+        }
+    }
+
+    BrotliDecoderDestroyInstance(s);
+
+    if (result != BROTLI_DECODER_RESULT_SUCCESS && result != BROTLI_DECODER_RESULT_NEEDS_MORE_INPUT) {
+        free(outputBuffer);
+        return DECOMPRESS_ERROR;
+    }
+
+    *outputData = outputBuffer;
+    *outputSize = total_out;
+    return SUCCEED;
 }

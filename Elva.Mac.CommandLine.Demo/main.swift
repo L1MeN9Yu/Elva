@@ -22,7 +22,7 @@ let inputData =
         """.data(using: .utf8)!
 
 let zstdResult = ZSTD.compress(data: inputData).flatMap { compressedData -> Result<Data, ZSTD.Error> in
-    print("\(compressedData)")
+    print("zstd compress : \(compressedData)")
     return ZSTD.decompress(data: compressedData)
 }
 
@@ -34,6 +34,18 @@ case .failure(_):
     exit(1)
 }
 
+let brotliResult = Brotli.compress(data: inputData).flatMap { compressedData -> Result<Data, Brotli.Error> in
+    print("brotli compress : \(compressedData)")
+    return Brotli.decompress(data: compressedData)
+}
+
+switch brotliResult {
+case .success(let data):
+    let string = String(data: data, encoding: .utf8)!
+    print("\(string)")
+case .failure(_):
+    exit(1)
+}
 //try Brotli.compress(
 //        inputFile: temp.appendingPathComponent("1574736566.json"),
 //        outputFile: temp.appendingPathComponent("1574736566.json.br")

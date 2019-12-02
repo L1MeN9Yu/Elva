@@ -17,8 +17,14 @@ func Brotli_GetWindowBits(_ min: UnsafeMutablePointer<UInt32>, _ max: UnsafeMuta
 @_silgen_name("Brotli_GetInputBlockBits")
 func Brotli_GetInputBlockBits(_ min: UnsafeMutablePointer<UInt32>, _ max: UnsafeMutablePointer<UInt32>)
 
-@_silgen_name("Brotli_Compress")
-func Brotli_Compress(_ input_path: UnsafePointer<Int8>, _ output_path: UnsafePointer<Int8>, _ mode: UInt32, _ window_bits: UInt32, _ quality: UInt32) -> Int32
+@_silgen_name("Brotli_CompressData")
+func Brotli_CompressData(_ inputData: UnsafeRawPointer, _ inputSize: Int, _ mode: UInt32, _ window_bits: UInt32, _ quality: UInt32, _ outputData: UnsafeMutablePointer<UnsafeMutableRawPointer?>, _ outputSize: UnsafeMutablePointer<Int>) -> Int32
 
-@_silgen_name("Brotli_Decompress")
-func Brotli_Decompress(_ input_path: UnsafePointer<Int8>, _ output_path: UnsafePointer<Int8>) -> Int32
+@_silgen_name("Brotli_DecompressData")
+func Brotli_DecompressData(_ inputData: UnsafeRawPointer, _ inputSize: Int, _ outputData: UnsafeMutablePointer<UnsafeMutableRawPointer?>, _ outputSize: UnsafeMutablePointer<Int>, _ bufferCapacity: Int) -> Int32
+
+@_silgen_name("Brotli_CompressFile")
+func Brotli_CompressFile(_ input_path: UnsafePointer<Int8>, _ output_path: UnsafePointer<Int8>, _ mode: UInt32, _ window_bits: UInt32, _ quality: UInt32) -> Int32
+
+@_silgen_name("Brotli_DecompressFile")
+func Brotli_DecompressFile(_ input_path: UnsafePointer<Int8>, _ output_path: UnsafePointer<Int8>) -> Int32
