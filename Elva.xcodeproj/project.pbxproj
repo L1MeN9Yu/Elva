@@ -704,7 +704,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/lib",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.Elva;
 				PRODUCT_NAME = Elva;
 				SKIP_INSTALL = YES;
@@ -738,7 +738,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ExternalLibrary/iOS/lib",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = top.limengyu.Elva;
 				PRODUCT_NAME = Elva;
 				SKIP_INSTALL = YES;
@@ -769,7 +769,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ExternalLibrary/macOS/lib";
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "top.limengyu.Elva-macOS";
 				PRODUCT_NAME = Elva;
 				SDKROOT = macosx;
@@ -801,7 +801,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/ExternalLibrary/macOS/lib";
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "top.limengyu.Elva-macOS";
 				PRODUCT_NAME = Elva;
 				SDKROOT = macosx;
