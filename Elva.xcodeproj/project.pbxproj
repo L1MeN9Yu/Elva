@@ -103,6 +103,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		425A419A239A2982004B7CB9 /* archive.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = archive.yml; sourceTree = "<group>"; };
 		429183122387B0C200C4A8C3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		42E64D86238E18D900BBEC0F /* libbrotli.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbrotli.a; path = ExternalLibrary/iOS/lib/libbrotli.a; sourceTree = "<group>"; };
 		42E64D88238E18F100BBEC0F /* libbrotli.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbrotli.a; path = ExternalLibrary/macOS/lib/libbrotli.a; sourceTree = "<group>"; };
@@ -174,12 +175,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		425A4198239A2982004B7CB9 /* .github */ = {
+			isa = PBXGroup;
+			children = (
+				425A4199239A2982004B7CB9 /* workflows */,
+			);
+			path = .github;
+			sourceTree = "<group>";
+		};
+		425A4199239A2982004B7CB9 /* workflows */ = {
+			isa = PBXGroup;
+			children = (
+				425A419A239A2982004B7CB9 /* archive.yml */,
+			);
+			path = workflows;
+			sourceTree = "<group>";
+		};
 		42F4AC57238687FD00463F82 = {
 			isa = PBXGroup;
 			children = (
 				429183122387B0C200C4A8C3 /* README.md */,
 				42F4AC82238692CA00463F82 /* .gitattributes */,
 				42F4AC83238692CA00463F82 /* .gitignore */,
+				425A4198239A2982004B7CB9 /* .github */,
 				42F4AC6C2386880800463F82 /* Source */,
 				42F4AC63238687FD00463F82 /* Elva */,
 				42F78C0F2387C0E50066694E /* Elva.Mac.CommandLine.Demo */,
