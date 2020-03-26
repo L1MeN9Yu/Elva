@@ -7,9 +7,5 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Build iOS
-        run: xcodebuild archive -target Elva.iOS
-      - name: Build macOS
-        run: xcodebuild archive -target Elva.macOS
-      - name: Run tests
-        run: echo Run tests not implemented
+      - name: build xcframework
+        run: sh build_all.sh

@@ -3,13 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		42E64D87238E18E300BBEC0F /* libbrotli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42E64D86238E18D900BBEC0F /* libbrotli.a */; };
+		42D31367242C98570048ADDA /* libbrotli.maccatalyst.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42D31363242C8ED10048ADDA /* libbrotli.maccatalyst.a */; platformFilter = maccatalyst; };
+		42D31368242C98570048ADDA /* libzstd.maccatalyst.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42D31364242C8ED10048ADDA /* libzstd.maccatalyst.a */; platformFilter = maccatalyst; };
+		42E64D87238E18E300BBEC0F /* libbrotli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42E64D86238E18D900BBEC0F /* libbrotli.a */; platformFilter = ios; };
 		42E64D89238E18FA00BBEC0F /* libbrotli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42E64D88238E18F100BBEC0F /* libbrotli.a */; };
-		42F4AC802386927A00463F82 /* libzstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F4AC7F2386926900463F82 /* libzstd.a */; };
+		42F4AC802386927A00463F82 /* libzstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F4AC7F2386926900463F82 /* libzstd.a */; platformFilter = ios; };
 		42F4AC812386928500463F82 /* libzstd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F4AC7E2386925D00463F82 /* libzstd.a */; };
 		42F78C112387C0E50066694E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F78C102387C0E50066694E /* main.swift */; };
 		42F78C152387C1190066694E /* Elva.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F4AC72238688C900463F82 /* Elva.framework */; };
@@ -105,6 +107,10 @@
 /* Begin PBXFileReference section */
 		425A419A239A2982004B7CB9 /* archive.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = archive.yml; sourceTree = "<group>"; };
 		429183122387B0C200C4A8C3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		42D31361242C8E7F0048ADDA /* libzstd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzstd.a; path = ExternalLibrary/iOS/lib/maccatalyst/libzstd.a; sourceTree = "<group>"; };
+		42D31362242C8E7F0048ADDA /* libbrotli.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbrotli.a; path = ExternalLibrary/iOS/lib/maccatalyst/libbrotli.a; sourceTree = "<group>"; };
+		42D31363242C8ED10048ADDA /* libbrotli.maccatalyst.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbrotli.maccatalyst.a; path = ExternalLibrary/iOS/lib/libbrotli.maccatalyst.a; sourceTree = "<group>"; };
+		42D31364242C8ED10048ADDA /* libzstd.maccatalyst.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzstd.maccatalyst.a; path = ExternalLibrary/iOS/lib/libzstd.maccatalyst.a; sourceTree = "<group>"; };
 		42E64D86238E18D900BBEC0F /* libbrotli.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbrotli.a; path = ExternalLibrary/iOS/lib/libbrotli.a; sourceTree = "<group>"; };
 		42E64D88238E18F100BBEC0F /* libbrotli.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbrotli.a; path = ExternalLibrary/macOS/lib/libbrotli.a; sourceTree = "<group>"; };
 		42F4AC61238687FD00463F82 /* Elva.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Elva.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,8 +156,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42D31368242C98570048ADDA /* libzstd.maccatalyst.a in Frameworks */,
 				42F4AC802386927A00463F82 /* libzstd.a in Frameworks */,
 				42E64D87238E18E300BBEC0F /* libbrotli.a in Frameworks */,
+				42D31367242C98570048ADDA /* libbrotli.maccatalyst.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +245,10 @@
 		42F4AC7D2386925D00463F82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				42D31363242C8ED10048ADDA /* libbrotli.maccatalyst.a */,
+				42D31364242C8ED10048ADDA /* libzstd.maccatalyst.a */,
+				42D31362242C8E7F0048ADDA /* libbrotli.a */,
+				42D31361242C8E7F0048ADDA /* libzstd.a */,
 				42E64D86238E18D900BBEC0F /* libbrotli.a */,
 				42E64D88238E18F100BBEC0F /* libbrotli.a */,
 				42F4AC7F2386926900463F82 /* libzstd.a */,

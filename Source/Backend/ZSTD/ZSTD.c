@@ -174,14 +174,14 @@ int ZSTD_DecompressData(const void *inputData, size_t inputSize, void **outputDa
         return INVALID_PARAMETER;
     }
     if (rSize == ZSTD_CONTENTSIZE_UNKNOWN) {
-        LogError("original size unknown")
+        LogError("original size unknown");
         return INVALID_PARAMETER;
     }
 
     void *const rBuff = malloc((size_t) rSize);
     if (rBuff == NULL) {return MEMORY_ERROR;}
 
-    size_t const dSize = ZSTD_decompress(rBuff, rSize, inputData, inputSize);
+    size_t const dSize = ZSTD_decompress(rBuff, (size_t)rSize, inputData, inputSize);
 
     if (ZSTD_isError(dSize)) {
         LogError("Compress Error : %s", ZSTD_getErrorName(dSize));

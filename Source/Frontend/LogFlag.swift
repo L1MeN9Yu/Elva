@@ -9,9 +9,9 @@ public enum LogFlag {
     case trace
     case debug
     case info
-    case warning
+    case warn
     case error
-    case critical
+    case crit
     case off
 
     init?(unsignedIntValue: CUnsignedInt) {
@@ -23,11 +23,11 @@ public enum LogFlag {
         case 2:
             self = .info
         case 3:
-            self = .warning
+            self = .warn
         case 4:
             self = .error
         case 5:
-            self = .critical
+            self = .crit
         case 6:
             self = .off
         default:
