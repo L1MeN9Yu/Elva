@@ -1,0 +1,6 @@
+[submodule "Submodule/brotli"]
+	path = Submodule/brotli
+	url = git@github.com:google/brotli.git
+[submodule "Submodule/zstd"]
+	path = Submodule/zstd
+	url = git@github.com:facebook/zstd.git
