@@ -1,10 +1,15 @@
 NAME=Elva
 rm -r build $NAME.xcframework
 xcodebuild clean
-xcodebuild archive -scheme "$NAME.macOS" -sdk macosx OBJROOT=build/macosx
-xcodebuild archive -scheme "$NAME.iOS" -sdk iphoneos OBJROOT=build/iOS
-xcodebuild archive -scheme "$NAME.iOS" -sdk iphonesimulator OBJROOT=build/simulator
-xcodebuild archive -scheme "$NAME.iOS" -destination 'platform=macOS,arch=x86_64,variant=Mac Catalyst'  OBJROOT=build/maccatalyst
+xcodebuild archive -scheme "$NAME-Package" -sdk macosx \
+OBJROOT=build/macosx BUILD_LIBRARY_FOR_DISTRIBUTION=YES SWIFT_INSTALL_OBJC_HEADER=NO
+xcodebuild archive -scheme "$NAME-Package" -sdk iphoneos \
+OBJROOT=build/iOS BUILD_LIBRARY_FOR_DISTRIBUTION=YES SWIFT_INSTALL_OBJC_HEADER=NO
+xcodebuild archive -scheme "$NAME-Package" -sdk iphonesimulator \
+OBJROOT=build/simulator  BUILD_LIBRARY_FOR_DISTRIBUTION=YES SWIFT_INSTALL_OBJC_HEADER=NO
+xcodebuild archive -scheme "$NAME-Package" -destination 'platform=macOS,arch=x86_64,variant=Mac Catalyst' \
+OBJROOT=build/maccatalyst  BUILD_LIBRARY_FOR_DISTRIBUTION=YES SWIFT_INSTALL_OBJC_HEADER=NO
+
 xcodebuild -create-xcframework \
 -framework build/macosx/UninstalledProducts/macosx/$NAME.framework \
 -framework build/iOS/UninstalledProducts/iphoneos/$NAME.framework \
