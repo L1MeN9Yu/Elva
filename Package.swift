@@ -7,9 +7,8 @@ let package = Package(
         name: "Elva",
         products: [
             // Products define the executables and libraries produced by a package, and make them visible to other packages.
-            .library(
-                    name: "Elva",
-                    targets: ["Elva"]),
+            .library(name: "Elva", type: .dynamic, targets: ["Elva"]),
+            .library(name: "ElvaStatic", type: .static, targets: ["Elva"]),
         ],
         dependencies: [
             // Dependencies declare other packages that this package depends on.
