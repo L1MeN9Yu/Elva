@@ -20,8 +20,6 @@ let package = Package(
             .target(name: "Elva.Brotli"),
             .target(name: "Elva.zstd"),
             .target(name: "Elva", dependencies: [.target(name: "Elva.Brotli"), .target(name: "Elva.zstd")]),
-            .testTarget(
-                    name: "ElvaTests",
-                    dependencies: ["Elva"]),
+            .testTarget(name: "ElvaTests", dependencies: ["Elva"]),
         ]
 )

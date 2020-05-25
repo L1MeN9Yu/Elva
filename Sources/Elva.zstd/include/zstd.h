@@ -1,1 +1,1 @@
-../../../Submodule/zstd/lib/zstd.h
+../zstd.h
