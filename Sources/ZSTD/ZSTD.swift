@@ -5,6 +5,7 @@
 
 import Foundation
 import Elva_zstd
+import Service
 
 public struct ZSTD { private init() {} }
 

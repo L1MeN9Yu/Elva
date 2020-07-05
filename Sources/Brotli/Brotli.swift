@@ -6,6 +6,7 @@
 import Foundation
 import Darwin
 import Elva_Brotli
+import Service
 
 public struct Brotli { private init() {} }
 

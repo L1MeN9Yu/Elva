@@ -1,5 +1,6 @@
 import XCTest
-@testable import Elva
+@testable import ZSTD
+@testable import Brotli
 import Foundation
 
 final class ElvaTests: XCTestCase {
