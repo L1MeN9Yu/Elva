@@ -3,8 +3,8 @@
 // Copyright (c) 2019 Mengyu Li. All rights reserved.
 //
 
+@_implementationOnly import Elva_Brotli
 import Foundation
-import Elva_Brotli
 
 public extension Brotli {
     enum Mode {
@@ -24,16 +24,16 @@ public extension Brotli {
         }
 
         var brotliEncoderMode: BrotliEncoderMode {
-            BrotliEncoderMode(rawValue: self.rawValue)
+            BrotliEncoderMode(rawValue: rawValue)
         }
 
         public static var `default`: Mode {
             switch Self._default {
-            case self.generic.rawValue:
+            case generic.rawValue:
                 return Mode.generic
-            case self.text.rawValue:
+            case text.rawValue:
                 return Mode.text
-            case self.font.rawValue:
+            case font.rawValue:
                 return Mode.font
             default:
                 return Mode.generic

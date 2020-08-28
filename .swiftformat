@@ -1,0 +1,10 @@
+--exclude .build
+--indent 4
+--indentcase false
+--trimwhitespace always
+--nospaceoperators ..<,...
+--ifdef noindent
+--stripunusedargs closure-only
+--disable andOperator
+--patternlet inline
+--swiftversion 5.2

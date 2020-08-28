@@ -3,8 +3,8 @@
 // Copyright (c) 2019 Mengyu Li. All rights reserved.
 //
 
+@_implementationOnly import Elva_Brotli
 import Foundation
-import Elva_Brotli
 
 public extension Brotli {
     struct WindowBits: RawRepresentable, Hashable {
@@ -17,7 +17,7 @@ public extension Brotli {
         }
 
         private init(builtinValue: RawValue) {
-            self.rawValue = builtinValue
+            rawValue = builtinValue
         }
     }
 }

@@ -3,8 +3,8 @@
 // Copyright (c) 2019 Mengyu Li. All rights reserved.
 //
 
+@_implementationOnly import Elva_zstd
 import Foundation
-import Elva_zstd
 
 public extension ZSTD {
     struct Level: RawRepresentable, Hashable {
@@ -17,7 +17,7 @@ public extension ZSTD {
         }
 
         private init(builtinValue: RawValue) {
-            self.rawValue = builtinValue
+            rawValue = builtinValue
         }
     }
 }

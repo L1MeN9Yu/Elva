@@ -3,13 +3,14 @@
 // Copyright (c) 2019 Mengyu Li. All rights reserved.
 //
 
+@_implementationOnly import Elva_zstd
+@_implementationOnly import ElvaCore
 import Foundation
-import Elva_zstd
-import Service
 
 public struct ZSTD { private init() {} }
 
 // MARK: - File
+
 public extension ZSTD {
     static func compress(inputFile: URL, outputFile: URL, level: Level = Level.default) -> Result<Void, Error> {
         guard FileManager.default.fileExists(atPath: inputFile.path) else { return .failure(.fileNotExist) }
@@ -45,12 +46,12 @@ public extension ZSTD {
                 let remaining = ZSTD_compressStream2(compressContext, &output, &input, mode)
                 guard ZSTD_isError(remaining) == 0 else { return .failure(.compress) }
                 fwrite(outputBuffer, 1, output.pos, fileOut)
-                finished = lastChunk ? (remaining == 0) : (input.pos == input.size);
+                finished = lastChunk ? (remaining == 0) : (input.pos == input.size)
             }
 
-            if (input.pos != input.size) { return .failure(.compress) }
+            if input.pos != input.size { return .failure(.compress) }
 
-            if (lastChunk) { break }
+            if lastChunk { break }
         }
 
         return .success(())
@@ -94,6 +95,7 @@ public extension ZSTD {
 }
 
 // MARK: - Data
+
 public extension ZSTD {
     static func compress(data: Data, level: Level = Level.default) -> Result<Data, Error> {
         let inputBuffer = data.withUnsafePointer { pointer -> UnsafeRawPointer in UnsafeRawPointer(pointer) }

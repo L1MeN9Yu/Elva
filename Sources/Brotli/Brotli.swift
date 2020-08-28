@@ -3,10 +3,10 @@
 // Copyright (c) 2019 Mengyu Li. All rights reserved.
 //
 
-import Foundation
 import Darwin
-import Elva_Brotli
-import Service
+@_implementationOnly import Elva_Brotli
+@_implementationOnly import ElvaCore
+import Foundation
 
 public struct Brotli { private init() {} }
 
@@ -15,6 +15,7 @@ private extension Brotli {
 }
 
 // MARK: - File
+
 public extension Brotli {
     static func compress(inputFile: URL, outputFile: URL, mode: Mode = Mode.default, quality: Quality = Quality.default, windowBits: WindowBits = WindowBits.default) -> Result<Void, Error> {
         guard FileManager.default.fileExists(atPath: inputFile.path) else { return .failure(.fileNotExist) }
@@ -38,12 +39,12 @@ public extension Brotli {
         let inputBuffer = buffer
         let outputBuffer = buffer + fileBufferSize
         var availableInSize: size_t = 0
-        var nextInBuffer: UnsafePointer<UInt8>? = nil
+        var nextInBuffer: UnsafePointer<UInt8>?
         var availableOutSize: size_t = fileBufferSize
         var nextOutBuffer: UnsafeMutablePointer<UInt8>? = outputBuffer
 
         while true {
-            if (availableInSize == 0 && !isEndOfFile) {
+            if availableInSize == 0 && !isEndOfFile {
                 availableInSize = fread(inputBuffer, 1, fileBufferSize, fileIn)
                 nextInBuffer = UnsafePointer<UInt8>(inputBuffer)
                 guard ferror(fileIn) == 0 else { return .failure(.fileIO) }
@@ -51,10 +52,10 @@ public extension Brotli {
             }
 
             let compressResult = BrotliEncoderCompressStream(
-                    encoderState,
-                    isEndOfFile ? BROTLI_OPERATION_FINISH : BROTLI_OPERATION_PROCESS,
-                    &availableInSize, &nextInBuffer,
-                    &availableOutSize, &nextOutBuffer, nil
+                encoderState,
+                isEndOfFile ? BROTLI_OPERATION_FINISH : BROTLI_OPERATION_PROCESS,
+                &availableInSize, &nextInBuffer,
+                &availableOutSize, &nextOutBuffer, nil
             )
             guard compressResult == BROTLI_TRUE else { return .failure(.compress) }
 
@@ -77,7 +78,6 @@ public extension Brotli {
                     break
                 }
             }
-
         }
 
         return .success(())
@@ -102,7 +102,7 @@ public extension Brotli {
         let inputBuffer = buffer
         let outputBuffer = buffer + fileBufferSize
         var availableIn: size_t = 0
-        var nextInBuffer: UnsafePointer<UInt8>? = nil
+        var nextInBuffer: UnsafePointer<UInt8>?
         var availableOut: size_t = fileBufferSize
         var nextOutBuffer: UnsafeMutablePointer<UInt8>? = outputBuffer
 
@@ -134,7 +134,7 @@ public extension Brotli {
                 return .failure(.decompress)
             }
 
-            result = BrotliDecoderDecompressStream(decoderState, &availableIn, &nextInBuffer, &availableOut, &nextOutBuffer, nil);
+            result = BrotliDecoderDecompressStream(decoderState, &availableIn, &nextInBuffer, &availableOut, &nextOutBuffer, nil)
         }
 
         return .success(())
@@ -142,6 +142,7 @@ public extension Brotli {
 }
 
 // MARK: - Data
+
 public extension Brotli {
     static func compress(data: Data, mode: Mode = Mode.default, quality: Quality = Quality.default, windowBits: WindowBits = WindowBits.default) -> Result<Data, Error> {
         let input = data.withUnsafePointer { pointer -> UnsafeRawPointer in UnsafeRawPointer(pointer) }
@@ -179,7 +180,7 @@ public extension Brotli {
             result = BrotliDecoderDecompressStream(decoderState, &availableInSize, &nextInputBuffer, &availableOutSize, &nextOutBuffer, &totalOut)
             outputBufferSize = outputBufferCapacity - availableOutSize
             if availableOutSize < bufferCapacity {
-                outputBufferCapacity += bufferCapacity;
+                outputBufferCapacity += bufferCapacity
                 outputBuffer = realloc(outputBuffer, outputBufferCapacity * MemoryLayout<UInt8>.size).assumingMemoryBound(to: UInt8.self)
             }
         }
