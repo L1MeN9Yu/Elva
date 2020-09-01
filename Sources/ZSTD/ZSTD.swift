@@ -12,28 +12,28 @@ public struct ZSTD { private init() {} }
 // MARK: - File
 
 public extension ZSTD {
-    static func compress(inputFile: URL, outputFile: URL, level: Level = Level.default) -> Result<Void, Error> {
-        guard FileManager.default.fileExists(atPath: inputFile.path) else { return .failure(.fileNotExist) }
-        guard !FileManager.default.fileExists(atPath: outputFile.path) else { return .failure(.outputFileExist) }
-        guard let fileIn = fopen(inputFile.path, "rb") else { return .failure(.openFile(fileURL: inputFile)) }
-        guard let fileOut = fopen(outputFile.path, "wb") else { return .failure(.openFile(fileURL: outputFile)) }
+    static func compress(inputFile: URL, outputFile: URL, level: Level = Level.default) throws {
+        guard FileManager.default.fileExists(atPath: inputFile.path) else { throw Error.fileNotExist }
+        guard !FileManager.default.fileExists(atPath: outputFile.path) else { throw Error.outputFileExist }
+        guard let fileIn = fopen(inputFile.path, "rb") else { throw Error.openFile(fileURL: inputFile) }
+        guard let fileOut = fopen(outputFile.path, "wb") else { throw Error.openFile(fileURL: outputFile) }
         defer {
             fclose(fileIn)
             fclose(fileOut)
         }
-        guard let compressContext = ZSTD_createCCtx() else { return .failure(.encoderCreate) }
+        guard let compressContext = ZSTD_createCCtx() else { throw Error.encoderCreate }
         defer { ZSTD_freeCCtx(compressContext) }
 
         let inputBufferSize = ZSTD_CStreamInSize()
-        guard let inputBuffer = malloc(inputBufferSize) else { return .failure(.memory) }
+        guard let inputBuffer = malloc(inputBufferSize) else { throw Error.memory }
         defer { inputBuffer.deallocate() }
         let outputBufferSize = ZSTD_CStreamOutSize()
-        guard let outputBuffer = malloc(outputBufferSize) else { return .failure(.memory) }
+        guard let outputBuffer = malloc(outputBufferSize) else { throw Error.memory }
         defer { outputBuffer.deallocate() }
         var setParameterResult = ZSTD_CCtx_setParameter(compressContext, ZSTD_c_compressionLevel, level.rawValue)
-        guard ZSTD_isError(setParameterResult) == 0 else { return .failure(.encoderCreate) }
+        guard ZSTD_isError(setParameterResult) == 0 else { throw Error.encoderCreate }
         setParameterResult = ZSTD_CCtx_setParameter(compressContext, ZSTD_c_checksumFlag, 1)
-        guard ZSTD_isError(setParameterResult) == 0 else { return .failure(.encoderCreate) }
+        guard ZSTD_isError(setParameterResult) == 0 else { throw Error.encoderCreate }
 
         while true {
             let readSize = fread(inputBuffer, 1, inputBufferSize, fileIn)
@@ -44,33 +44,31 @@ public extension ZSTD {
             while !finished {
                 var output = ZSTD_outBuffer(dst: outputBuffer, size: outputBufferSize, pos: 0)
                 let remaining = ZSTD_compressStream2(compressContext, &output, &input, mode)
-                guard ZSTD_isError(remaining) == 0 else { return .failure(.compress) }
+                guard ZSTD_isError(remaining) == 0 else { throw Error.compress }
                 fwrite(outputBuffer, 1, output.pos, fileOut)
                 finished = lastChunk ? (remaining == 0) : (input.pos == input.size)
             }
 
-            if input.pos != input.size { return .failure(.compress) }
+            if input.pos != input.size { throw Error.compress }
 
             if lastChunk { break }
         }
-
-        return .success(())
     }
 
-    static func decompress(inputFile: URL, outputFile: URL) -> Result<Void, Error> {
-        guard FileManager.default.fileExists(atPath: inputFile.path) else { return .failure(.fileNotExist) }
-        guard !FileManager.default.fileExists(atPath: outputFile.path) else { return .failure(.outputFileExist) }
-        guard let decompressContext = ZSTD_createDCtx() else { return .failure(.decoderCreate) }
+    static func decompress(inputFile: URL, outputFile: URL) throws {
+        guard FileManager.default.fileExists(atPath: inputFile.path) else { throw Error.fileNotExist }
+        guard !FileManager.default.fileExists(atPath: outputFile.path) else { throw Error.outputFileExist }
+        guard let decompressContext = ZSTD_createDCtx() else { throw Error.decoderCreate }
         defer { ZSTD_freeDCtx(decompressContext) }
-        guard let fileIn = fopen(inputFile.path, "rb") else { return .failure(.openFile(fileURL: inputFile)) }
+        guard let fileIn = fopen(inputFile.path, "rb") else { throw Error.openFile(fileURL: inputFile) }
         defer { fclose(fileIn) }
-        guard let fileOut = fopen(outputFile.path, "wb") else { return .failure(.openFile(fileURL: outputFile)) }
+        guard let fileOut = fopen(outputFile.path, "wb") else { throw Error.openFile(fileURL: outputFile) }
         defer { fclose(fileOut) }
         let inputBufferSize = ZSTD_DStreamInSize()
-        guard let inputBuffer = malloc(inputBufferSize) else { return .failure(.memory) }
+        guard let inputBuffer = malloc(inputBufferSize) else { throw Error.memory }
         defer { inputBuffer.deallocate() }
         let outputBufferSize = ZSTD_DStreamOutSize()
-        guard let outputBuffer = malloc(outputBufferSize) else { return .failure(.memory) }
+        guard let outputBuffer = malloc(outputBufferSize) else { throw Error.memory }
 
         var read = 0
         var lastRet = 0
@@ -82,47 +80,47 @@ public extension ZSTD {
             while input.pos < input.size {
                 var output = ZSTD_outBuffer(dst: outputBuffer, size: outputBufferSize, pos: 0)
                 let decompressResult = ZSTD_decompressStream(decompressContext, &output, &input)
-                guard ZSTD_isError(decompressResult) == 0 else { return .failure(.decompress) }
+                guard ZSTD_isError(decompressResult) == 0 else { throw Error.decompress }
                 fwrite(outputBuffer, 1, output.pos, fileOut)
                 lastRet = decompressResult
             }
         } while read > 0
 
-        guard lastRet == 0 else { return .failure(.decompress) }
-
-        return .success(())
+        guard lastRet == 0 else { throw Error.decompress }
     }
 }
 
 // MARK: - Data
 
 public extension ZSTD {
-    static func compress(data: Data, level: Level = Level.default) -> Result<Data, Error> {
+    static func compress(data: Data, level: Level = Level.default) throws -> Data {
         let inputBuffer = data.withUnsafePointer { pointer -> UnsafeRawPointer in UnsafeRawPointer(pointer) }
         let inputBufferSize = data.count
         let outputBufferSize = ZSTD_compressBound(inputBufferSize)
-        guard let outputBuffer = malloc(outputBufferSize) else { return .failure(.memory) }
+        guard let outputBuffer = malloc(outputBufferSize) else { throw Error.memory }
         defer { outputBuffer.deallocate() }
         let compressResult = ZSTD_compress(outputBuffer, outputBufferSize, inputBuffer, inputBufferSize, level.rawValue)
-        guard ZSTD_isError(compressResult) == 0 else { return .failure(.compress) }
+        guard ZSTD_isError(compressResult) == 0 else { throw Error.compress }
 
         let data = Data(bytes: outputBuffer, count: compressResult)
-        return .success(data)
+        return data
     }
 
-    static func decompress(data: Data) -> Result<Data, Error> {
+    static func decompress(data: Data) throws -> Data {
         let inputBuffer = data.withUnsafePointer { pointer -> UnsafeRawPointer in UnsafeRawPointer(pointer) }
         let inputBufferSize = data.count
-        let outputBufferSize = Int(ZSTD_getFrameContentSize(inputBuffer, inputBufferSize))
-        guard outputBufferSize != ZSTD_CONTENTSIZE_ERROR else { return .failure(.invalidData) }
-        guard outputBufferSize != ZSTD_CONTENTSIZE_UNKNOWN else { return .failure(.invalidData) }
-        guard let outputBuffer = malloc(outputBufferSize) else { return .failure(.memory) }
+        let outBufferLongLongSize = ZSTD_getFrameContentSize(inputBuffer, inputBufferSize)
+        guard outBufferLongLongSize <= Int.max else { throw Error.invalidData }
+        let outputBufferSize = Int(outBufferLongLongSize)
+        guard outputBufferSize != ZSTD_CONTENTSIZE_ERROR else { throw Error.invalidData }
+        guard outputBufferSize != ZSTD_CONTENTSIZE_UNKNOWN else { throw Error.invalidData }
+        guard let outputBuffer = malloc(outputBufferSize) else { throw Error.memory }
         defer { outputBuffer.deallocate() }
         let decompressResult = ZSTD_decompress(outputBuffer, outputBufferSize, inputBuffer, inputBufferSize)
-        guard ZSTD_isError(decompressResult) == 0 else { return .failure(.decompress) }
-        guard decompressResult == outputBufferSize else { return .failure(.decompress) }
+        guard ZSTD_isError(decompressResult) == 0 else { throw Error.decompress }
+        guard decompressResult == outputBufferSize else { throw Error.decompress }
 
         let data = Data(bytes: outputBuffer, count: outputBufferSize)
-        return .success(data)
+        return data
     }
 }
