@@ -3,7 +3,11 @@
 // Copyright (c) 2019 Mengyu Li. All rights reserved.
 //
 
+#if os(Linux)
+import Glibc
+#else
 import Darwin
+#endif
 @_implementationOnly import Elva_Brotli
 @_implementationOnly import ElvaCore
 import Foundation
