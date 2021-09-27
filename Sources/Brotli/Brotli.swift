@@ -12,7 +12,7 @@ import Darwin
 @_implementationOnly import ElvaCore
 import Foundation
 
-public struct Brotli { private init() {} }
+public enum Brotli {}
 
 private extension Brotli {
     static let fileBufferSize: size_t = 1 << 19
@@ -21,24 +21,20 @@ private extension Brotli {
 // MARK: - File
 
 public extension Brotli {
-    static func compress(inputFile: URL, outputFile: URL,
-                         mode: Mode = Mode.default, quality: Quality = Quality.default,
-                         windowBits: WindowBits = WindowBits.default) throws
-    {
+    static func compress(inputFile: URL, outputFile: URL, mode: Mode = Mode.default, quality: Quality = Quality.default, windowBits: WindowBits = WindowBits.default) throws {
         guard FileManager.default.fileExists(atPath: inputFile.path) else { throw Error.fileNotExist }
         guard let fileIn = fopen(inputFile.path, "rb") else { throw Error.openFile(fileURL: inputFile) }
+        defer { fclose(fileIn) }
         let fd = open(outputFile.path, O_CREAT | (true ? 0 : O_EXCL) | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR)
         guard fd > 0 else { throw Error.openFile(fileURL: outputFile) }
         guard let fileOut = fdopen(fd, "wb") else { throw Error.openFile(fileURL: outputFile) }
+        defer { fclose(fileOut) }
         guard let encoderState = BrotliEncoderCreateInstance(nil, nil, nil) else { throw Error.encoderCreate }
+        defer { BrotliEncoderDestroyInstance(encoderState) }
+
         guard BrotliEncoderSetParameter(encoderState, BROTLI_PARAM_MODE, mode.rawValue) == BROTLI_TRUE else { throw Error.encoderCreate }
         guard BrotliEncoderSetParameter(encoderState, BROTLI_PARAM_QUALITY, UInt32(quality.rawValue)) == BROTLI_TRUE else { throw Error.encoderCreate }
         guard BrotliEncoderSetParameter(encoderState, BROTLI_PARAM_LGWIN, UInt32(windowBits.rawValue)) == BROTLI_TRUE else { throw Error.encoderCreate }
-        defer {
-            BrotliEncoderDestroyInstance(encoderState)
-            fclose(fileIn)
-            fclose(fileOut)
-        }
 
         var isEndOfFile = false
         guard let rawBuffer = malloc(fileBufferSize * 2) else { throw Error.memory }
@@ -146,8 +142,7 @@ public extension Brotli {
 
 public extension Brotli {
     static func compress(data: Data, mode: Mode = Mode.default,
-                         quality: Quality = Quality.default, windowBits: WindowBits = WindowBits.default) throws -> Data
-    {
+                         quality: Quality = Quality.default, windowBits: WindowBits = WindowBits.default) throws -> Data {
         let input = data.withUnsafePointer { pointer -> UnsafeRawPointer in UnsafeRawPointer(pointer) }
         let inputBuffer = input.assumingMemoryBound(to: UInt8.self)
         var outputSize: Int = 0

@@ -7,7 +7,7 @@
 @_implementationOnly import ElvaCore
 import Foundation
 
-public struct ZSTD { private init() {} }
+public enum ZSTD {}
 
 // MARK: - File
 
@@ -16,11 +16,9 @@ public extension ZSTD {
         guard FileManager.default.fileExists(atPath: inputFile.path) else { throw Error.fileNotExist }
         guard !FileManager.default.fileExists(atPath: outputFile.path) else { throw Error.outputFileExist }
         guard let fileIn = fopen(inputFile.path, "rb") else { throw Error.openFile(fileURL: inputFile) }
+        defer { fclose(fileIn) }
         guard let fileOut = fopen(outputFile.path, "wb") else { throw Error.openFile(fileURL: outputFile) }
-        defer {
-            fclose(fileIn)
-            fclose(fileOut)
-        }
+        defer { fclose(fileOut) }
         guard let compressContext = ZSTD_createCCtx() else { throw Error.encoderCreate }
         defer { ZSTD_freeCCtx(compressContext) }
 
