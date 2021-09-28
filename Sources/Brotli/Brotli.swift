@@ -142,7 +142,8 @@ public extension Brotli {
 
 public extension Brotli {
     static func compress(data: Data, mode: Mode = Mode.default,
-                         quality: Quality = Quality.default, windowBits: WindowBits = WindowBits.default) throws -> Data {
+                         quality: Quality = Quality.default, windowBits: WindowBits = WindowBits.default) throws -> Data
+    {
         let input = data.withUnsafePointer { pointer -> UnsafeRawPointer in UnsafeRawPointer(pointer) }
         let inputBuffer = input.assumingMemoryBound(to: UInt8.self)
         var outputSize: Int = 0

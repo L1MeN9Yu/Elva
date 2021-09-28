@@ -6,18 +6,23 @@ import PackageDescription
 let package = Package(
     name: "Elva",
     products: [
-        // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(name: "ZSTD", targets: ["ZSTD"]),
         .library(name: "Brotli", targets: ["Brotli"]),
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages which this package depends on.
-        .target(name: "Elva.Brotli"),
-        .target(name: "Elva.zstd"),
-        .target(name: "ElvaCore"),
+        .target(name: "Elva.lz4", cSettings: [.define("XXH_NAMESPACE", to: "Elva_lz4_")]),
+        .target(name: "LZ4", dependencies: [.target(name: "Elva.lz4"), .target(name: "ElvaCore")]),
+        .testTarget(name: "LZ4Tests", dependencies: [.target(name: "LZ4")]),
+
+        .target(name: "Elva.zstd", cSettings: [.define("XXH_NAMESPACE", to: "Elva_zstd_")]),
         .target(name: "ZSTD", dependencies: [.target(name: "Elva.zstd"), .target(name: "ElvaCore")]),
+        .testTarget(name: "ZSTDTests", dependencies: [.target(name: "ZSTD")]),
+
+        .target(name: "Elva.Brotli"),
         .target(name: "Brotli", dependencies: [.target(name: "Elva.Brotli"), .target(name: "ElvaCore")]),
-        .testTarget(name: "ElvaTests", dependencies: [.target(name: "ZSTD"), .target(name: "Brotli")]),
+        .testTarget(name: "BrotliTests", dependencies: [.target(name: "Brotli")]),
+
+        .target(name: "ElvaCore"),
+        .testTarget(name: "ElvaCoreTests", dependencies: [.target(name: "ElvaCore")]),
     ]
 )

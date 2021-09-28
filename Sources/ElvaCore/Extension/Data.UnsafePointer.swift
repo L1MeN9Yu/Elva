@@ -5,8 +5,8 @@
 
 import Foundation
 
-extension Data {
-    public func withUnsafePointer<ResultType>(_ body: (UnsafePointer<UInt8>) throws -> ResultType) rethrows -> ResultType {
+public extension Data {
+    func withUnsafePointer<ResultType>(_ body: (UnsafePointer<UInt8>) throws -> ResultType) rethrows -> ResultType {
         try withUnsafeBytes { (rawBufferPointer: UnsafeRawBufferPointer) -> ResultType in
             let unsafeBufferPointer = rawBufferPointer.bindMemory(to: UInt8.self)
             guard let unsafePointer = unsafeBufferPointer.baseAddress else {
