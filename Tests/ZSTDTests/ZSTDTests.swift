@@ -3,32 +3,24 @@ import XCTest
 @testable import ZSTD
 
 final class ZSTDTests: XCTestCase {
-    func testZSTDFile() throws {
-        let des = try FileManager.default.url(for: .desktopDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        let input = des.appendingPathComponent("content.json")
-        let output = des.appendingPathComponent("content.json.zstd")
-        try ZSTD.compress(inputFile: input, outputFile: output)
-        let decompressOutput = des.appendingPathComponent("content.decompress.json")
-        try ZSTD.decompress(inputFile: output, outputFile: decompressOutput)
+    func testZSTDMemory() throws {
+        let originalData = Self.content
+        let compressed: Data = try ZSTD.compress(data: originalData)
+        let decompressed: Data = try ZSTD.decompress(data: compressed)
+        XCTAssertEqual(originalData, decompressed)
     }
 
-    func testZSTDData() throws {
-        let des = try FileManager.default.url(for: .desktopDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        let input = des.appendingPathComponent("content.json")
-        let originalData = try Data(contentsOf: input)
-        print("\(originalData.count)")
-        let data = try ZSTD.compress(data: originalData)
-        do {
-            print("\(data.count)")
-            let des = try FileManager.default.url(for: .desktopDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            let input = des.appendingPathComponent("content.json.zstd")
-            try data.write(to: input)
-            do {
-                let data = try ZSTD.decompress(data: data)
-                print("\(data.count)")
-                let string = String(data: data, encoding: .utf8)
-                print("\(String(describing: string))")
-            }
-        }
+    func testZSTDFile() throws {
+        let inputFileURL = URL(fileURLWithPath: "zstd_input")
+        let compressFileURL = URL(fileURLWithPath: "zstd_compress")
+        let decompressFileURL = URL(fileURLWithPath: "zstd_decompress")
+        try Self.content.write(to: inputFileURL)
+        try ZSTD.compress(inputFile: inputFileURL, outputFile: compressFileURL)
+        try ZSTD.decompress(inputFile: compressFileURL, outputFile: decompressFileURL)
+        try XCTAssertEqual(Data(contentsOf: decompressFileURL), Self.content)
     }
+}
+
+private extension ZSTDTests {
+    static let content = Data("the quick brown fox jumps over the lazy dog".utf8)
 }

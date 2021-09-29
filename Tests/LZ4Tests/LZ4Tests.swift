@@ -8,27 +8,27 @@ import XCTest
 
 final class LZ4Tests: XCTestCase {
     func testMemory() throws {
-        let memoryInput = BufferedMemoryStream(startData: Self.content)
-        let memoryOutput = BufferedMemoryStream()
+        let inputMemory = BufferedMemoryStream(startData: Self.content)
+        let compressMemory = BufferedMemoryStream()
         let compressConfig = LZ4.CompressConfig.default
-        try LZ4.compress(reader: memoryInput, writer: memoryOutput, config: compressConfig)
-        XCTAssertEqual(memoryOutput.size, Self.content.count + 15)
-        let memoryDecompress = BufferedMemoryStream()
+        try LZ4.compress(reader: inputMemory, writer: compressMemory, config: compressConfig)
+        XCTAssertEqual(compressMemory.size, Self.content.count + 15)
+        let decompressMemory = BufferedMemoryStream()
         let decompressConfig = LZ4.DecompressConfig.default
-        try LZ4.decompress(reader: memoryOutput, writer: memoryDecompress, config: decompressConfig)
-        XCTAssertEqual(memoryInput, memoryDecompress)
+        try LZ4.decompress(reader: compressMemory, writer: decompressMemory, config: decompressConfig)
+        XCTAssertEqual(inputMemory, decompressMemory)
     }
 
     func testFile() throws {
-        let inputFileURL = URL(fileURLWithPath: "input")
-        let outputFileURL = URL(fileURLWithPath: "output")
+        let inputFileURL = URL(fileURLWithPath: "lz4_input")
+        let compressFileURL = URL(fileURLWithPath: "lz4_compress")
         try Self.content.write(to: inputFileURL)
         let fileReadStream = FileReadStream(path: inputFileURL.path)
-        let fileWriteStream = FileWriteStream(path: outputFileURL.path)
+        let fileWriteStream = FileWriteStream(path: compressFileURL.path)
         let compressConfig = LZ4.CompressConfig.default
         try LZ4.compress(reader: fileReadStream, writer: fileWriteStream, config: compressConfig)
-        let decompressFileURL = URL(fileURLWithPath: "decompress")
-        let compressedReaderStream = FileReadStream(path: outputFileURL.path)
+        let decompressFileURL = URL(fileURLWithPath: "lz4_decompress")
+        let compressedReaderStream = FileReadStream(path: compressFileURL.path)
         let decompressWriterStream = FileWriteStream(path: decompressFileURL.path)
         let decompressConfig = LZ4.DecompressConfig.default
         try LZ4.decompress(reader: compressedReaderStream, writer: decompressWriterStream, config: decompressConfig)

@@ -7,25 +7,24 @@ import Foundation
 import XCTest
 
 final class BrotliTests: XCTestCase {
-    func testBrotliFile() throws {
-        let des = try FileManager.default.url(for: .desktopDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        let input = des.appendingPathComponent("content.json")
-        let output = des.appendingPathComponent("content.json.br")
-        try Brotli.compress(inputFile: input, outputFile: output)
-        let decompressOutput = des.appendingPathComponent("content.decompress.json")
-        try Brotli.decompress(inputFile: output, outputFile: decompressOutput)
+    func testBrotliMemory() throws {
+        let originalData = Self.content
+        let compressed: Data = try Brotli.compress(data: originalData)
+        let decompressed: Data = try Brotli.decompress(data: compressed)
+        XCTAssertEqual(originalData, decompressed)
     }
 
-    func testBrotliData() throws {
-        guard let originalData = "带的2j1儿科2e🤣😊😗都去啊发到你9219额1561".data(using: .utf8) else { fatalError() }
-        print("\(originalData.count)")
-        let data = try Brotli.compress(data: originalData)
-        print("\(data.count)")
-        do {
-            let data = try Brotli.decompress(data: data)
-            print("\(data.count)")
-            let string = String(data: data, encoding: .utf8)
-            print("\(String(describing: string))")
-        }
+    func testBrotliFile() throws {
+        let inputFileURL = URL(fileURLWithPath: "brotli_input")
+        let compressFileURL = URL(fileURLWithPath: "brotli_compress")
+        let decompressFileURL = URL(fileURLWithPath: "brotli_decompress")
+        try Self.content.write(to: inputFileURL)
+        try Brotli.compress(inputFile: inputFileURL, outputFile: compressFileURL)
+        try Brotli.decompress(inputFile: compressFileURL, outputFile: decompressFileURL)
+        try XCTAssertEqual(Data(contentsOf: decompressFileURL), Self.content)
     }
+}
+
+private extension BrotliTests {
+    static let content = Data("the quick brown fox jumps over the lazy dog".utf8)
 }
