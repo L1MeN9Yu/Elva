@@ -20,15 +20,21 @@ extension LZ4: CompressionCapable {
         let context = UnsafeMutablePointer<OpaquePointer?>.allocate(capacity: MemoryLayout<LZ4F_compressionContext_t>.size)
 
         let frameInfo = LZ4F_frameInfo_t(
-            blockSizeID: LZ4F_max4MB,
-            blockMode: LZ4F_blockLinked,
-            contentChecksumFlag: LZ4F_noContentChecksum,
-            frameType: LZ4F_frame,
-            contentSize: 0,
-            dictID: 0,
-            blockChecksumFlag: LZ4F_noBlockChecksum
+            blockSizeID: config.blockSize.value,
+            blockMode: config.blockMode.value,
+            contentChecksumFlag: config.contentChecksum.value,
+            frameType: config.frameType.value,
+            contentSize: config.contentSize,
+            dictID: config.dictID,
+            blockChecksumFlag: config.blockChecksum.value
         )
-        var preferences = LZ4F_preferences_t(frameInfo: frameInfo, compressionLevel: 0, autoFlush: 0, favorDecSpeed: 0, reserved: (0, 0, 0))
+        var preferences = LZ4F_preferences_t(
+            frameInfo: frameInfo,
+            compressionLevel: config.compressLevel,
+            autoFlush: config.autoFlush ? 1 : 0,
+            favorDecSpeed: config.favorDecompressSpeed ? 1 : 0,
+            reserved: (0, 0, 0)
+        )
         let outputBufferCapacity: Int = LZ4F_compressBound(bufferSize, &preferences)
 
         func createContext() throws {
