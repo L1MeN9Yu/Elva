@@ -6,7 +6,7 @@ The `Compression` Kit.
 
 ### ZSTD
 
-The [zstd](https://github.com/facebook/zstd.git) Swift wrapper.
+[zstd](https://github.com/facebook/zstd.git) Swift wrapper.
 
 ### Brotli
 
