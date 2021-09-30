@@ -4,7 +4,6 @@
 //
 
 @_implementationOnly import Elva_Brotli
-import Foundation
 
 public extension Brotli {
     struct WindowBits: RawRepresentable, Hashable {

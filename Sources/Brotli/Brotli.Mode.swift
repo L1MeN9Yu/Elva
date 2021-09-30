@@ -4,7 +4,6 @@
 //
 
 @_implementationOnly import Elva_Brotli
-import Foundation
 
 public extension Brotli {
     enum Mode {
@@ -23,23 +22,14 @@ public extension Brotli {
             }
         }
 
-        var brotliEncoderMode: BrotliEncoderMode {
+        var value: BrotliEncoderMode {
             BrotliEncoderMode(rawValue: rawValue)
         }
-
-        public static var `default`: Mode {
-            switch Self._default {
-            case generic.rawValue:
-                return Mode.generic
-            case text.rawValue:
-                return Mode.text
-            case font.rawValue:
-                return Mode.font
-            default:
-                return Mode.generic
-            }
-        }
     }
+}
+
+public extension Brotli.Mode {
+    static let `default`: Self = .generic
 }
 
 private extension Brotli.Mode {

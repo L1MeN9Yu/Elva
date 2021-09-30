@@ -15,5 +15,6 @@ public extension Brotli {
         case fileIO
         case compress
         case decompress
+        case write(expect: Int, written: Int)
     }
 }

@@ -4,7 +4,6 @@
 //
 
 @_implementationOnly import Elva_Brotli
-import Foundation
 
 public extension Brotli {
     struct InputBlockBits: RawRepresentable, Hashable {
@@ -28,6 +27,6 @@ public extension Brotli.InputBlockBits {
 }
 
 private extension Brotli.InputBlockBits {
-    private static let _min = UInt32(BROTLI_MIN_INPUT_BLOCK_BITS)
-    private static let _max = UInt32(BROTLI_MAX_INPUT_BLOCK_BITS)
+    static let _min = UInt32(BROTLI_MIN_INPUT_BLOCK_BITS)
+    static let _max = UInt32(BROTLI_MAX_INPUT_BLOCK_BITS)
 }

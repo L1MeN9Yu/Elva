@@ -9,6 +9,14 @@ public protocol CompressionCapable {
     static func decompress(reader: ReadableStream, writer: WriteableStream, config: DecompressConfig) throws
 }
 
-public protocol CompressConfigurable {}
+public protocol CompressConfigurable {
+    var bufferSize: Int { get }
+    var autoCloseReadStream: Bool { get }
+    var autoCloseWriteStream: Bool { get }
+}
 
-public protocol DecompressConfigurable {}
+public protocol DecompressConfigurable {
+    var bufferSize: Int { get }
+    var autoCloseReadStream: Bool { get }
+    var autoCloseWriteStream: Bool { get }
+}
