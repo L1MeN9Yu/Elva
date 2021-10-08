@@ -23,6 +23,7 @@ extension Brotli: CompressionCapable {
             guard BrotliEncoderSetParameter(encoderState, BROTLI_PARAM_MODE, config.mode.rawValue) == BROTLI_TRUE else { throw Error.encoderCreate }
             guard BrotliEncoderSetParameter(encoderState, BROTLI_PARAM_QUALITY, UInt32(config.quality.rawValue)) == BROTLI_TRUE else { throw Error.encoderCreate }
             guard BrotliEncoderSetParameter(encoderState, BROTLI_PARAM_LGWIN, UInt32(config.windowBits.rawValue)) == BROTLI_TRUE else { throw Error.encoderCreate }
+            guard BrotliEncoderSetParameter(encoderState, BROTLI_PARAM_LGBLOCK, UInt32(config.inputBlockBits.rawValue)) == BROTLI_TRUE else { throw Error.encoderCreate }
             return encoderState
         }
 

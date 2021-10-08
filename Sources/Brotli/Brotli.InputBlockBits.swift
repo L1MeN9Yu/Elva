@@ -24,6 +24,7 @@ public extension Brotli {
 public extension Brotli.InputBlockBits {
     static let min = Self(builtinValue: Self._min)
     static let max = Self(builtinValue: Self._max)
+    static let `default` = min
 }
 
 private extension Brotli.InputBlockBits {

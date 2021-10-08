@@ -12,6 +12,7 @@ public extension Brotli {
         public let mode: Mode
         public let quality: Quality
         public let windowBits: WindowBits
+        public let inputBlockBits: InputBlockBits
 
         public init(
             bufferSize: Int = 1 << 11,
@@ -19,7 +20,8 @@ public extension Brotli {
             autoCloseWriteStream: Bool = true,
             mode: Mode = .default,
             quality: Quality = .default,
-            windowBits: WindowBits = .default
+            windowBits: WindowBits = .default,
+            inputBlockBits: InputBlockBits = .default
         ) {
             self.bufferSize = bufferSize
             self.autoCloseReadStream = autoCloseReadStream
@@ -27,6 +29,7 @@ public extension Brotli {
             self.mode = mode
             self.quality = quality
             self.windowBits = windowBits
+            self.inputBlockBits = inputBlockBits
         }
     }
 }

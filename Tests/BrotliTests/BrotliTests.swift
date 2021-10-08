@@ -18,14 +18,7 @@ final class BrotliTests: XCTestCase {
             XCTAssertEqual(inputMemory, decompressMemory)
         }
 
-        let compressConfigList: [Brotli.CompressConfig] = [
-            Brotli.CompressConfig.default,
-            Brotli.CompressConfig(bufferSize: 2),
-            Brotli.CompressConfig(mode: .text, quality: .max, windowBits: .max),
-            Brotli.CompressConfig(mode: .text, quality: .min, windowBits: .min),
-        ]
-
-        try compressConfigList.forEach {
+        try Self.compressConfigList.forEach {
             try brotli(compressConfig: $0)
         }
     }
@@ -46,17 +39,20 @@ final class BrotliTests: XCTestCase {
             try XCTAssertEqual(Data(contentsOf: decompressFileURL), Self.content)
         }
 
-        let compressConfigList: [Brotli.CompressConfig] = [
-            Brotli.CompressConfig.default,
-            Brotli.CompressConfig(bufferSize: 2),
-            Brotli.CompressConfig(mode: .text, quality: .max, windowBits: .max),
-            Brotli.CompressConfig(mode: .text, quality: .min, windowBits: .min),
-        ]
-
-        try compressConfigList.forEach {
+        try Self.compressConfigList.forEach {
             try brotli(compressConfig: $0)
         }
     }
+}
+
+private extension BrotliTests {
+    static let compressConfigList: [Brotli.CompressConfig] = [
+        Brotli.CompressConfig.default,
+        Brotli.CompressConfig(bufferSize: 2),
+        Brotli.CompressConfig(mode: .text, quality: .max, windowBits: .max, inputBlockBits: .default),
+        Brotli.CompressConfig(mode: .text, quality: .min, windowBits: .min, inputBlockBits: .min),
+        Brotli.CompressConfig(mode: .text, quality: .min, windowBits: .min, inputBlockBits: .max),
+    ]
 }
 
 private extension BrotliTests {
