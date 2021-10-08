@@ -43,6 +43,16 @@ final class BrotliTests: XCTestCase {
             try brotli(compressConfig: $0)
         }
     }
+
+    func testOptions() {
+        func inputBlockBits() {
+            XCTAssertNil(Brotli.InputBlockBits(rawValue: Brotli.InputBlockBits.max.rawValue + 1))
+            XCTAssertNil(Brotli.InputBlockBits(rawValue: Brotli.InputBlockBits.min.rawValue - 1))
+            XCTAssertNotNil(Brotli.InputBlockBits(rawValue: Brotli.InputBlockBits.RawValue.random(in: Brotli.InputBlockBits.min.rawValue...Brotli.InputBlockBits.max.rawValue)))
+        }
+
+        inputBlockBits()
+    }
 }
 
 private extension BrotliTests {
