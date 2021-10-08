@@ -50,8 +50,21 @@ final class BrotliTests: XCTestCase {
             XCTAssertNil(Brotli.InputBlockBits(rawValue: Brotli.InputBlockBits.min.rawValue - 1))
             XCTAssertNotNil(Brotli.InputBlockBits(rawValue: Brotli.InputBlockBits.RawValue.random(in: Brotli.InputBlockBits.min.rawValue...Brotli.InputBlockBits.max.rawValue)))
         }
-
         inputBlockBits()
+
+        func quality() {
+            XCTAssertNil(Brotli.Quality(rawValue: Brotli.Quality.max.rawValue + 1))
+            XCTAssertNil(Brotli.Quality(rawValue: Brotli.Quality.min.rawValue - 1))
+            XCTAssertNotNil(Brotli.Quality(rawValue: Brotli.Quality.RawValue.random(in: Brotli.Quality.min.rawValue...Brotli.Quality.max.rawValue)))
+        }
+        quality()
+
+        func windowBits() {
+            XCTAssertNil(Brotli.WindowBits(rawValue: Brotli.WindowBits.max.rawValue + 1))
+            XCTAssertNil(Brotli.WindowBits(rawValue: Brotli.WindowBits.min.rawValue - 1))
+            XCTAssertNotNil(Brotli.WindowBits(rawValue: Brotli.WindowBits.RawValue.random(in: Brotli.WindowBits.min.rawValue...Brotli.WindowBits.max.rawValue)))
+        }
+        windowBits()
     }
 }
 
@@ -61,7 +74,7 @@ private extension BrotliTests {
         Brotli.CompressConfig(bufferSize: 2),
         Brotli.CompressConfig(mode: .text, quality: .max, windowBits: .max, inputBlockBits: .default),
         Brotli.CompressConfig(mode: .text, quality: .min, windowBits: .min, inputBlockBits: .min),
-        Brotli.CompressConfig(mode: .text, quality: .min, windowBits: .min, inputBlockBits: .max),
+        Brotli.CompressConfig(mode: .font, quality: .min, windowBits: .min, inputBlockBits: .max),
     ]
 }
 
