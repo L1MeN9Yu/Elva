@@ -8,6 +8,7 @@ let package = Package(
     products: [
         .library(name: "ZSTD", targets: ["ZSTD"]),
         .library(name: "Brotli", targets: ["Brotli"]),
+        .library(name: "LZ4", targets: ["LZ4"]),
     ],
     targets: [
         .target(name: "Elva.lz4", cSettings: [.define("XXH_NAMESPACE", to: "Elva_lz4_")]),
