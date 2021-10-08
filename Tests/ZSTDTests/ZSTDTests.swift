@@ -14,13 +14,7 @@ final class ZSTDTests: XCTestCase {
             XCTAssertEqual(inputMemory, decompressMemory)
         }
 
-        let compressConfigList: [ZSTD.CompressConfig] = [
-            ZSTD.CompressConfig.default,
-            ZSTD.CompressConfig(bufferSize: 2),
-            ZSTD.CompressConfig.zstd,
-        ]
-
-        try compressConfigList.forEach { compressConfig in
+        try Self.compressConfigList.forEach { compressConfig in
             try Self.contents.forEach { content in
                 try zstd(content: content, compressConfig: compressConfig)
             }
@@ -43,13 +37,7 @@ final class ZSTDTests: XCTestCase {
             try XCTAssertEqual(Data(contentsOf: decompressFileURL), content)
         }
 
-        let compressConfigList: [ZSTD.CompressConfig] = [
-            ZSTD.CompressConfig.default,
-            ZSTD.CompressConfig(bufferSize: 2),
-            ZSTD.CompressConfig.zstd,
-        ]
-
-        try compressConfigList.forEach { compressConfig in
+        try Self.compressConfigList.forEach { compressConfig in
             try Self.contents.forEach { content in
                 try zstd(content: content, compressConfig: compressConfig)
             }
@@ -65,6 +53,14 @@ final class ZSTDTests: XCTestCase {
 
         level()
     }
+}
+
+private extension ZSTDTests {
+    static let compressConfigList: [ZSTD.CompressConfig] = [
+        ZSTD.CompressConfig.default,
+        ZSTD.CompressConfig(bufferSize: 2),
+        ZSTD.CompressConfig.zstd,
+    ]
 }
 
 private extension ZSTDTests {
