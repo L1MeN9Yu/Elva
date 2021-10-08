@@ -3,6 +3,7 @@
 //
 
 @testable import Brotli
+import Elva_Brotli
 import Foundation
 import XCTest
 
@@ -50,6 +51,7 @@ final class BrotliTests: XCTestCase {
             XCTAssertNil(Brotli.InputBlockBits(rawValue: Brotli.InputBlockBits.min.rawValue - 1))
             XCTAssertNotNil(Brotli.InputBlockBits(rawValue: Brotli.InputBlockBits.RawValue.random(in: Brotli.InputBlockBits.min.rawValue...Brotli.InputBlockBits.max.rawValue)))
         }
+
         inputBlockBits()
 
         func quality() {
@@ -57,6 +59,7 @@ final class BrotliTests: XCTestCase {
             XCTAssertNil(Brotli.Quality(rawValue: Brotli.Quality.min.rawValue - 1))
             XCTAssertNotNil(Brotli.Quality(rawValue: Brotli.Quality.RawValue.random(in: Brotli.Quality.min.rawValue...Brotli.Quality.max.rawValue)))
         }
+
         quality()
 
         func windowBits() {
@@ -64,7 +67,16 @@ final class BrotliTests: XCTestCase {
             XCTAssertNil(Brotli.WindowBits(rawValue: Brotli.WindowBits.min.rawValue - 1))
             XCTAssertNotNil(Brotli.WindowBits(rawValue: Brotli.WindowBits.RawValue.random(in: Brotli.WindowBits.min.rawValue...Brotli.WindowBits.max.rawValue)))
         }
+
         windowBits()
+
+        func mode() {
+            XCTAssertEqual(Brotli.Mode.generic.value.rawValue, Brotli.Mode.generic.rawValue)
+            XCTAssertEqual(Brotli.Mode.text.value.rawValue, Brotli.Mode.text.rawValue)
+            XCTAssertEqual(Brotli.Mode.font.value.rawValue, Brotli.Mode.font.rawValue)
+        }
+
+        mode()
     }
 }
 
