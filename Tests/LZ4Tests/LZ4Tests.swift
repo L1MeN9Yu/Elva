@@ -55,6 +55,9 @@ private extension LZ4Tests {
     static let compressConfigList: [LZ4.CompressConfig] = [
         LZ4.CompressConfig.default,
         LZ4.CompressConfig(bufferSize: 2),
+        LZ4.CompressConfig(blockSize: .max256KB, blockMode: .independent, contentChecksum: .enabled, frameType: .skippableFrame, blockChecksum: .noChecksum, compressLevel: 0, autoFlush: true, favorDecompressSpeed: false),
+        LZ4.CompressConfig(blockSize: .max1MB, blockMode: .linked, contentChecksum: .noChecksum, frameType: .frame, blockChecksum: .enabled, compressLevel: 1, autoFlush: false, favorDecompressSpeed: true),
+        LZ4.CompressConfig(blockSize: .max4MB, blockMode: .independent, contentChecksum: .enabled, frameType: .skippableFrame, blockChecksum: .noChecksum, compressLevel: 2, autoFlush: true, favorDecompressSpeed: false),
     ]
 }
 
