@@ -11,7 +11,6 @@ final class LZ4Tests: XCTestCase {
         func lz4(content: Data, compressConfig: LZ4.CompressConfig) throws {
             let inputMemory = BufferedMemoryStream(startData: content)
             let compressMemory = BufferedMemoryStream()
-            let compressConfig = LZ4.CompressConfig.default
             try LZ4.compress(reader: inputMemory, writer: compressMemory, config: compressConfig)
             let decompressMemory = BufferedMemoryStream()
             let decompressConfig = LZ4.DecompressConfig.default
@@ -33,7 +32,6 @@ final class LZ4Tests: XCTestCase {
             try content.write(to: inputFileURL)
             let fileReadStream = FileReadStream(path: inputFileURL.path)
             let fileWriteStream = FileWriteStream(path: compressFileURL.path)
-            let compressConfig = LZ4.CompressConfig.default
             try LZ4.compress(reader: fileReadStream, writer: fileWriteStream, config: compressConfig)
             let decompressFileURL = URL(fileURLWithPath: "lz4_decompress")
             let compressedReaderStream = FileReadStream(path: compressFileURL.path)
