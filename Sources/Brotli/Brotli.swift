@@ -9,10 +9,6 @@ import Foundation
 
 public enum Brotli {}
 
-private extension Brotli {
-    static let fileBufferSize: size_t = 1 << 19
-}
-
 extension Brotli: CompressionCapable {
     public typealias CompressConfig = CompressOption
     public typealias DecompressConfig = DecompressOption
@@ -36,7 +32,9 @@ extension Brotli: CompressionCapable {
         func writeCompress() throws {
             var isEnd = false
             let readBuffer: UnsafeMutablePointer<UInt8> = .allocate(capacity: bufferSize)
+            defer { readBuffer.deallocate() }
             let writeBuffer: UnsafeMutablePointer<UInt8> = .allocate(capacity: bufferSize)
+            defer { writeBuffer.deallocate() }
             var availableIn: size_t = 0
             var nextInBuffer: UnsafePointer<UInt8>?
             var availableOut: size_t = bufferSize
@@ -98,12 +96,14 @@ extension Brotli: CompressionCapable {
 
         func writeDecompress() throws {
             var result: BrotliDecoderResult = BROTLI_DECODER_RESULT_NEEDS_MORE_INPUT
-            let inputBuffer: UnsafeMutablePointer<UInt8> = .allocate(capacity: bufferSize)
-            let outputBuffer: UnsafeMutablePointer<UInt8> = .allocate(capacity: bufferSize)
+            let readBuffer: UnsafeMutablePointer<UInt8> = .allocate(capacity: bufferSize)
+            defer { readBuffer.deallocate() }
+            let writeBuffer: UnsafeMutablePointer<UInt8> = .allocate(capacity: bufferSize)
+            defer { writeBuffer.deallocate() }
             var availableIn: size_t = 0
             var nextInBuffer: UnsafePointer<UInt8>?
             var availableOut: size_t = bufferSize
-            var nextOutBuffer: UnsafeMutablePointer<UInt8>? = outputBuffer
+            var nextOutBuffer: UnsafeMutablePointer<UInt8>? = writeBuffer
 
             whileLoop: while true {
                 guard let nextOutBufferWrapped = nextOutBuffer else {
@@ -111,19 +111,19 @@ extension Brotli: CompressionCapable {
                 }
                 switch result {
                 case BROTLI_DECODER_RESULT_NEEDS_MORE_INPUT:
-                    availableIn = reader.read(inputBuffer, length: bufferSize)
-                    nextInBuffer = UnsafePointer<UInt8>(inputBuffer)
+                    availableIn = reader.read(readBuffer, length: bufferSize)
+                    nextInBuffer = UnsafePointer<UInt8>(readBuffer)
                 case BROTLI_DECODER_RESULT_NEEDS_MORE_OUTPUT:
-                    let outSize: size_t = nextOutBufferWrapped - outputBuffer
-                    let written = writer.write(outputBuffer, length: outSize)
+                    let outSize: size_t = nextOutBufferWrapped - writeBuffer
+                    let written = writer.write(writeBuffer, length: outSize)
                     guard written == outSize else {
                         throw Error.write(expect: outSize, written: written)
                     }
-                    availableOut = fileBufferSize
-                    nextOutBuffer = outputBuffer
+                    availableOut = bufferSize
+                    nextOutBuffer = writeBuffer
                 case BROTLI_DECODER_RESULT_SUCCESS:
-                    let outSize: size_t = nextOutBufferWrapped - outputBuffer
-                    let written = writer.write(outputBuffer, length: outSize)
+                    let outSize: size_t = nextOutBufferWrapped - writeBuffer
+                    let written = writer.write(writeBuffer, length: outSize)
                     guard written == outSize else {
                         throw Error.write(expect: outSize, written: written)
                     }
