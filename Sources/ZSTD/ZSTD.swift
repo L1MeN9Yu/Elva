@@ -14,6 +14,8 @@ extension ZSTD: CompressionCapable {
 
     public static func compress(reader: ReadableStream, writer: WriteableStream, config: CompressConfig) throws {
         let bufferSize = config.bufferSize
+        let inputBufferSize = config.inputBufferSize ?? bufferSize
+        let outputBufferSize = config.outputBufferSize ?? bufferSize
         defer { if config.autoCloseReadStream { reader.close() } }
         defer { if config.autoCloseWriteStream { writer.close() } }
 
@@ -29,22 +31,20 @@ extension ZSTD: CompressionCapable {
 
         func writeCompress() throws {
             while true {
-                let readBuffer: UnsafeMutablePointer<UInt8> = .allocate(capacity: bufferSize)
+                let readBuffer: UnsafeMutablePointer<UInt8> = .allocate(capacity: inputBufferSize)
                 defer { readBuffer.deallocate() }
-                let writeBuffer: UnsafeMutablePointer<UInt8> = .allocate(capacity: bufferSize)
+                let writeBuffer: UnsafeMutablePointer<UInt8> = .allocate(capacity: outputBufferSize)
                 defer { writeBuffer.deallocate() }
 
-//                let readSize = fread(inputBuffer, 1, inputBufferSize, fileIn)
-                let read = reader.read(readBuffer, length: bufferSize)
-                let lastChunk = read < bufferSize
+                let read = reader.read(readBuffer, length: inputBufferSize)
+                let lastChunk = read < inputBufferSize
                 let mode: ZSTD_EndDirective = lastChunk ? ZSTD_e_end : ZSTD_e_continue
                 var input = ZSTD_inBuffer(src: readBuffer, size: read, pos: 0)
                 var finished = false
                 while !finished {
-                    var output = ZSTD_outBuffer(dst: writeBuffer, size: bufferSize, pos: 0)
+                    var output = ZSTD_outBuffer(dst: writeBuffer, size: outputBufferSize, pos: 0)
                     let remaining = ZSTD_compressStream2(compressContext, &output, &input, mode)
                     guard ZSTD_isError(remaining) == 0 else { throw Error.compress }
-//                    fwrite(outputBuffer, 1, output.pos, fileOut)
                     let written = writer.write(writeBuffer, length: output.pos)
                     guard written == output.pos else {
                         throw Error.write(expect: output.pos, written: written)
@@ -63,6 +63,8 @@ extension ZSTD: CompressionCapable {
 
     public static func decompress(reader: ReadableStream, writer: WriteableStream, config: DecompressConfig) throws {
         let bufferSize = config.bufferSize
+        let inputBufferSize = config.inputBufferSize ?? bufferSize
+        let outputBufferSize = config.outputBufferSize ?? bufferSize
         defer { if config.autoCloseReadStream { reader.close() } }
         defer { if config.autoCloseWriteStream { writer.close() } }
 
@@ -79,22 +81,20 @@ extension ZSTD: CompressionCapable {
             var decompressResult = 0
 
             repeat {
-                let readBuffer: UnsafeMutablePointer<UInt8> = .allocate(capacity: bufferSize)
+                let readBuffer: UnsafeMutablePointer<UInt8> = .allocate(capacity: inputBufferSize)
                 defer { readBuffer.deallocate() }
-                let writeBuffer: UnsafeMutablePointer<UInt8> = .allocate(capacity: bufferSize)
+                let writeBuffer: UnsafeMutablePointer<UInt8> = .allocate(capacity: outputBufferSize)
                 defer { writeBuffer.deallocate() }
 
-//                read = fread(inputBuffer, 1, inputBufferSize, fileIn)
-                read = reader.read(readBuffer, length: bufferSize)
+                read = reader.read(readBuffer, length: inputBufferSize)
                 var input = ZSTD_inBuffer(src: readBuffer, size: read, pos: 0)
 
                 while input.pos < input.size {
-                    var output = ZSTD_outBuffer(dst: writeBuffer, size: bufferSize, pos: 0)
+                    var output = ZSTD_outBuffer(dst: writeBuffer, size: outputBufferSize, pos: 0)
                     decompressResult = ZSTD_decompressStream(decompressContext, &output, &input)
                     guard ZSTD_isError(decompressResult) == 0 else {
                         throw Error.decompress
                     }
-//                    fwrite(outputBuffer, 1, output.pos, fileOut)
                     let written = writer.write(writeBuffer, length: output.pos)
                     guard written == output.pos else {
                         throw Error.write(expect: output.pos, written: written)

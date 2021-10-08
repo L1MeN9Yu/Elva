@@ -17,6 +17,7 @@ final class ZSTDTests: XCTestCase {
         let compressConfigList: [ZSTD.CompressConfig] = [
             ZSTD.CompressConfig.default,
             ZSTD.CompressConfig(bufferSize: 2),
+            ZSTD.CompressConfig.zstd,
         ]
 
         try compressConfigList.forEach {
@@ -43,6 +44,7 @@ final class ZSTDTests: XCTestCase {
         let compressConfigList: [ZSTD.CompressConfig] = [
             ZSTD.CompressConfig.default,
             ZSTD.CompressConfig(bufferSize: 2),
+            ZSTD.CompressConfig.zstd,
         ]
 
         try compressConfigList.forEach {
