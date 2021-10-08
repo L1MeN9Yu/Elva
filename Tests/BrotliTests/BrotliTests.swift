@@ -9,8 +9,8 @@ import XCTest
 
 final class BrotliTests: XCTestCase {
     func testMemory() throws {
-        func brotli(compressConfig: Brotli.CompressConfig) throws {
-            let inputMemory = BufferedMemoryStream(startData: Self.content)
+        func brotli(content: Data, compressConfig: Brotli.CompressConfig) throws {
+            let inputMemory = BufferedMemoryStream(startData: content)
             let compressMemory = BufferedMemoryStream()
             try Brotli.compress(reader: inputMemory, writer: compressMemory, config: compressConfig)
             let decompressMemory = BufferedMemoryStream()
@@ -19,16 +19,18 @@ final class BrotliTests: XCTestCase {
             XCTAssertEqual(inputMemory, decompressMemory)
         }
 
-        try Self.compressConfigList.forEach {
-            try brotli(compressConfig: $0)
+        try Self.compressConfigList.forEach { compressConfig in
+            try Self.contents.forEach { content in
+                try brotli(content: content, compressConfig: compressConfig)
+            }
         }
     }
 
     func testFile() throws {
-        func brotli(compressConfig: Brotli.CompressConfig) throws {
+        func brotli(content: Data, compressConfig: Brotli.CompressConfig) throws {
             let inputFileURL = URL(fileURLWithPath: "brotli_input")
             let compressFileURL = URL(fileURLWithPath: "brotli_compress")
-            try Self.content.write(to: inputFileURL)
+            try content.write(to: inputFileURL)
             let fileReadStream = FileReadStream(path: inputFileURL.path)
             let fileWriteStream = FileWriteStream(path: compressFileURL.path)
             try Brotli.compress(reader: fileReadStream, writer: fileWriteStream, config: compressConfig)
@@ -37,11 +39,13 @@ final class BrotliTests: XCTestCase {
             let decompressWriterStream = FileWriteStream(path: decompressFileURL.path)
             let decompressConfig = Brotli.DecompressConfig.default
             try Brotli.decompress(reader: compressedReaderStream, writer: decompressWriterStream, config: decompressConfig)
-            try XCTAssertEqual(Data(contentsOf: decompressFileURL), Self.content)
+            try XCTAssertEqual(Data(contentsOf: decompressFileURL), content)
         }
 
-        try Self.compressConfigList.forEach {
-            try brotli(compressConfig: $0)
+        try Self.compressConfigList.forEach { compressConfig in
+            try Self.contents.forEach { content in
+                try brotli(content: content, compressConfig: compressConfig)
+            }
         }
     }
 
@@ -91,5 +95,8 @@ private extension BrotliTests {
 }
 
 private extension BrotliTests {
-    static let content = Data("the quick brown fox jumps over the lazy dog".utf8)
+    static let contents: [Data] = [
+        Data("the quick brown fox jumps over the lazy dog".utf8),
+        Data((0..<(1 << 12)).map { _ in UInt8.random(in: UInt8.min..<UInt8.max) }),
+    ]
 }
