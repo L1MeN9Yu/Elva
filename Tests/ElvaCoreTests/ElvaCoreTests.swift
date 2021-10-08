@@ -13,14 +13,14 @@ final class ElvaCoreTests: XCTestCase {
         XCTAssertNotEqual(inputMemory, outputMemory)
 
         XCTAssertEqual(inputMemory.size, Self.content.count)
-        XCTAssertEqual(inputMemory.internalRepresentation, Self.content)
+        XCTAssertEqual(inputMemory.representation, Self.content)
 
         let writeCount = inputMemory.readAll(sink: outputMemory)
 
         XCTAssertEqual(writeCount, Self.content.count)
-        XCTAssertEqual(outputMemory.internalRepresentation, Self.content)
+        XCTAssertEqual(outputMemory.representation, Self.content)
         XCTAssertEqual(outputMemory, inputMemory)
-        XCTAssertEqual(outputMemory.internalRepresentation, inputMemory.internalRepresentation)
+        XCTAssertEqual(outputMemory.representation, inputMemory.representation)
     }
 
     func testBufferedMemoryStreamRead() {
@@ -33,7 +33,7 @@ final class ElvaCoreTests: XCTestCase {
         XCTAssertNotEqual(inputMemory, outputMemory)
 
         XCTAssertEqual(inputMemory.size, Self.content.count)
-        XCTAssertEqual(inputMemory.internalRepresentation, Self.content)
+        XCTAssertEqual(inputMemory.representation, Self.content)
 
         let writeBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: constWriteCount)
         defer { writeBuffer.deallocate() }
@@ -48,7 +48,7 @@ final class ElvaCoreTests: XCTestCase {
         let writeCount = outputMemory.write([UInt8](Self.content), length: Self.content.count)
 
         XCTAssertEqual(writeCount, Self.content.count)
-        XCTAssertEqual(outputMemory.internalRepresentation, Self.content)
+        XCTAssertEqual(outputMemory.representation, Self.content)
     }
 
     func testFileWriteStream() throws {
