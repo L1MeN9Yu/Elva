@@ -21,6 +21,8 @@ final class BrotliTests: XCTestCase {
         let compressConfigList: [Brotli.CompressConfig] = [
             Brotli.CompressConfig.default,
             Brotli.CompressConfig(bufferSize: 2),
+            Brotli.CompressConfig(mode: .text, quality: .max, windowBits: .max),
+            Brotli.CompressConfig(mode: .text, quality: .min, windowBits: .min),
         ]
 
         try compressConfigList.forEach {
@@ -47,6 +49,8 @@ final class BrotliTests: XCTestCase {
         let compressConfigList: [Brotli.CompressConfig] = [
             Brotli.CompressConfig.default,
             Brotli.CompressConfig(bufferSize: 2),
+            Brotli.CompressConfig(mode: .text, quality: .max, windowBits: .max),
+            Brotli.CompressConfig(mode: .text, quality: .min, windowBits: .min),
         ]
 
         try compressConfigList.forEach {
