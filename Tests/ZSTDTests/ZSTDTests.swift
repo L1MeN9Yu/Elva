@@ -4,8 +4,8 @@ import XCTest
 
 final class ZSTDTests: XCTestCase {
     func testMemory() throws {
-        func zstd(compressConfig: ZSTD.CompressConfig) throws {
-            let inputMemory = BufferedMemoryStream(startData: Self.content)
+        func zstd(content: Data, compressConfig: ZSTD.CompressConfig) throws {
+            let inputMemory = BufferedMemoryStream(startData: content)
             let compressMemory = BufferedMemoryStream()
             try ZSTD.compress(reader: inputMemory, writer: compressMemory, config: compressConfig)
             let decompressMemory = BufferedMemoryStream()
@@ -20,16 +20,18 @@ final class ZSTDTests: XCTestCase {
             ZSTD.CompressConfig.zstd,
         ]
 
-        try compressConfigList.forEach {
-            try zstd(compressConfig: $0)
+        try compressConfigList.forEach { compressConfig in
+            try Self.contents.forEach { content in
+                try zstd(content: content, compressConfig: compressConfig)
+            }
         }
     }
 
     func testFile() throws {
-        func zstd(compressConfig: ZSTD.CompressConfig) throws {
+        func zstd(content: Data, compressConfig: ZSTD.CompressConfig) throws {
             let inputFileURL = URL(fileURLWithPath: "zstd_input")
             let compressFileURL = URL(fileURLWithPath: "zstd_compress")
-            try Self.content.write(to: inputFileURL)
+            try content.write(to: inputFileURL)
             let fileReadStream = FileReadStream(path: inputFileURL.path)
             let fileWriteStream = FileWriteStream(path: compressFileURL.path)
             try ZSTD.compress(reader: fileReadStream, writer: fileWriteStream, config: compressConfig)
@@ -38,7 +40,7 @@ final class ZSTDTests: XCTestCase {
             let decompressWriterStream = FileWriteStream(path: decompressFileURL.path)
             let decompressConfig = ZSTD.DecompressConfig.default
             try ZSTD.decompress(reader: compressedReaderStream, writer: decompressWriterStream, config: decompressConfig)
-            try XCTAssertEqual(Data(contentsOf: decompressFileURL), Self.content)
+            try XCTAssertEqual(Data(contentsOf: decompressFileURL), content)
         }
 
         let compressConfigList: [ZSTD.CompressConfig] = [
@@ -47,12 +49,27 @@ final class ZSTDTests: XCTestCase {
             ZSTD.CompressConfig.zstd,
         ]
 
-        try compressConfigList.forEach {
-            try zstd(compressConfig: $0)
+        try compressConfigList.forEach { compressConfig in
+            try Self.contents.forEach { content in
+                try zstd(content: content, compressConfig: compressConfig)
+            }
         }
+    }
+
+    func testOptions() {
+        func level() {
+            XCTAssertNil(ZSTD.Level(rawValue: ZSTD.Level.max.rawValue + 1))
+            XCTAssertNil(ZSTD.Level(rawValue: ZSTD.Level.min.rawValue - 1))
+            XCTAssertNotNil(ZSTD.Level(rawValue: ZSTD.Level.RawValue.random(in: ZSTD.Level.min.rawValue...ZSTD.Level.max.rawValue)))
+        }
+
+        level()
     }
 }
 
 private extension ZSTDTests {
-    static let content = Data("the quick brown fox jumps over the lazy dog".utf8)
+    static let contents: [Data] = [
+        Data("the quick brown fox jumps over the lazy dog".utf8),
+        Data((0..<(1 << 12)).map { _ in UInt8.random(in: UInt8.min..<UInt8.max) }),
+    ]
 }
