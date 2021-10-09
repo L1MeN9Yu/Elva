@@ -47,6 +47,20 @@ final class LZ4Tests: XCTestCase {
             }
         }
     }
+
+    func testMemoryHandler() throws {
+        func lz4(content: Data, compressConfig: LZ4.CompressConfig) throws {
+            let compressedData = try LZ4.memory.compress(data: content, config: compressConfig)
+            let decompressedData = try LZ4.memory.decompress(data: compressedData, config: .default)
+            XCTAssertEqual(decompressedData, content)
+        }
+
+        try Self.compressConfigList.forEach { compressConfig in
+            try Self.contents.forEach { content in
+                try lz4(content: content, compressConfig: compressConfig)
+            }
+        }
+    }
 }
 
 private extension LZ4Tests {
