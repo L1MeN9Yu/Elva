@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct MemoryHandler<Compression: CompressionCapable> {
+public struct GreedyHandler<Compression: CompressionCapable> {
     public let compression: Compression.Type
 
     public init(compression: Compression.Type) {
@@ -12,18 +12,18 @@ public struct MemoryHandler<Compression: CompressionCapable> {
     }
 }
 
-public extension MemoryHandler {
+public extension GreedyHandler {
     func compress(data: Data, config: Compression.CompressConfig = .default) throws -> Data {
         let inputMemory = BufferedMemoryStream(startData: data)
         let compressMemory = BufferedMemoryStream()
-        try compression.compress(reader: inputMemory, writer: compressMemory, config: config)
+        try compression.compress(greedy: inputMemory, writer: compressMemory, config: config)
         return compressMemory.representation
     }
 
     func decompress(data: Data, config: Compression.DecompressConfig = .default) throws -> Data {
         let inputMemory = BufferedMemoryStream(startData: data)
         let decompressMemory = BufferedMemoryStream()
-        try compression.decompress(reader: inputMemory, writer: decompressMemory, config: config)
+        try compression.decompress(greedy: inputMemory, writer: decompressMemory, config: config)
         return decompressMemory.representation
     }
 }

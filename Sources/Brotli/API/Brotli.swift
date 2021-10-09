@@ -57,10 +57,10 @@ extension Brotli: CompressionCapable {
                     throw Error.compress
                 }
                 if availableOut == 0 {
-                    let outSize: size_t = nextOutBufferWrapped - writeBuffer
-                    let written = writer.write(writeBuffer, length: outSize)
-                    guard written == outSize else {
-                        throw Error.write(expect: outSize, written: written)
+                    let outputSize: size_t = nextOutBufferWrapped - writeBuffer
+                    let written = writer.write(writeBuffer, length: outputSize)
+                    guard written == outputSize else {
+                        throw Error.write(expect: outputSize, written: written)
                     }
                     availableOut = bufferSize
                     nextOutBuffer = writeBuffer
@@ -123,10 +123,10 @@ extension Brotli: CompressionCapable {
                     availableOut = bufferSize
                     nextOutBuffer = writeBuffer
                 case BROTLI_DECODER_RESULT_SUCCESS:
-                    let outSize: size_t = nextOutBufferWrapped - writeBuffer
-                    let written = writer.write(writeBuffer, length: outSize)
-                    guard written == outSize else {
-                        throw Error.write(expect: outSize, written: written)
+                    let outputSize: size_t = nextOutBufferWrapped - writeBuffer
+                    let written = writer.write(writeBuffer, length: outputSize)
+                    guard written == outputSize else {
+                        throw Error.write(expect: outputSize, written: written)
                     }
                     availableOut = 0
                     break whileLoop
@@ -139,5 +139,65 @@ extension Brotli: CompressionCapable {
         }
 
         try writeDecompress()
+    }
+
+    public static func compress(greedy: GreedyStream, writer: WriteableStream, config: CompressConfig) throws {
+        let inputMemory = BufferedMemoryStream()
+        let read = greedy.readAll(sink: inputMemory)
+        let maxOutputSize = BrotliEncoderMaxCompressedSize(read)
+        let outputBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: maxOutputSize)
+        defer { outputBuffer.deallocate() }
+        var outputSize = maxOutputSize
+        guard BrotliEncoderCompress(config.quality.rawValue, config.windowBits.rawValue, config.mode.value, read, [UInt8](inputMemory.representation), &outputSize, outputBuffer) == BROTLI_TRUE else {
+            throw Error.compress
+        }
+        let written = writer.write(outputBuffer, length: outputSize)
+        guard written == outputSize else {
+            throw Error.write(expect: outputSize, written: written)
+        }
+    }
+
+    public static func decompress(greedy: GreedyStream, writer: WriteableStream, config: DecompressConfig) throws {
+        let bufferSize = config.bufferSize
+
+        let inputBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: greedy.size)
+        defer { inputBuffer.deallocate() }
+        let read = greedy.readAll(inputBuffer)
+
+        var availableIn = read
+        var nextInputBuffer: UnsafePointer<UInt8>? = UnsafePointer<UInt8>(inputBuffer)
+        var outputSize: Int = 0
+        var lastOutputBufferSize = bufferSize
+        var outputBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: lastOutputBufferSize)
+        defer { outputBuffer.deallocate() }
+
+        guard let decoderState = BrotliDecoderCreateInstance(nil, nil, nil) else {
+            throw Error.decoderCreate
+        }
+        defer { BrotliDecoderDestroyInstance(decoderState) }
+        var result: BrotliDecoderResult = BROTLI_DECODER_RESULT_NEEDS_MORE_OUTPUT
+        var outputBufferCapacity = bufferSize
+        while result == BROTLI_DECODER_RESULT_NEEDS_MORE_OUTPUT {
+            var availableOutSize = outputBufferCapacity - outputSize
+            var nextOutBuffer: UnsafeMutablePointer<UInt8>? = outputBuffer + outputSize
+            result = BrotliDecoderDecompressStream(decoderState, &availableIn, &nextInputBuffer, &availableOutSize, &nextOutBuffer, nil)
+            outputSize = outputBufferCapacity - availableOutSize
+            if availableOutSize < bufferSize {
+                outputBufferCapacity += bufferSize
+                let newBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: outputBufferCapacity)
+                newBuffer.initialize(from: outputBuffer, count: lastOutputBufferSize)
+                outputBuffer.deallocate()
+                outputBuffer = newBuffer
+                lastOutputBufferSize = outputBufferCapacity
+            }
+        }
+
+        if result != BROTLI_DECODER_RESULT_SUCCESS && result != BROTLI_DECODER_RESULT_NEEDS_MORE_INPUT {
+            throw Error.decompress
+        }
+        let written = writer.write(outputBuffer, length: outputSize)
+        guard written == outputSize else {
+            throw Error.write(expect: outputSize, written: written)
+        }
     }
 }

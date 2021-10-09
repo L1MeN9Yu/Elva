@@ -7,16 +7,6 @@ public protocol CompressionCapable {
     associatedtype DecompressConfig: DecompressConfigurable
     static func compress(reader: ReadableStream, writer: WriteableStream, config: CompressConfig) throws
     static func decompress(reader: ReadableStream, writer: WriteableStream, config: DecompressConfig) throws
-}
-
-public protocol CompressConfigurable {
-    var bufferSize: Int { get }
-    var autoCloseReadStream: Bool { get }
-    var autoCloseWriteStream: Bool { get }
-}
-
-public protocol DecompressConfigurable {
-    var bufferSize: Int { get }
-    var autoCloseReadStream: Bool { get }
-    var autoCloseWriteStream: Bool { get }
+    static func compress(greedy: GreedyStream, writer: WriteableStream, config: CompressConfig) throws
+    static func decompress(greedy: GreedyStream, writer: WriteableStream, config: DecompressConfig) throws
 }

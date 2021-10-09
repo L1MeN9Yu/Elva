@@ -44,8 +44,15 @@ extension BufferedMemoryStream: GreedyStream {
 
         representation.copyBytes(to: bytes, count: size)
         let written: Int = sink.write(bytes, length: size)
-        assert(written == size)
         return written
+    }
+
+    public func readAll(_ buffer: UnsafeMutablePointer<UInt8>) -> Int {
+        guard readerIndex < size else { return 0 }
+        let count = representation.count
+        representation.copyBytes(to: buffer, from: 0..<count)
+        readerIndex += count
+        return count
     }
 }
 
