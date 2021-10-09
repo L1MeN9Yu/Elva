@@ -82,6 +82,20 @@ final class BrotliTests: XCTestCase {
 
         mode()
     }
+
+    func testMemoryHandler() throws {
+        func brotli(content: Data, compressConfig: Brotli.CompressConfig) throws {
+            let compressedData = try Brotli.memory.compress(data: content, config: compressConfig)
+            let decompressedData = try Brotli.memory.decompress(data: compressedData, config: .default)
+            XCTAssertEqual(decompressedData, content)
+        }
+
+        try Self.compressConfigList.forEach { compressConfig in
+            try Self.contents.forEach { content in
+                try brotli(content: content, compressConfig: compressConfig)
+            }
+        }
+    }
 }
 
 private extension BrotliTests {
