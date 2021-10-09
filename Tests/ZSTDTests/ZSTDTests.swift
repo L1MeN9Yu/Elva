@@ -53,6 +53,20 @@ final class ZSTDTests: XCTestCase {
 
         level()
     }
+
+    func testMemoryHandler() throws {
+        func zstd(content: Data, compressConfig: ZSTD.CompressConfig) throws {
+            let compressedData = try ZSTD.memory.compress(data: content, config: compressConfig)
+            let decompressedData = try ZSTD.memory.decompress(data: compressedData, config: .default)
+            XCTAssertEqual(decompressedData, content)
+        }
+
+        try Self.compressConfigList.forEach { compressConfig in
+            try Self.contents.forEach { content in
+                try zstd(content: content, compressConfig: compressConfig)
+            }
+        }
+    }
 }
 
 private extension ZSTDTests {
