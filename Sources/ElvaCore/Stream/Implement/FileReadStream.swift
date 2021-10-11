@@ -6,10 +6,13 @@ import Foundation
 
 public class FileReadStream {
     private let filePointer: UnsafeMutablePointer<FILE>
-    private var size: Int = 0
+    public private(set) var size: Int = 0
 
-    public init(path: String) {
-        filePointer = fopen(path, "rb")
+    public init(path: String) throws {
+        guard let filePointer = fopen(path, "rb") else {
+            throw Error.fopen
+        }
+        self.filePointer = filePointer
     }
 }
 
@@ -24,5 +27,11 @@ extension FileReadStream: ReadableStream {
 extension FileReadStream: ByteStream {
     public func close() {
         fclose(filePointer)
+    }
+}
+
+public extension FileReadStream {
+    enum Error: Swift.Error {
+        case fopen
     }
 }

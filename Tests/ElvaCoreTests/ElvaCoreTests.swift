@@ -53,7 +53,7 @@ final class ElvaCoreTests: XCTestCase {
 
     func testFileWriteStream() throws {
         let url = URL(fileURLWithPath: "elva_core")
-        let fileWriteStream = FileWriteStream(path: url.path)
+        let fileWriteStream = try FileWriteStream(path: url.path)
         let written = fileWriteStream.write([UInt8](Self.content), length: Self.content.count)
         XCTAssertEqual(written, Self.content.count)
         fileWriteStream.close()
@@ -66,7 +66,7 @@ final class ElvaCoreTests: XCTestCase {
         let constWriteCount = 2
         let url = URL(fileURLWithPath: "elva_core")
         try Self.content.write(to: url)
-        let fileReadStream = FileReadStream(path: url.path)
+        let fileReadStream = try FileReadStream(path: url.path)
         let writeBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: constWriteCount)
         defer { writeBuffer.deallocate() }
         let read = fileReadStream.read(writeBuffer, length: constWriteCount)

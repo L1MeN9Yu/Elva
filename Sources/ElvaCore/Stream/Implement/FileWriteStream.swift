@@ -6,10 +6,13 @@ import Foundation
 
 public class FileWriteStream {
     private let filePointer: UnsafeMutablePointer<FILE>
-    private var size: Int = 0
+    public private(set) var size: Int = 0
 
-    public init(path: String) {
-        filePointer = fopen(path, "wb")
+    public init(path: String) throws {
+        guard let filePointer = fopen(path, "wb") else {
+            throw Error.fopen
+        }
+        self.filePointer = filePointer
     }
 }
 
@@ -24,5 +27,11 @@ extension FileWriteStream: WriteableStream {
         let written = fwrite(data, 1, length, filePointer)
         size += written
         return written
+    }
+}
+
+public extension FileWriteStream {
+    enum Error: Swift.Error {
+        case fopen
     }
 }

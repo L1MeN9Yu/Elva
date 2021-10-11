@@ -142,13 +142,13 @@ extension Brotli: CompressionCapable {
     }
 
     public static func compress(greedy: GreedyStream, writer: WriteableStream, config: CompressConfig) throws {
-        let inputMemory = BufferedMemoryStream()
-        let read = greedy.readAll(sink: inputMemory)
+        let inputBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: greedy.size)
+        let read = greedy.readAll(inputBuffer)
         let maxOutputSize = BrotliEncoderMaxCompressedSize(read)
         let outputBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: maxOutputSize)
         defer { outputBuffer.deallocate() }
         var outputSize = maxOutputSize
-        guard BrotliEncoderCompress(config.quality.rawValue, config.windowBits.rawValue, config.mode.value, read, [UInt8](inputMemory.representation), &outputSize, outputBuffer) == BROTLI_TRUE else {
+        guard BrotliEncoderCompress(config.quality.rawValue, config.windowBits.rawValue, config.mode.value, read, inputBuffer, &outputSize, outputBuffer) == BROTLI_TRUE else {
             throw Error.compress
         }
         let written = writer.write(outputBuffer, length: outputSize)
