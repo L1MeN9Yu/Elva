@@ -112,6 +112,24 @@ final class BrotliTests: XCTestCase {
             }
         }
     }
+
+    func testFileHandler() throws {
+        func run(content: Data, compressConfig: Compression.CompressConfig) throws {
+            let inputFileURL = URL(fileURLWithPath: "brotli_input")
+            let compressFileURL = URL(fileURLWithPath: "brotli_compress")
+            let decompressFileURL = URL(fileURLWithPath: "brotli_decompress")
+            try content.write(to: inputFileURL)
+            try Compression.file.compress(inputFileURL: inputFileURL, outputFileURL: compressFileURL, config: compressConfig)
+            try Compression.file.decompress(inputFileURL: compressFileURL, outputFileURL: decompressFileURL)
+            try XCTAssertEqual(Data(contentsOf: decompressFileURL), content)
+        }
+
+        try Self.compressConfigList.forEach { compressConfig in
+            try Self.contents.forEach { content in
+                try run(content: content, compressConfig: compressConfig)
+            }
+        }
+    }
 }
 
 private extension BrotliTests {
