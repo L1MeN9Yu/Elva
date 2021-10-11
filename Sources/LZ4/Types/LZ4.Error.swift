@@ -12,6 +12,7 @@ public extension LZ4 {
         case unknownBlockSizeID
         case unknownLZ4Trailing
         case lz4(message: String)
+        case notImplement
     }
 }
 

@@ -187,7 +187,11 @@ extension LZ4: CompressionCapable {
         try writeDecompress()
     }
 
-    public static func compress(greedy: GreedyStream, writer: WriteableStream, config: CompressConfig) throws {}
+    public static func compress(greedy: GreedyStream, writer: WriteableStream, config: CompressConfig) throws {
+        throw Error.notImplement
+    }
 
-    public static func decompress(greedy: GreedyStream, writer: WriteableStream, config: DecompressConfig) throws {}
+    public static func decompress(greedy: GreedyStream, writer: WriteableStream, config: DecompressConfig) throws {
+        throw Error.notImplement
+    }
 }

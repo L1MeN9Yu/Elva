@@ -6,15 +6,17 @@ import Foundation
 @testable import LZ4
 import XCTest
 
+typealias Compression = LZ4
+
 final class LZ4Tests: XCTestCase {
     func testMemory() throws {
-        func lz4(content: Data, compressConfig: LZ4.CompressConfig) throws {
+        func lz4(content: Data, compressConfig: Compression.CompressConfig) throws {
             let inputMemory = BufferedMemoryStream(startData: content)
             let compressMemory = BufferedMemoryStream()
-            try LZ4.compress(reader: inputMemory, writer: compressMemory, config: compressConfig)
+            try Compression.compress(reader: inputMemory, writer: compressMemory, config: compressConfig)
             let decompressMemory = BufferedMemoryStream()
-            let decompressConfig = LZ4.DecompressConfig.default
-            try LZ4.decompress(reader: compressMemory, writer: decompressMemory, config: decompressConfig)
+            let decompressConfig = Compression.DecompressConfig.default
+            try Compression.decompress(reader: compressMemory, writer: decompressMemory, config: decompressConfig)
             XCTAssertEqual(inputMemory, decompressMemory)
         }
 
@@ -26,18 +28,18 @@ final class LZ4Tests: XCTestCase {
     }
 
     func testFile() throws {
-        func lz4(content: Data, compressConfig: LZ4.CompressConfig) throws {
+        func lz4(content: Data, compressConfig: Compression.CompressConfig) throws {
             let inputFileURL = URL(fileURLWithPath: "lz4_input")
             let compressFileURL = URL(fileURLWithPath: "lz4_compress")
             try content.write(to: inputFileURL)
             let fileReadStream = FileReadStream(path: inputFileURL.path)
             let fileWriteStream = FileWriteStream(path: compressFileURL.path)
-            try LZ4.compress(reader: fileReadStream, writer: fileWriteStream, config: compressConfig)
+            try Compression.compress(reader: fileReadStream, writer: fileWriteStream, config: compressConfig)
             let decompressFileURL = URL(fileURLWithPath: "lz4_decompress")
             let compressedReaderStream = FileReadStream(path: compressFileURL.path)
             let decompressWriterStream = FileWriteStream(path: decompressFileURL.path)
-            let decompressConfig = LZ4.DecompressConfig.default
-            try LZ4.decompress(reader: compressedReaderStream, writer: decompressWriterStream, config: decompressConfig)
+            let decompressConfig = Compression.DecompressConfig.default
+            try Compression.decompress(reader: compressedReaderStream, writer: decompressWriterStream, config: decompressConfig)
             try XCTAssertEqual(Data(contentsOf: decompressFileURL), content)
         }
 
@@ -49,9 +51,9 @@ final class LZ4Tests: XCTestCase {
     }
 
     func testMemoryHandler() throws {
-        func lz4(content: Data, compressConfig: LZ4.CompressConfig) throws {
-            let compressedData = try LZ4.memory.compress(data: content, config: compressConfig)
-            let decompressedData = try LZ4.memory.decompress(data: compressedData, config: .default)
+        func lz4(content: Data, compressConfig: Compression.CompressConfig) throws {
+            let compressedData = try Compression.memory.compress(data: content, config: compressConfig)
+            let decompressedData = try Compression.memory.decompress(data: compressedData, config: .default)
             XCTAssertEqual(decompressedData, content)
         }
 
@@ -64,12 +66,12 @@ final class LZ4Tests: XCTestCase {
 }
 
 private extension LZ4Tests {
-    static let compressConfigList: [LZ4.CompressConfig] = [
-        LZ4.CompressConfig.default,
-        LZ4.CompressConfig(bufferSize: 2),
-        LZ4.CompressConfig(blockSize: .max256KB, blockMode: .independent, contentChecksum: .enabled, frameType: .skippableFrame, blockChecksum: .noChecksum, compressLevel: 0, autoFlush: true, favorDecompressSpeed: false),
-        LZ4.CompressConfig(blockSize: .max1MB, blockMode: .linked, contentChecksum: .noChecksum, frameType: .frame, blockChecksum: .enabled, compressLevel: 1, autoFlush: false, favorDecompressSpeed: true),
-        LZ4.CompressConfig(blockSize: .max4MB, blockMode: .independent, contentChecksum: .enabled, frameType: .skippableFrame, blockChecksum: .noChecksum, compressLevel: 2, autoFlush: true, favorDecompressSpeed: false),
+    static let compressConfigList: [Compression.CompressConfig] = [
+        Compression.CompressConfig.default,
+        Compression.CompressConfig(bufferSize: 2),
+        Compression.CompressConfig(blockSize: .max256KB, blockMode: .independent, contentChecksum: .enabled, frameType: .skippableFrame, blockChecksum: .noChecksum, compressLevel: 0, autoFlush: true, favorDecompressSpeed: false),
+        Compression.CompressConfig(blockSize: .max1MB, blockMode: .linked, contentChecksum: .noChecksum, frameType: .frame, blockChecksum: .enabled, compressLevel: 1, autoFlush: false, favorDecompressSpeed: true),
+        Compression.CompressConfig(blockSize: .max4MB, blockMode: .independent, contentChecksum: .enabled, frameType: .skippableFrame, blockChecksum: .noChecksum, compressLevel: 2, autoFlush: true, favorDecompressSpeed: false),
     ]
 }
 
