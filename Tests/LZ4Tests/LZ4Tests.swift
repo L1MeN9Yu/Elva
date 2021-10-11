@@ -10,7 +10,7 @@ typealias Compression = LZ4
 
 final class LZ4Tests: XCTestCase {
     func testMemory() throws {
-        func lz4(content: Data, compressConfig: Compression.CompressConfig) throws {
+        func run(content: Data, compressConfig: Compression.CompressConfig) throws {
             let inputMemory = BufferedMemoryStream(startData: content)
             let compressMemory = BufferedMemoryStream()
             try Compression.compress(reader: inputMemory, writer: compressMemory, config: compressConfig)
@@ -22,13 +22,13 @@ final class LZ4Tests: XCTestCase {
 
         try Self.compressConfigList.forEach { compressConfig in
             try Self.contents.forEach { content in
-                try lz4(content: content, compressConfig: compressConfig)
+                try run(content: content, compressConfig: compressConfig)
             }
         }
     }
 
     func testFile() throws {
-        func lz4(content: Data, compressConfig: Compression.CompressConfig) throws {
+        func run(content: Data, compressConfig: Compression.CompressConfig) throws {
             let inputFileURL = URL(fileURLWithPath: "lz4_input")
             let compressFileURL = URL(fileURLWithPath: "lz4_compress")
             try content.write(to: inputFileURL)
@@ -45,13 +45,13 @@ final class LZ4Tests: XCTestCase {
 
         try Self.compressConfigList.forEach { compressConfig in
             try Self.contents.forEach { content in
-                try lz4(content: content, compressConfig: compressConfig)
+                try run(content: content, compressConfig: compressConfig)
             }
         }
     }
 
     func testMemoryHandler() throws {
-        func lz4(content: Data, compressConfig: Compression.CompressConfig) throws {
+        func run(content: Data, compressConfig: Compression.CompressConfig) throws {
             let compressedData = try Compression.memory.compress(data: content, config: compressConfig)
             let decompressedData = try Compression.memory.decompress(data: compressedData, config: .default)
             XCTAssertEqual(decompressedData, content)
@@ -59,7 +59,25 @@ final class LZ4Tests: XCTestCase {
 
         try Self.compressConfigList.forEach { compressConfig in
             try Self.contents.forEach { content in
-                try lz4(content: content, compressConfig: compressConfig)
+                try run(content: content, compressConfig: compressConfig)
+            }
+        }
+    }
+
+    func testFileHandler() throws {
+        func run(content: Data, compressConfig: Compression.CompressConfig) throws {
+            let inputFileURL = URL(fileURLWithPath: "lz4_input")
+            let compressFileURL = URL(fileURLWithPath: "lz4_compress")
+            let decompressFileURL = URL(fileURLWithPath: "lz4_decompress")
+            try content.write(to: inputFileURL)
+            try Compression.file.compress(inputFileURL: inputFileURL, outputFileURL: compressFileURL, config: compressConfig)
+            try Compression.file.decompress(inputFileURL: compressFileURL, outputFileURL: decompressFileURL)
+            try XCTAssertEqual(Data(contentsOf: decompressFileURL), content)
+        }
+
+        try Self.compressConfigList.forEach { compressConfig in
+            try Self.contents.forEach { content in
+                try run(content: content, compressConfig: compressConfig)
             }
         }
     }
