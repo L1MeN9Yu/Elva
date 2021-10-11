@@ -64,6 +64,13 @@ final class LZ4Tests: XCTestCase {
         }
     }
 
+    func testGreedyHandler() {
+        let inputMemory = BufferedMemoryStream()
+        let outputMemory = BufferedMemoryStream()
+        try XCTAssertThrowsError(Compression.compress(greedy: inputMemory, writer: outputMemory, config: .default))
+        try XCTAssertThrowsError(Compression.decompress(greedy: inputMemory, writer: outputMemory, config: .default))
+    }
+
     func testFileHandler() throws {
         func run(content: Data, compressConfig: Compression.CompressConfig) throws {
             let inputFileURL = URL(fileURLWithPath: "lz4_input")
