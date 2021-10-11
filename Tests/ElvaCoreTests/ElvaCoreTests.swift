@@ -76,6 +76,11 @@ final class ElvaCoreTests: XCTestCase {
         XCTAssertEqual(writeData, Self.content[0..<constWriteCount])
         try FileManager.default.removeItem(at: url)
     }
+
+    func testFileStreamErrors() {
+        XCTAssertThrowsError(try FileReadStream(path: "/dev/null/not_exist"))
+        XCTAssertThrowsError(try FileWriteStream(path: "/dev/null/not_exist"))
+    }
 }
 
 private extension ElvaCoreTests {
