@@ -9,6 +9,7 @@ public extension ZSTD {
         case decoderCreate
         case compress
         case decompress
+        case invalidData
         case write(expect: Int, written: Int)
     }
 }
