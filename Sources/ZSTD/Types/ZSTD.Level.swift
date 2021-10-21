@@ -23,7 +23,7 @@ public extension ZSTD {
 }
 
 public extension ZSTD.Level {
-    static let `default` = Self(builtinValue: Self._max)
+    static let `default` = Self(builtinValue: Self._default)
     static let min = Self(builtinValue: Self._min)
     static let max = Self(builtinValue: Self._max)
 }
@@ -31,4 +31,5 @@ public extension ZSTD.Level {
 private extension ZSTD.Level {
     private static let _min = ZSTD_minCLevel()
     private static let _max = ZSTD_maxCLevel()
+    private static let _default = ZSTD_defaultCLevel()
 }
