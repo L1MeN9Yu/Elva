@@ -79,3 +79,7 @@ fastlane/test_output
 *.framework.zip
 *.xcframework.zip
 *.xcframework
+
+# Homebrew
+
+Brewfile.lock.json
