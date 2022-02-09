@@ -166,7 +166,7 @@ extension Brotli: CompressionCapable {
 
         var availableIn = read
         var nextInputBuffer: UnsafePointer<UInt8>? = UnsafePointer<UInt8>(inputBuffer)
-        var outputSize: Int = 0
+        var outputSize = 0
         var lastOutputBufferSize = bufferSize
         var outputBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: lastOutputBufferSize)
         defer { outputBuffer.deallocate() }

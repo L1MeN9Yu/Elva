@@ -63,7 +63,7 @@ extension LZ4: CompressionCapable {
         try writeHeader()
 
         func writeCompress() throws {
-            var read: Int = 0
+            var read = 0
             repeat {
                 let readBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
                 defer { readBuffer.deallocate() }
@@ -149,7 +149,7 @@ extension LZ4: CompressionCapable {
         let blockSize = try readHeader()
 
         func writeDecompress() throws {
-            var remain: Int = 0
+            var remain = 0
             repeat {
                 let scratchBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
                 defer { scratchBuffer.deallocate() }
