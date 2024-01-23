@@ -38,23 +38,7 @@ let package = Package(
             cSettings: [
                 .define("ZSTD_STATIC_LINKING_ONLY", to: ""),
                 .define("XXH_NAMESPACE", to: "Elva_zstd_"),
-                .define("ZSTDERRORLIB_VISIBILITY", to: """
-                                                       __attribute__ ((visibility ("default")))
-                                                       """),
-                .define("ZSTDLIB_VISIBLE", to: """
-                                               __attribute__ ((visibility ("default")))
-                                               """),
-                .define("ZSTDLIB_HIDDEN", to: """
-                                              __attribute__ ((visibility ("hidden")))
-                                              """),
-                .define("ZSTDLIB_VISIBLE", to: """
-                                               __attribute__ ((visibility ("default")))
-                                               """),
-                .define("ZDICTLIB_VISIBILITY", to: """
-                                                   __attribute__ ((visibility ("default")))
-                                                   """),
                 .define("ZSTD_CLEVEL_DEFAULT", to: "3"),
-                .define("ZSTDLIB_STATIC_API", to: "ZSTDLIB_VISIBLE"),
                 .headerSearchPath("./"),
             ]),
         .target(
