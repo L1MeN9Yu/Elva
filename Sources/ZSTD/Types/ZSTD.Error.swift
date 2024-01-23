@@ -7,6 +7,7 @@ public extension ZSTD {
     enum Error: Swift.Error {
         case encoderCreate
         case decoderCreate
+        case setParameter
         case compress
         case decompress
         case invalidData
