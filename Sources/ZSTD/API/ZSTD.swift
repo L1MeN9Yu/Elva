@@ -81,7 +81,7 @@ extension ZSTD: CompressionCapable {
                 switch parameter {
                 case let .windowLogMax(value):
                     let resultCode: Int = ZSTD_DCtx_setParameter(decompressContext, ZSTD_d_windowLogMax, value)
-                    guard ZSTD_isError(resultCode) == 0 else { throw Error.decoderCreate }
+                    guard ZSTD_isError(resultCode) == 0 else { throw Error.setParameter }
                 }
             }
         }
