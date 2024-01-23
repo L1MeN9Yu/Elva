@@ -76,6 +76,18 @@ extension ZSTD: CompressionCapable {
         let decompressContext = try createContext()
         defer { ZSTD_freeDCtx(decompressContext) }
 
+        func setParameters() throws {
+            try config.parameters.forEach { parameter in
+                switch parameter {
+                case let .windowLogMax(value):
+                    let resultCode: Int = ZSTD_DCtx_setParameter(decompressContext, ZSTD_d_windowLogMax, value)
+                    guard ZSTD_isError(resultCode) == 0 else { throw Error.decoderCreate }
+                }
+            }
+        }
+
+        try setParameters()
+
         func writeDecompress() throws {
             var read = 0
             var decompressResult = 0
@@ -92,9 +104,8 @@ extension ZSTD: CompressionCapable {
                 while input.pos < input.size {
                     var output = ZSTD_outBuffer(dst: writeBuffer, size: outputBufferSize, pos: 0)
                     decompressResult = ZSTD_decompressStream(decompressContext, &output, &input)
-                    guard ZSTD_isError(decompressResult) == 0 else {
-                        throw Error.decompress
-                    }
+                    guard ZSTD_isError(decompressResult) == 0 else { throw Error.decompress }
+
                     let written = writer.write(writeBuffer, length: output.pos)
                     guard written == output.pos else {
                         throw Error.write(expect: output.pos, written: written)
@@ -114,14 +125,10 @@ extension ZSTD: CompressionCapable {
         let outputBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: outputBufferSize)
         defer { outputBuffer.deallocate() }
         let compressResult = ZSTD_compress(outputBuffer, outputBufferSize, inputBuffer, inputBufferSize, config.level.rawValue)
-        guard ZSTD_isError(compressResult) == 0 else {
-            throw Error.compress
-        }
+        guard ZSTD_isError(compressResult) == 0 else { throw Error.compress }
 
         let written = writer.write(outputBuffer, length: compressResult)
-        guard written == compressResult else {
-            throw Error.write(expect: compressResult, written: written)
-        }
+        guard written == compressResult else { throw Error.write(expect: compressResult, written: written) }
     }
 
     public static func decompress(greedy: GreedyStream, writer: WriteableStream, config: DecompressConfig) throws {
@@ -129,25 +136,19 @@ extension ZSTD: CompressionCapable {
         let read = greedy.readAll(inputBuffer)
         let inputBufferSize = read
         let outBufferLongLongSize = ZSTD_getFrameContentSize(inputBuffer, inputBufferSize)
-        guard outBufferLongLongSize <= Int.max else {
-            throw Error.invalidData
-        }
+
+        guard outBufferLongLongSize <= Int.max else { throw Error.invalidData }
         let outputBufferSize = Int(outBufferLongLongSize)
-        guard outputBufferSize != ZSTD_CONTENTSIZE_ERROR else {
-            throw Error.invalidData
-        }
-        guard outputBufferSize != ZSTD_CONTENTSIZE_UNKNOWN else {
-            throw Error.invalidData
-        }
+
+        guard outputBufferSize != ZSTD_CONTENTSIZE_ERROR else { throw Error.invalidData }
+        guard outputBufferSize != ZSTD_CONTENTSIZE_UNKNOWN else { throw Error.invalidData }
+
         let outputBuffer = UnsafeMutablePointer<UInt8>.allocate(capacity: outputBufferSize)
         defer { outputBuffer.deallocate() }
+
         let decompressResult = ZSTD_decompress(outputBuffer, outputBufferSize, inputBuffer, inputBufferSize)
-        guard ZSTD_isError(decompressResult) == 0 else {
-            throw Error.decompress
-        }
-        guard decompressResult == outputBufferSize else {
-            throw Error.decompress
-        }
+        guard ZSTD_isError(decompressResult) == 0 else { throw Error.decompress }
+        guard decompressResult == outputBufferSize else { throw Error.decompress }
 
         let written = writer.write(outputBuffer, length: outputBufferSize)
         guard written == outputBufferSize else {
