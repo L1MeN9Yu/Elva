@@ -24,21 +24,19 @@ jobs:
         run: swift build -v
       - name: Run tests
         run: swift test --enable-code-coverage -v
-      - name: Swift Coverage Report
-        uses: L1MeN9Yu/spm-lcov-action@master
+      - name: Prepare Code Coverage
+        run: xcrun llvm-cov export -format="lcov" .build/debug/ElvaPackageTests.xctest/Contents/MacOS/ElvaPackageTests  -instr-profile .build/debug/codecov/default.profdata > info.lcov
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v3
 
   build_on_linux:
 
     runs-on: ubuntu-latest
-    container:
-      image: swift:5.8-focal
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: recursive
       - name: Build
         run: swift build -v
       - name: Run tests
-        run: swift test -v
+        run: swift test --enable-test-discovery -v
