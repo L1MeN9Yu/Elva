@@ -11,19 +11,22 @@ public extension ZSTD {
         public let outputBufferSize: Int?
         public let autoCloseReadStream: Bool
         public let autoCloseWriteStream: Bool
+        public let parameters: [Parameter]
 
         public init(
             bufferSize: Int = 1 << 11,
             inputBufferSize: Int? = nil,
             outputBufferSize: Int? = nil,
             autoCloseReadStream: Bool = true,
-            autoCloseWriteStream: Bool = true
+            autoCloseWriteStream: Bool = true,
+            parameters: [Parameter] = []
         ) {
             self.bufferSize = bufferSize
             self.inputBufferSize = inputBufferSize
             self.outputBufferSize = outputBufferSize
             self.autoCloseReadStream = autoCloseReadStream
             self.autoCloseWriteStream = autoCloseWriteStream
+            self.parameters = parameters
         }
     }
 }
