@@ -21,8 +21,8 @@ final class BrotliTests: XCTestCase {
             XCTAssertEqual(inputMemory, decompressMemory)
         }
 
-        try Self.compressConfigList.forEach { compressConfig in
-            try Self.contents.forEach { content in
+        for compressConfig in Self.compressConfigList {
+            for content in Self.contents {
                 try run(content: content, compressConfig: compressConfig)
             }
         }
@@ -44,8 +44,8 @@ final class BrotliTests: XCTestCase {
             try XCTAssertEqual(Data(contentsOf: decompressFileURL), content)
         }
 
-        try Self.compressConfigList.forEach { compressConfig in
-            try Self.contents.forEach { content in
+        for compressConfig in Self.compressConfigList {
+            for content in Self.contents {
                 try run(content: content, compressConfig: compressConfig)
             }
         }
@@ -92,8 +92,8 @@ final class BrotliTests: XCTestCase {
             XCTAssertEqual(decompressedData, content)
         }
 
-        try Self.compressConfigList.forEach { compressConfig in
-            try Self.contents.forEach { content in
+        for compressConfig in Self.compressConfigList {
+            for content in Self.contents {
                 try run(content: content, compressConfig: compressConfig)
             }
         }
@@ -106,8 +106,8 @@ final class BrotliTests: XCTestCase {
             XCTAssertEqual(decompressedData, content)
         }
 
-        try Self.compressConfigList.forEach { compressConfig in
-            try Self.contents.forEach { content in
+        for compressConfig in Self.compressConfigList {
+            for content in Self.contents {
                 try run(content: content, compressConfig: compressConfig)
             }
         }
@@ -124,8 +124,8 @@ final class BrotliTests: XCTestCase {
             try XCTAssertEqual(Data(contentsOf: decompressFileURL), content)
         }
 
-        try Self.compressConfigList.forEach { compressConfig in
-            try Self.contents.forEach { content in
+        for compressConfig in Self.compressConfigList {
+            for content in Self.contents {
                 try run(content: content, compressConfig: compressConfig)
             }
         }

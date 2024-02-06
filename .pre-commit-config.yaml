@@ -2,7 +2,7 @@
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.5.0
+    rev: v4.5.0
     hooks:
     -   id: trailing-whitespace
     -   id: end-of-file-fixer
@@ -11,7 +11,7 @@ repos:
     -   id: detect-private-key
     -   id: check-merge-conflict
 -   repo: https://github.com/hodovani/pre-commit-swift
-    rev: master
+    rev: 0551a937b9f98a839fd98d2c3e6ce0b6c0a1e093
     hooks:
     -   id: swift-lint
     -   id: swift-format
