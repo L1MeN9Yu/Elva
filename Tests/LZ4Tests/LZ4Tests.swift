@@ -20,8 +20,8 @@ final class LZ4Tests: XCTestCase {
             XCTAssertEqual(inputMemory, decompressMemory)
         }
 
-        try Self.compressConfigList.forEach { compressConfig in
-            try Self.contents.forEach { content in
+        for compressConfig in Self.compressConfigList {
+            for content in Self.contents {
                 try run(content: content, compressConfig: compressConfig)
             }
         }
@@ -43,8 +43,8 @@ final class LZ4Tests: XCTestCase {
             try XCTAssertEqual(Data(contentsOf: decompressFileURL), content)
         }
 
-        try Self.compressConfigList.forEach { compressConfig in
-            try Self.contents.forEach { content in
+        for compressConfig in Self.compressConfigList {
+            for content in Self.contents {
                 try run(content: content, compressConfig: compressConfig)
             }
         }
@@ -57,8 +57,8 @@ final class LZ4Tests: XCTestCase {
             XCTAssertEqual(decompressedData, content)
         }
 
-        try Self.compressConfigList.forEach { compressConfig in
-            try Self.contents.forEach { content in
+        for compressConfig in Self.compressConfigList {
+            for content in Self.contents {
                 try run(content: content, compressConfig: compressConfig)
             }
         }
@@ -82,8 +82,8 @@ final class LZ4Tests: XCTestCase {
             try XCTAssertEqual(Data(contentsOf: decompressFileURL), content)
         }
 
-        try Self.compressConfigList.forEach { compressConfig in
-            try Self.contents.forEach { content in
+        for compressConfig in Self.compressConfigList {
+            for content in Self.contents {
                 try run(content: content, compressConfig: compressConfig)
             }
         }

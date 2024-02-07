@@ -12,6 +12,7 @@ public extension ZSTD {
         public let autoCloseReadStream: Bool
         public let autoCloseWriteStream: Bool
         public let level: Level
+        public let dictionary: Dictionary?
 
         public init(
             bufferSize: Int = 1 << 11,
@@ -19,7 +20,8 @@ public extension ZSTD {
             outputBufferSize: Int? = nil,
             autoCloseReadStream: Bool = true,
             autoCloseWriteStream: Bool = true,
-            level: Level = .default
+            level: Level = .default,
+            dictionary: Dictionary? = nil
         ) {
             self.bufferSize = bufferSize
             self.inputBufferSize = inputBufferSize
@@ -27,6 +29,7 @@ public extension ZSTD {
             self.autoCloseReadStream = autoCloseReadStream
             self.autoCloseWriteStream = autoCloseWriteStream
             self.level = level
+            self.dictionary = dictionary
         }
     }
 }
@@ -34,5 +37,5 @@ public extension ZSTD {
 public extension ZSTD.CompressOption {
     static let `default`: Self = .init()
 
-    static let zstd: Self = .init(bufferSize: 0, inputBufferSize: ZSTD_CStreamInSize(), outputBufferSize: ZSTD_CStreamOutSize())
+    static let zstd: Self = .init(inputBufferSize: ZSTD_CStreamInSize(), outputBufferSize: ZSTD_CStreamOutSize())
 }

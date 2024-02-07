@@ -1,4 +1,4 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.5
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -36,11 +36,12 @@ let package = Package(
         .target(
             name: "Elva.zstd",
             cSettings: [
-                .define("ZSTD_STATIC_LINKING_ONLY", to: ""),
+                .define("ZSTD_STATIC_LINKING_ONLY"),
                 .define("XXH_NAMESPACE", to: "Elva_zstd_"),
                 .define("ZSTD_CLEVEL_DEFAULT", to: "3"),
                 .headerSearchPath("./"),
-            ]),
+            ]
+        ),
         .target(
             name: "ZSTD",
             dependencies: [
