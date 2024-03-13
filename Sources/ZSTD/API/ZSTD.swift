@@ -41,7 +41,7 @@ extension ZSTD: CompressionCapable {
                 while !finished {
                     var output: ZSTD_outBuffer_s = ZSTD_outBuffer(dst: writeBuffer, size: outputBufferSize, pos: 0)
                     let remaining: Int = ZSTD_compressStream2(context.pointer, &output, &input, mode)
-                    if Error.isError(remaining) { throw Error.compress }
+                    if Error.isError(remaining) { throw Error.compress(code: remaining) }
                     let written: Int = writer.write(writeBuffer, length: output.pos)
                     guard written == output.pos else {
                         throw Error.write(expect: output.pos, written: written)
@@ -49,7 +49,7 @@ extension ZSTD: CompressionCapable {
                     finished = lastChunk ? (remaining == 0) : (input.pos == input.size)
                 }
 
-                if input.pos != input.size { throw Error.compress }
+                if input.pos != input.size { throw Error.compress() }
 
                 if lastChunk { break }
             }
@@ -87,7 +87,7 @@ extension ZSTD: CompressionCapable {
                 while input.pos < input.size {
                     var output: ZSTD_outBuffer_s = ZSTD_outBuffer(dst: writeBuffer, size: outputBufferSize, pos: 0)
                     decompressResult = ZSTD_decompressStream(context.pointer, &output, &input)
-                    if Error.isError(decompressResult) { throw Error.decompress }
+                    if Error.isError(decompressResult) { throw Error.decompress(code: decompressResult) }
 
                     let written: Int = writer.write(writeBuffer, length: output.pos)
                     guard written == output.pos else {
@@ -116,7 +116,7 @@ extension ZSTD: CompressionCapable {
         }
 
         let compressResult: Int = ZSTD_compress2(context.pointer, outputBuffer, outputBufferSize, inputBuffer, inputBufferSize)
-        guard ZSTD_isError(compressResult) == 0 else { throw Error.compress }
+        guard ZSTD_isError(compressResult) == 0 else { throw Error.compress(code: compressResult) }
 
         let written: Int = writer.write(outputBuffer, length: compressResult)
         guard written == compressResult else { throw Error.write(expect: compressResult, written: written) }
@@ -145,8 +145,8 @@ extension ZSTD: CompressionCapable {
         }
 
         let decompressResult: Int = ZSTD_decompressDCtx(context.pointer, outputBuffer, outputBufferSize, inputBuffer, inputBufferSize)
-        guard ZSTD_isError(decompressResult) == 0 else { throw Error.decompress }
-        guard decompressResult == outputBufferSize else { throw Error.decompress }
+        guard ZSTD_isError(decompressResult) == 0 else { throw Error.decompress(code: decompressResult) }
+        guard decompressResult == outputBufferSize else { throw Error.decompress() }
 
         let written: Int = writer.write(outputBuffer, length: outputBufferSize)
         guard written == outputBufferSize else {

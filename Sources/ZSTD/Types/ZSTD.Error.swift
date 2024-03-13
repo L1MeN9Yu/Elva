@@ -9,17 +9,17 @@ public extension ZSTD {
     enum Error: Swift.Error {
         case encoderCreate
         case decoderCreate
-        case setParameter(description: String?)
-        case compress
-        case decompress
+        case setParameter(code: Int)
+        case compress(code: Int = 1)
+        case decompress(code: Int = 1)
         case invalidData
         case write(expect: Int, written: Int)
         case dictionaryData
-        case loadDictionary(description: String?)
+        case loadDictionary(code: Int)
     }
 }
 
-extension ZSTD.Error {
+public extension ZSTD.Error {
     static func isError(_ code: Int) -> Bool {
         ZSTD_isError(code) != 0
     }
